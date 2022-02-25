@@ -55,4 +55,29 @@ public class EmployeesController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    // Update employee
+    @PutMapping("{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") int id, @RequestBody() Employee employee){
+        Employee old = fakeDataBase.readEmployeeByID(id);
+
+        if (old != null){
+            old.setFirstName(employee.getFirstName());
+            old.setLastName(employee.getLastName());
+            old.setEmail(employee.getEmail());
+            old.setPhoneNumber(employee.getPhoneNumber());
+            old.setAddress(employee.getAddress());
+
+            return ResponseEntity.noContent().build();
+        }
+
+        return new ResponseEntity("Please provide a valid employee id", HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity deleteEmployee(@PathVariable int id){
+        fakeDataBase.deleteEmployee(id);
+
+        return ResponseEntity.ok().build();
+    }
 }
