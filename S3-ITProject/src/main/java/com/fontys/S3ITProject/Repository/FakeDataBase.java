@@ -87,4 +87,14 @@ public class FakeDataBase {
     public List<Guest> readGuests(){
         return guests;
     }
+
+    public Guest readGuestByAccountNr(int accountNr){
+        for (Guest g : guests){
+            if (g.getAccountNumber() == accountNr){
+                return g;
+            }
+        }
+
+        return null;
+    }
 }
