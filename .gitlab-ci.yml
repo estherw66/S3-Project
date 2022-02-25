@@ -6,7 +6,6 @@ build:
   stage: build
   script:
     - cd S3-ITProject
-    - chmod +x ./gradlew
     - ./gradlew build -x test
     - ./gradlew.bat --stop 
 test:
