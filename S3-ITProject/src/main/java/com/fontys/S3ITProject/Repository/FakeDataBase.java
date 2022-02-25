@@ -24,14 +24,14 @@ public class FakeDataBase {
         employees.add(new Employee(5,"Kate", "Price", "k.price@skyegold.com", "password", new Address("Coates Gardens 2", "4571IE", "Zaandam"), "+31644547382", LocalDate.of(1973, 4, 10)));
 
         // guests
-        guests.add(new Guest("John", "Floreani", "jflor@gmail.com", "password", new CreditCard("4780 0054 4578", "J. Floreani", "04/23")));
-        guests.add(new Guest("Jan", "Pieters", "janpieters@gmail.com", "password", null));
-        guests.add(new Guest("Henk", "Jansen", "henkjansen@hotmail.com", "password", null));
+        guests.add(new Guest(1,"John", "Floreani", "jflor@gmail.com", "password", new CreditCard("4780 0054 4578", "J. Floreani", "04/23")));
+        guests.add(new Guest(2,"Jan", "Pieters", "janpieters@gmail.com", "password", null));
+        guests.add(new Guest(3,"Henk", "Jansen", "henkjansen@hotmail.com", "password", null));
 
         // reservations
-        reservations.add(new Reservation(1, LocalDate.of(2022,2, 10), LocalDate.of(2022, 2, 28), LocalDate.of(2022, 3, 3), new Guest("John", "Floreani", "jflor@gmail.com", "password", new CreditCard("4780 0054 4578", "J. Floreani", "04/23")), 1, 100));
-        reservations.add(new Reservation(2, LocalDate.of(2022,2, 18), LocalDate.of(2022, 4, 1), LocalDate.of(2022, 4, 7), new Guest("Jan", "Pieters", "janpieters@gmail.com", "password", null), 2, 150));
-        reservations.add(new Reservation(3, LocalDate.of(2022,2, 20), LocalDate.of(2022, 6, 15), LocalDate.of(2022, 6, 18), new Guest("Henk", "Jansen", "henkjansen@hotmail.com", "password", null), 1, 75));
+        reservations.add(new Reservation(1, LocalDate.of(2022,2, 10), LocalDate.of(2022, 2, 28), LocalDate.of(2022, 3, 3), new Guest(1,"John", "Floreani", "jflor@gmail.com", "password", new CreditCard("4780 0054 4578", "J. Floreani", "04/23")), 1, 100));
+        reservations.add(new Reservation(2, LocalDate.of(2022,2, 18), LocalDate.of(2022, 4, 1), LocalDate.of(2022, 4, 7), new Guest(2,"Jan", "Pieters", "janpieters@gmail.com", "password", null), 2, 150));
+        reservations.add(new Reservation(3, LocalDate.of(2022,2, 20), LocalDate.of(2022, 6, 15), LocalDate.of(2022, 6, 18), new Guest(3,"Henk", "Jansen", "henkjansen@hotmail.com", "password", null), 1, 75));
     }
 
     // employees
