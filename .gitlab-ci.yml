@@ -5,6 +5,7 @@ stages:
 build:
   stage: build
   script:
+    - cd S3-ITProject
     - ./gradlew build -x test
     - ./gradlew.bat --stop 
 test:
