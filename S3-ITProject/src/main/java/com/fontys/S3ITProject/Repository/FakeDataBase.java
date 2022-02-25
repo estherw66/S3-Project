@@ -82,4 +82,9 @@ public class FakeDataBase {
 
         return employees.remove(employee);
     }
+
+    // guests
+    public List<Guest> readGuests(){
+        return guests;
+    }
 }
