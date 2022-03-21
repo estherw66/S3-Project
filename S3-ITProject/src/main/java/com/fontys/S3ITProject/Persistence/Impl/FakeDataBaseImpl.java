@@ -1,6 +1,8 @@
-package com.fontys.S3ITProject.Repository;
+package com.fontys.S3ITProject.Repository.Impl;
+
 
 import com.fontys.S3ITProject.Models.*;
+import com.fontys.S3ITProject.Repository.FakeDataBase;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -9,13 +11,13 @@ import java.util.*;
 
 @Repository
 @Primary
-public class FakeDataBase {
+public class FakeDataBaseImpl implements FakeDataBase {
 
     private final List<Employee> employees = new ArrayList<>();
     private final List<Guest> guests = new ArrayList<>();
     private final List<Reservation> reservations = new ArrayList<>();
 
-    public FakeDataBase(){
+    public FakeDataBaseImpl(){
         // employees
         employees.add(new Employee(1,"Esther", "Wolfs", "e.wolfs@goldskye.com", "password", new Address("Mozartlaan 41", "5151KA", "Drunen"), "+31612901749", LocalDate.of(1998,01,01)));
         employees.add(new Employee(2,"Emma", "Wiles", "e.wiles@goldskye.com", "password", new Address("Leidsestraat 41", "4864AD", "Amsterdam"), "+31678453321", LocalDate.of(1999, 04, 19)));
@@ -88,9 +90,9 @@ public class FakeDataBase {
         return guests;
     }
 
-    public Guest readGuestByAccountNr(int accountNr){
+    public Guest readGuestByID(int id){
         for (Guest g : guests){
-            if (g.getAccountNumber() == accountNr){
+            if (g.getAccountNumber() == id){
                 return g;
             }
         }

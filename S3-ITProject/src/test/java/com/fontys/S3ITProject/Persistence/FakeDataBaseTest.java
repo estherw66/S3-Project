@@ -2,6 +2,7 @@ package com.fontys.S3ITProject.Repository;
 
 import com.fontys.S3ITProject.Models.Address;
 import com.fontys.S3ITProject.Models.Employee;
+import com.fontys.S3ITProject.Repository.Impl.FakeDataBaseImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ class FakeDataBaseTest {
     @Test
     void createNewEmployeeSuccessful() {
         // arrange
-        FakeDataBase fdb = new FakeDataBase();
+        FakeDataBaseImpl fdb = new FakeDataBaseImpl();
         Employee testEmployee1 = new Employee(6, "Henk", "Jansen", "h.jansen@goldskye.com", "password", new Address("street", "1234AA", "Eindhoven"), "+31612345678", LocalDate.of(2000,12,12));
 
         // act
@@ -31,7 +32,7 @@ class FakeDataBaseTest {
     @Test
     void createNewEmployeeIDAlreadyExists(){
         // arrange
-        FakeDataBase fdb = new FakeDataBase();
+        FakeDataBaseImpl fdb = new FakeDataBaseImpl();
         Employee testEmployee1 = new Employee(1, "Henk", "Jansen", "h.jansen@goldskye.com", "password", new Address("street", "1234AA", "Eindhoven"), "+31612345678", LocalDate.of(2000,12,12));
 
         // act
@@ -44,7 +45,7 @@ class FakeDataBaseTest {
     @Test
     void readEmployeesContainsFiveEmployees() {
         // arrange
-        FakeDataBase fdb = new FakeDataBase();
+        FakeDataBaseImpl fdb = new FakeDataBaseImpl();
 
         // act
         long result = fdb.readEmployees().stream().count();
@@ -56,7 +57,7 @@ class FakeDataBaseTest {
     @Test
     void readEmployeeByIDGetNameEmployeeWithIDFive() {
         // arrange
-        FakeDataBase fdb = new FakeDataBase();
+        FakeDataBaseImpl fdb = new FakeDataBaseImpl();
 
         // act
         Employee testEmployee = fdb.readEmployeeByID(5);
@@ -69,7 +70,7 @@ class FakeDataBaseTest {
     @Test
     void readEmployeeByIDGetNameEmployeeWithIDThatDoesntExist(){
         // arrange
-        FakeDataBase fdb = new FakeDataBase();
+        FakeDataBaseImpl fdb = new FakeDataBaseImpl();
 
         // act
         Employee testEmployee = fdb.readEmployeeByID(6);
@@ -86,7 +87,7 @@ class FakeDataBaseTest {
     @Test
     void updateEmployeeEmail() {
         // arrange
-        FakeDataBase fdb = new FakeDataBase();
+        FakeDataBaseImpl fdb = new FakeDataBaseImpl();
         Employee old = fdb.readEmployeeByID(5);
 
         // act
@@ -103,7 +104,7 @@ class FakeDataBaseTest {
     @Test
     void deleteEmployee() {
         // arrange
-        FakeDataBase fdb = new FakeDataBase();
+        FakeDataBaseImpl fdb = new FakeDataBaseImpl();
 
         // act
         fdb.deleteEmployee(5);

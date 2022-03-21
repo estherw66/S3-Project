@@ -1,7 +1,7 @@
 package com.fontys.S3ITProject.Controllers;
 
 import com.fontys.S3ITProject.Models.Employee;
-import com.fontys.S3ITProject.Repository.FakeDataBase;
+import com.fontys.S3ITProject.Repository.Impl.FakeDataBaseImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +13,9 @@ import java.util.*;
 @RequestMapping("/employees")
 public class EmployeesController {
 
-    private FakeDataBase fakeDataBase;
+    private FakeDataBaseImpl fakeDataBase;
 
-    public EmployeesController(FakeDataBase fakeDataBase){
+    public EmployeesController(FakeDataBaseImpl fakeDataBase){
         this.fakeDataBase = fakeDataBase;
     }
 
