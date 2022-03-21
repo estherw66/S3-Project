@@ -1,7 +1,7 @@
-package com.fontys.S3ITProject.Controllers;
+package com.fontys.S3ITProject.Controller;
 
 import com.fontys.S3ITProject.Models.Employee;
-import com.fontys.S3ITProject.Repository.Impl.FakeDataBaseImpl;
+import com.fontys.S3ITProject.Persistence.Impl.FakeDataBaseImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -74,6 +74,7 @@ public class EmployeesController {
         return new ResponseEntity("Please provide a valid employee id", HttpStatus.NOT_FOUND);
     }
 
+    // Delete employee
     @DeleteMapping("{id}")
     public ResponseEntity deleteEmployee(@PathVariable int id){
         fakeDataBase.deleteEmployee(id);

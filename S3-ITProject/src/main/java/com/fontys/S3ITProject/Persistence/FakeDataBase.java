@@ -1,4 +1,4 @@
-package com.fontys.S3ITProject.Repository;
+package com.fontys.S3ITProject.Persistence;
 
 import com.fontys.S3ITProject.Models.Employee;
 import com.fontys.S3ITProject.Models.Guest;
