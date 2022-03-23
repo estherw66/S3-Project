@@ -17,4 +17,5 @@ public interface FakeDataBase {
     // guests
     public List<Guest> readGuests();
     public Guest readGuestByID(int id);
+
 }
