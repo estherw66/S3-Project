@@ -1,9 +1,8 @@
-package com.fontys.S3ITProject.Business.Impl;
+package com.fontys.S3ITProject.business.Impl;
 
-import com.fontys.S3ITProject.Business.EmployeesUseCase;
-import com.fontys.S3ITProject.Models.Employee;
-import com.fontys.S3ITProject.Persistence.FakeDataBase;
-import org.springframework.stereotype.Service;
+import com.fontys.S3ITProject.business.EmployeesUseCase;
+import com.fontys.S3ITProject.models.Employee;
+import com.fontys.S3ITProject.persistence.FakeDataBase;
 
 import java.util.List;
 

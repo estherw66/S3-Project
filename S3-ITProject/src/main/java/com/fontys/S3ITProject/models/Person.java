@@ -1,4 +1,4 @@
-package com.fontys.S3ITProject.Models;
+package com.fontys.S3ITProject.models;
 
 
 import lombok.Getter;

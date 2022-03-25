@@ -1,8 +1,8 @@
-package com.fontys.S3ITProject.Persistence;
+package com.fontys.S3ITProject.persistence;
 
-import com.fontys.S3ITProject.Models.Address;
-import com.fontys.S3ITProject.Models.Employee;
-import com.fontys.S3ITProject.Persistence.Impl.FakeDataBaseImpl;
+import com.fontys.S3ITProject.models.Address;
+import com.fontys.S3ITProject.models.Employee;
+import com.fontys.S3ITProject.persistence.Impl.FakeDataBaseImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

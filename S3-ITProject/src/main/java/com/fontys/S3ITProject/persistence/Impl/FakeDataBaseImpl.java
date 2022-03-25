@@ -1,8 +1,8 @@
-package com.fontys.S3ITProject.Persistence.Impl;
+package com.fontys.S3ITProject.persistence.Impl;
 
 
-import com.fontys.S3ITProject.Models.*;
-import com.fontys.S3ITProject.Persistence.FakeDataBase;
+import com.fontys.S3ITProject.models.*;
+import com.fontys.S3ITProject.persistence.FakeDataBase;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 

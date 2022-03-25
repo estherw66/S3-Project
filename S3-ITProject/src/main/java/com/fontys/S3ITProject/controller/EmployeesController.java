@@ -1,7 +1,7 @@
-package com.fontys.S3ITProject.Controller;
+package com.fontys.S3ITProject.controller;
 
-import com.fontys.S3ITProject.Models.Employee;
-import com.fontys.S3ITProject.Persistence.Impl.FakeDataBaseImpl;
+import com.fontys.S3ITProject.models.Employee;
+import com.fontys.S3ITProject.persistence.Impl.FakeDataBaseImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
