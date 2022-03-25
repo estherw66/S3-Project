@@ -3,17 +3,12 @@ import Sidebar from '../Components/Sidebar'
 import Navbar from '../Components/Navbar'
 
 const Home = () => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggleMenu = () => {
-        setIsOpen(!isOpen)
-    }
-
 
   return (
     <>
-        <Sidebar isOpen={isOpen} toggleMenu={toggleMenu} />
-        <Navbar toggleMenu={toggleMenu} />
+        <h1> Homepage</h1>
+        <h1> Our Rooms </h1>
+        <h1> About </h1>
     </>
   )
 }

@@ -13,10 +13,10 @@ const Navbar = ({ toggleMenu }) => {
           </HamburgerMenu>
           <NavMenu>
             <NavItem>
-              <NavLinks to='rooms'>Our Rooms</NavLinks>
+              <NavLinks to='/'>Our Rooms</NavLinks>
             </NavItem>
             <NavItem>
-              <NavLinks to='about'>About Us</NavLinks>
+              <NavLinks to='/'>About Us</NavLinks>
             </NavItem>
           </NavMenu>
           <NavBtn>

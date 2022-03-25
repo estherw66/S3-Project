@@ -1,14 +1,28 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import './App.css';
 import Home from "./Pages";
+import LoginPage from "./Pages/login";
+import Navbar from "./Components/Navbar";
+import Sidebar from "./Components/Sidebar";
 
 function App() {
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen)
+    }
+
     return (
        <>
-        <Router>
-            <Home />
-        </Router>
+        <Sidebar isOpen={isOpen} toggleMenu={toggleMenu} />
+        <Navbar toggleMenu={toggleMenu} />
+        
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<LoginPage />} />
+        </Routes>
        </>
     );
 }
