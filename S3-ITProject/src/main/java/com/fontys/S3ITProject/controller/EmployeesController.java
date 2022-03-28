@@ -1,5 +1,6 @@
 package com.fontys.S3ITProject.controller;
 
+import com.fontys.S3ITProject.business.Impl.EmployeesServiceImpl;
 import com.fontys.S3ITProject.models.Employee;
 import com.fontys.S3ITProject.persistence.Impl.FakeDataBaseImpl;
 import org.springframework.http.HttpStatus;
@@ -13,10 +14,12 @@ import java.util.*;
 @RequestMapping("/employees")
 public class EmployeesController {
 
+    private EmployeesServiceImpl employeesService;
     private FakeDataBaseImpl fakeDataBase;
 
     public EmployeesController(FakeDataBaseImpl fakeDataBase){
         this.fakeDataBase = fakeDataBase;
+//        this.employeesService = employeesService;
     }
 
     // Create
