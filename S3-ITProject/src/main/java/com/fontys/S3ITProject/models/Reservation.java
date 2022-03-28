@@ -17,7 +17,7 @@ public class Reservation {
     private Guest guest;
     private int amountOfGuests;
     private double totalPrice;
-    //payment status
+    //private Status status;
 
     // list of rooms
     private List<Room> roomList;

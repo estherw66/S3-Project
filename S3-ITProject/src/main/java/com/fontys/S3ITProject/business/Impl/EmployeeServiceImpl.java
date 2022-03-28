@@ -1,16 +1,16 @@
 package com.fontys.S3ITProject.business.Impl;
 
-import com.fontys.S3ITProject.business.EmployeesService;
+import com.fontys.S3ITProject.business.EmployeeService;
 import com.fontys.S3ITProject.models.Employee;
 import com.fontys.S3ITProject.persistence.FakeDataBase;
 
 import java.util.List;
 
-public class EmployeesServiceImpl implements EmployeesService {
+public class EmployeeServiceImpl implements EmployeeService {
 
     private final FakeDataBase fakeDataBase;
 
-    public EmployeesServiceImpl(FakeDataBase fakeDataBase){
+    public EmployeeServiceImpl(FakeDataBase fakeDataBase){
         this.fakeDataBase = fakeDataBase;
     }
 

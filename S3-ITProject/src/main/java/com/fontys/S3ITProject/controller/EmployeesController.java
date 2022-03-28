@@ -1,6 +1,6 @@
 package com.fontys.S3ITProject.controller;
 
-import com.fontys.S3ITProject.business.Impl.EmployeesServiceImpl;
+import com.fontys.S3ITProject.business.Impl.EmployeeServiceImpl;
 import com.fontys.S3ITProject.models.Employee;
 import com.fontys.S3ITProject.persistence.Impl.FakeDataBaseImpl;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ import java.util.*;
 @RequestMapping("/employees")
 public class EmployeesController {
 
-    private EmployeesServiceImpl employeesService;
+    private EmployeeServiceImpl employeesService;
     private FakeDataBaseImpl fakeDataBase;
 
     public EmployeesController(FakeDataBaseImpl fakeDataBase){
@@ -26,10 +26,10 @@ public class EmployeesController {
     @PostMapping()
     public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee){
         if (!fakeDataBase.createEmployee(employee)){
-            String entity = "Employee with id " + employee.getEmployeeID() + " already exists";
+            String entity = "Employee with id " + employee.getId() + " already exists";
             return new ResponseEntity(entity, HttpStatus.CONFLICT);
         } else {
-            String url = "employees" + "/" + employee.getEmployeeID();
+            String url = "employees" + "/" + employee.getId();
             URI uri = URI.create(url);
             return new ResponseEntity(uri, HttpStatus.CREATED);
         }

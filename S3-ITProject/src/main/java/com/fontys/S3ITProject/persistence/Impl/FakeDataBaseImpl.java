@@ -38,7 +38,7 @@ public class FakeDataBaseImpl implements FakeDataBase {
 
     // employees
     public boolean createEmployee(Employee employee){
-        if (this.readEmployeeByID(employee.getEmployeeID()) != null){
+        if (this.readEmployeeByID(employee.getId()) != null){
             return false;
         }
 
@@ -52,7 +52,7 @@ public class FakeDataBaseImpl implements FakeDataBase {
 
     public Employee readEmployeeByID(int id){
         for (Employee e : employees){
-            if (e.getEmployeeID() == id){
+            if (e.getId() == id){
                 return e;
             }
         }
@@ -61,7 +61,7 @@ public class FakeDataBaseImpl implements FakeDataBase {
     }
 
     public boolean updateEmployee(Employee employee){
-        Employee old = this.readEmployeeByID(employee.getEmployeeID());
+        Employee old = this.readEmployeeByID(employee.getId());
 
         if (old != null){
             old.setFirstName(employee.getFirstName());
@@ -92,7 +92,7 @@ public class FakeDataBaseImpl implements FakeDataBase {
 
     public Guest readGuestByID(int id){
         for (Guest g : guests){
-            if (g.getAccountNumber() == id){
+            if (g.getId() == id){
                 return g;
             }
         }

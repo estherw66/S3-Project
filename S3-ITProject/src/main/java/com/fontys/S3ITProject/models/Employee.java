@@ -9,16 +9,14 @@ import java.time.LocalDate;
 @Setter
 public class Employee extends Person{
 
-    private int employeeID;
     private Address address;
     private String phoneNumber;
     private LocalDate dateOfBirth;
 
-    public Employee(int employeeID, String firstName, String lastName, String email, String password, Address address,
+    public Employee(int id, String firstName, String lastName, String email, String password, Address address,
      String phoneNumber, LocalDate dateOfBirth) {
-        super(firstName, lastName, email, password);
+        super(id, firstName, lastName, email, password);
 
-        this.employeeID = employeeID;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
