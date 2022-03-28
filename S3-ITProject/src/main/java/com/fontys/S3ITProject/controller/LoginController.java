@@ -1,58 +1,33 @@
 package com.fontys.S3ITProject.controller;
 
+import com.fontys.S3ITProject.business.LoginService;
 import com.fontys.S3ITProject.models.Employee;
+import com.fontys.S3ITProject.models.Guest;
 import com.fontys.S3ITProject.models.Person;
-import com.fontys.S3ITProject.persistence.AccountRepository;
-import com.fontys.S3ITProject.persistence.Impl.AccountRepositoryImpl;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.net.URI;
 
+@RequestMapping("/api/login")
 @RestController
-@RequestMapping("/login")
 public class LoginController {
+    private final LoginService loginService;
 
-//    private AccountRepositoryImpl fakeDataBase;
-//
-//    public LoginController(AccountRepositoryImpl fakeDataBase) { this.fakeDataBase = fakeDataBase; }
-//
-//
-//
-//    @GetMapping("/e.wolfs@goldskye.com/password")
-//    public ResponseEntity<Person> getPerson(){
-//        List<Person> users = fakeDataBase.getAllUsers();
-//
-//        for (Person person : users){
-//            if (person.getEmail() == "e.wolfs@goldskye.com"){
-//                return ResponseEntity.ok().body(person);
-//            } else {
-//                return ResponseEntity.notFound().build();
-//            }
-//        }
-//
-//        return null;
-//    }
-//
-//    @RequestMapping(value = "/?username={username}&?password={password}", method = RequestMethod.GET)
-//    public ResponseEntity<Person> checkLogin(@PathVariable String username, String password){
-//        Person user = fakeDataBase.checkLogin(username, password);
-//
-//        if (user != null){
-//            return ResponseEntity.ok().body(user);
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
+    }
+
+    @ResponseBody
+    public Person checkLogin(@RequestBody String email, String password){
+
+        return new Person(7, "test", "test", "test@mail.com", "password");
+
+//        if (email.equals("test@email.com") || password.equals("password")){
+//            return new Person(7, "test", "test", "test@mail.com", "password");
 //        } else {
-//            return ResponseEntity.notFound().build();
+//            return new Person(7, "error", "error", "test@mail.com", "password");
 //        }
-//    }
-//
-//    @GetMapping
-//    public ResponseEntity<List<Person>> getAllUsers(){
-//        List<Person> users = fakeDataBase.getAllUsers();
-//
-//        if (users != null){
-//            return ResponseEntity.ok().body(users);
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+    }
 }
