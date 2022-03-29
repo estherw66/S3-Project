@@ -14,10 +14,10 @@ public class Guest extends Person{
 
     private PaymentInfo paymentInfo;
 
-    public Guest(int id, String firstName, String lastName, String email, String password, PaymentInfo paymentInfo) {
+    public Guest(int id, String firstName, String lastName, String email, String password) {
         super(id, firstName, lastName, email, password);
 
-        this.paymentInfo = paymentInfo;
+        //this.paymentInfo = paymentInfo;
         this.reservationList = new ArrayList<>();
     }
 }

@@ -2,7 +2,7 @@ package com.fontys.S3ITProject.controller;
 
 import com.fontys.S3ITProject.business.LoginService;
 import com.fontys.S3ITProject.models.Employee;
-import com.fontys.S3ITProject.models.Guest;
+import com.fontys.S3ITProject.models.*;
 import com.fontys.S3ITProject.models.Person;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +19,15 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @ResponseBody
-    public Person checkLogin(@RequestBody String email, String password){
+    @GetMapping()
+    public ResponseEntity<Guest> checkLogin(@RequestBody Login login){
 
-        return new Person(7, "test", "test", "test@mail.com", "password");
+        Guest user = loginService.checkLogin(login.getEmail(), login.getPassword());
 
-//        if (email.equals("test@email.com") || password.equals("password")){
-//            return new Person(7, "test", "test", "test@mail.com", "password");
-//        } else {
-//            return new Person(7, "error", "error", "test@mail.com", "password");
-//        }
+        if (user != null){
+            return ResponseEntity.ok().body(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

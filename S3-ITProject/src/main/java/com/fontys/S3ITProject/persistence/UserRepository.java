@@ -1,11 +1,11 @@
-package com.fontys.S3ITProject.business;
+package com.fontys.S3ITProject.persistence;
 
 import com.fontys.S3ITProject.models.Guest;
-import com.fontys.S3ITProject.models.Person;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface LoginService {
+public interface UserRepository {
     public Guest checkLogin(String email, String password);
     public List<Guest> getAllUsers();
     public boolean createUser(Guest user);

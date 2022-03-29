@@ -15,9 +15,9 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     public AccountRepositoryImpl(){
         // create users
-        users.add(new Guest(1,"John", "Floreani", "jflor@gmail.com", "password", new CreditCard("4780 0054 4578", "J. Floreani", "04/23")));
-        users.add(new Guest(2,"Jan", "Pieters", "janpieters@gmail.com", "password", null));
-        users.add(new Guest(3,"Henk", "Jansen", "henkjansen@hotmail.com", "password", null));
+        users.add(new Guest(1,"John", "Floreani", "jflor@gmail.com", "password"));
+        users.add(new Guest(2,"Jan", "Pieters", "janpieters@gmail.com", "password"));
+        users.add(new Guest(3,"Henk", "Jansen", "henkjansen@hotmail.com", "password"));
     }
 
     @Override
