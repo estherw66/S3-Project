@@ -9,9 +9,5 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address {
-
-    private String streetName;
-    private String zipCode;
-    private String city;
+public class User extends Person{
 }

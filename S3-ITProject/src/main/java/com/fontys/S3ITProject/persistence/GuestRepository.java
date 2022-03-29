@@ -1,7 +1,0 @@
-package com.fontys.S3ITProject.persistence;
-
-import com.fontys.S3ITProject.models.Guest;
-
-public interface GuestRepository {
-    public boolean createGuest(Guest guest);
-}

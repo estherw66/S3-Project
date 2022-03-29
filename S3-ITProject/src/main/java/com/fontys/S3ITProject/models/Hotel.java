@@ -9,12 +9,12 @@ import java.util.*;
 @Setter
 public class Hotel {
 
-    private String location;
+    private Address address;
     private List<Room> roomList;
     private List<Employee> employeeList;
 
-    public Hotel(String location){
-        this.location = location;
+    public Hotel(Address address){
+        this.address = address;
 
         this.roomList = new ArrayList<>();
         this.employeeList = new ArrayList<>();

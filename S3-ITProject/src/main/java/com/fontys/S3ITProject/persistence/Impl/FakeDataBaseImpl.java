@@ -31,9 +31,9 @@ public class FakeDataBaseImpl implements FakeDataBase {
         guests.add(new Guest(3,"Henk", "Jansen", "henkjansen@hotmail.com", "password"));
 
         // reservations
-        reservations.add(new Reservation(1, LocalDate.of(2022,2, 10), LocalDate.of(2022, 2, 28), LocalDate.of(2022, 3, 3), new Guest(1,"John", "Floreani", "jflor@gmail.com", "password"),  1, 100));
-        reservations.add(new Reservation(2, LocalDate.of(2022,2, 18), LocalDate.of(2022, 4, 1), LocalDate.of(2022, 4, 7), new Guest(2,"Jan", "Pieters", "janpieters@gmail.com", "password"), 2, 150));
-        reservations.add(new Reservation(3, LocalDate.of(2022,2, 20), LocalDate.of(2022, 6, 15), LocalDate.of(2022, 6, 18), new Guest(3,"Henk", "Jansen", "henkjansen@hotmail.com", "password"), 1, 75));
+//        reservations.add(new Reservation(1, LocalDate.of(2022,2, 10), LocalDate.of(2022, 2, 28), LocalDate.of(2022, 3, 3), new Guest(1,"John", "Floreani", "jflor@gmail.com", "password"),  1, 100));
+//        reservations.add(new Reservation(2, LocalDate.of(2022,2, 18), LocalDate.of(2022, 4, 1), LocalDate.of(2022, 4, 7), new Guest(2,"Jan", "Pieters", "janpieters@gmail.com", "password"), 2, 150));
+//        reservations.add(new Reservation(3, LocalDate.of(2022,2, 20), LocalDate.of(2022, 6, 15), LocalDate.of(2022, 6, 18), new Guest(3,"Henk", "Jansen", "henkjansen@hotmail.com", "password"), 1, 75));
     }
 
     // employees

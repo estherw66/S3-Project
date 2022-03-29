@@ -8,7 +8,7 @@ import java.util.List;
 
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final FakeDataBase fakeDataBase;
+    private final FakeDataBase fakeDataBase; // change name
 
     public EmployeeServiceImpl(FakeDataBase fakeDataBase){
         this.fakeDataBase = fakeDataBase;

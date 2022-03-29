@@ -1,24 +1,21 @@
 package com.fontys.S3ITProject.models;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Person {
 
     private int id;
     private String firstName;
     private String lastName;
     private String email;
+    private String username;
     private String password;
-
-    public Person(int id, String firstName, String lastName, String email, String password){
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
 }

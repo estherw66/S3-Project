@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, FormWrap, Icon, FormContent, Form, FormH1, FormLabel, FormInput, FormButton, Text } from './LoginStyled'
 
 const Login = () => {
+
   return (
     <>
       <Container>
@@ -10,12 +11,12 @@ const Login = () => {
           <FormContent>
             <Form>
               <FormH1>Login To Your Account:</FormH1>
-              <FormLabel htmlFor='for'>Email:</FormLabel>
-              <FormInput type='email' required />
-              <FormLabel htmlFor='for'>Password:</FormLabel>
-              <FormInput type='password' required />
+              <FormLabel htmlFor='username'>Username:</FormLabel>
+              <FormInput type='text' required/>
+              <FormLabel htmlFor='password'>Password:</FormLabel>
+              <FormInput type='password'required/>
               <FormButton type='submit'>Login</FormButton>
-              <Text>Create Account</Text>
+              <Text></Text>
             </Form>
           </FormContent>
         </FormWrap>

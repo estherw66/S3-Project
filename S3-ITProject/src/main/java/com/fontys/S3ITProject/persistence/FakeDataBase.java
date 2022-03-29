@@ -1,7 +1,6 @@
 package com.fontys.S3ITProject.persistence;
 
 import com.fontys.S3ITProject.models.Employee;
-import com.fontys.S3ITProject.models.Guest;
 
 import java.util.List;
 

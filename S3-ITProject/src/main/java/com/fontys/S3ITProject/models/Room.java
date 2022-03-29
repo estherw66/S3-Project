@@ -1,22 +1,21 @@
 package com.fontys.S3ITProject.models;
 
+import com.fontys.S3ITProject.models.enums.RoomType;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Room {
 
+    private int id;
     private int roomNumber;
-    //private RoomType type;
-    private double pricePerNight;
     private int maxCapacity;
+    private double basePricePerNight;
     private boolean isAvailable;
-
-    public Room(int roomNumber, double pricePerNight, int maxCapacity, boolean isAvailable){
-        this.roomNumber = roomNumber;
-        this.pricePerNight = pricePerNight;
-        this.maxCapacity = maxCapacity;
-        this.isAvailable = isAvailable;
-    }
+    private RoomType type;
 }
