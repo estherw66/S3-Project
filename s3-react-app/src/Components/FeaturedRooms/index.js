@@ -35,7 +35,7 @@ const FeaturedRooms = () => {
   return (
     <>
         <RoomContainer>
-            <Heading>Featured Rooms</Heading>
+            <Heading>Our Rooms</Heading>
             <Row>
                 <FeaturedRoomList />
             </Row>
