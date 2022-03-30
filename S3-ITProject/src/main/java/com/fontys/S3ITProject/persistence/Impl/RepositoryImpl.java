@@ -1,14 +1,27 @@
 package com.fontys.S3ITProject.persistence.Impl;
 
 import com.fontys.S3ITProject.models.*;
+import com.fontys.S3ITProject.models.enums.RoomType;
 import com.fontys.S3ITProject.persistence.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class RepositoryImpl implements ReservationsRepository, UserRepository, RoomRepository, EmployeeRepository,
         LoginRepository {
+
+    private final List<Employee> employees = new ArrayList<>();
+    private final List<Reservation> reservations = new ArrayList<>();
+    private final List<Room> roomTypes = new ArrayList<>();
+    private final List<SpecificRoom> specificRooms = new ArrayList<>();
+    private final List<User> users = new ArrayList<>();
+
+    public RepositoryImpl(){
+        addInitialRooms();
+    }
+
     /* start reservations */
     @Override
     public boolean createReservation(Reservation r) {
@@ -62,36 +75,86 @@ public class RepositoryImpl implements ReservationsRepository, UserRepository, R
         return false;
     }
 
-    @Override
-    public boolean createRoom(Room r) {
-        return false;
-    }
     /* end users*/
 
     /* start rooms */
+    private void addInitialRooms(){
+
+        // room types
+        roomTypes.add(new Room(1, 1, 50, RoomType.SINGLE));
+        roomTypes.add(new Room(2, 1, 112.50, RoomType.SINGLE_XXL));
+        roomTypes.add(new Room(3, 2, 75, RoomType.DOUBLE));
+        roomTypes.add(new Room(4,  2, 190, RoomType.DOUBLE_DELUXE));
+        roomTypes.add(new Room(5,  4, 175, RoomType.FAMILY));
+        roomTypes.add(new Room(6,  6, 225, RoomType.FAMILY_SUPERIOR));
+    }
+
+    @Override
+    public boolean createRoom(Room r) {
+
+        if (getRoomByID(r.getId()) != null){
+            return false;
+        }
+
+        roomTypes.add(r);
+        return true;
+    }
+
     @Override
     public List<Room> readRooms() {
-        return null;
+        return this.roomTypes;
     }
 
     @Override
     public List<Room> readAvailableRooms() {
-        return null;
+        List<Room> availableRooms = new ArrayList<>();
+
+//        for (Room room : rooms){
+//            if (room.isAvailable()){
+//                availableRooms.add(room);
+//            }
+//        }
+
+        return availableRooms;
     }
 
     @Override
     public boolean updateRoom(Room r) {
+        if (getRoomByID(r.getId()) != null){
+            r.setBasePricePerNight(r.getBasePricePerNight());
+            r.setMaxCapacity(r.getMaxCapacity());
+            r.setType(r.getType());
+
+            return true;
+        }
+
         return false;
     }
 
     @Override
     public boolean deleteRoom(Room r) {
+        if (getRoomByID(r.getId()) != null){
+            roomTypes.remove(r);
+            return true;
+        }
+
         return false;
     }
 
     @Override
     public boolean addRoomToReservation(Room room, Reservation reservation) {
         return false;
+    }
+
+    @Override
+    public Room getRoomByID(int id) {
+        for (Room room : roomTypes){
+            if (room.getId() == id){
+                return room;
+            }
+        }
+
+        return null;
     }
     /* end rooms */
 

@@ -18,31 +18,36 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public boolean createRoom(Room r) {
-        return false;
+        return this.roomRepo.createRoom(r);
     }
 
     @Override
     public List<Room> readRooms() {
-        return null;
+        return this.roomRepo.readRooms();
     }
 
     @Override
     public List<Room> readAvailableRooms() {
-        return null;
+        return this.roomRepo.readAvailableRooms();
     }
 
     @Override
     public boolean updateRoom(Room r) {
-        return false;
+        return this.roomRepo.updateRoom(r);
     }
 
     @Override
     public boolean deleteRoom(Room r) {
-        return false;
+        return this.roomRepo.deleteRoom(r);
     }
 
     @Override
     public boolean addRoomToReservation(Room room, Reservation reservation) {
         return false;
+    }
+
+    @Override
+    public double calculatePricePerNight(Room room) {
+        return 0;
     }
 }

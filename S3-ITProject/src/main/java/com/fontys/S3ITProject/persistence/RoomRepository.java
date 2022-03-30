@@ -13,4 +13,5 @@ public interface RoomRepository {
     public boolean deleteRoom(Room r);
 
     public boolean addRoomToReservation(Room room, Reservation reservation);
+    public Room getRoomByID(int id);
 }

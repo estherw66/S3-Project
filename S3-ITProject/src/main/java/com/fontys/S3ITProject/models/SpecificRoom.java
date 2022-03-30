@@ -10,10 +10,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Room {
-
+public class SpecificRoom {
     private int id;
-    private int maxCapacity;
-    private double basePricePerNight;
-    private RoomType type;
+    private int roomNumber;
+    private double actualPricePerNight;
+    private boolean isAvailable;
+    private RoomType roomType;
 }

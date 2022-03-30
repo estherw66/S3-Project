@@ -13,4 +13,5 @@ public interface RoomService {
     public boolean deleteRoom(Room r);
 
     public boolean addRoomToReservation(Room room, Reservation reservation);
+    public double calculatePricePerNight(Room room);
 }
