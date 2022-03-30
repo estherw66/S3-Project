@@ -4,9 +4,11 @@ import com.fontys.S3ITProject.business.ReservationService;
 import com.fontys.S3ITProject.models.Reservation;
 import com.fontys.S3ITProject.models.User;
 import com.fontys.S3ITProject.persistence.ReservationsRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ReservationServiceImpl implements ReservationService {
 
     private final ReservationsRepository reservationsRepo;

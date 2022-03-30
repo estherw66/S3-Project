@@ -2,40 +2,42 @@ package com.fontys.S3ITProject.business.Impl;
 
 import com.fontys.S3ITProject.business.EmployeeService;
 import com.fontys.S3ITProject.models.Employee;
-import com.fontys.S3ITProject.persistence.FakeDataBase;
+import com.fontys.S3ITProject.persistence.EmployeeRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final FakeDataBase fakeDataBase; // change name
+    private final EmployeeRepository employeeRepo;
 
-    public EmployeeServiceImpl(FakeDataBase fakeDataBase){
-        this.fakeDataBase = fakeDataBase;
+    public EmployeeServiceImpl(EmployeeRepository employeeRepo) {
+        this.employeeRepo = employeeRepo;
     }
 
     @Override
     public boolean createEmployee(Employee employee) {
-        return this.fakeDataBase.createEmployee(employee);
+        return false;
     }
 
     @Override
     public List<Employee> readEmployees() {
-        return this.fakeDataBase.readEmployees();
+        return null;
     }
 
     @Override
     public Employee readEmployeeByID(int id) {
-        return this.fakeDataBase.readEmployeeByID(id);
+        return null;
     }
 
     @Override
     public boolean updateEmployee(Employee employee) {
-        return this.fakeDataBase.updateEmployee(employee);
+        return false;
     }
 
     @Override
     public boolean deleteEmployee(int employeeID) {
-        return this.fakeDataBase.deleteEmployee(employeeID);
+        return false;
     }
 }

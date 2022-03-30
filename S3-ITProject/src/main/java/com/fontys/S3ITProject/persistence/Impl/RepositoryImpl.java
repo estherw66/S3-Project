@@ -1,17 +1,14 @@
 package com.fontys.S3ITProject.persistence.Impl;
 
-import com.fontys.S3ITProject.models.Reservation;
-import com.fontys.S3ITProject.models.User;
-import com.fontys.S3ITProject.persistence.FakeDataBase;
-import com.fontys.S3ITProject.persistence.ReservationsRepository;
-import com.fontys.S3ITProject.persistence.UserRepository;
+import com.fontys.S3ITProject.models.*;
+import com.fontys.S3ITProject.persistence.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class RepositoryImpl implements ReservationsRepository, UserRepository {
-
+public class RepositoryImpl implements ReservationsRepository, UserRepository, RoomRepository, EmployeeRepository,
+        LoginRepository {
     /* start reservations */
     @Override
     public boolean createReservation(Reservation r) {
@@ -64,7 +61,71 @@ public class RepositoryImpl implements ReservationsRepository, UserRepository {
     public boolean deleteUser(User u) {
         return false;
     }
-    /* end users */
+
+    @Override
+    public boolean createRoom(Room r) {
+        return false;
+    }
+    /* end users*/
 
     /* start rooms */
+    @Override
+    public List<Room> readRooms() {
+        return null;
+    }
+
+    @Override
+    public List<Room> readAvailableRooms() {
+        return null;
+    }
+
+    @Override
+    public boolean updateRoom(Room r) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteRoom(Room r) {
+        return false;
+    }
+
+    @Override
+    public boolean addRoomToReservation(Room room, Reservation reservation) {
+        return false;
+    }
+    /* end rooms */
+
+    /* start employees */
+    @Override
+    public boolean createEmployee(Employee e) {
+        return false;
+    }
+
+    @Override
+    public List<Employee> readEmployees() {
+        return null;
+    }
+
+    @Override
+    public Employee readEmployeeByID(int id) {
+        return null;
+    }
+
+    @Override
+    public boolean updateEmployee(Employee e) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteEmployee(Employee e) {
+        return false;
+    }
+    /* end employees */
+
+    /* start login */
+    @Override
+    public Person checkLogin(Login l) {
+        return null;
+    }
+    /* end login */
 }
