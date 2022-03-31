@@ -50,4 +50,9 @@ public class RoomServiceImpl implements RoomService {
     public double calculatePricePerNight(Room room) {
         return 0;
     }
+
+    @Override
+    public Room getRoomByID(int id) {
+        return this.roomRepo.getRoomByID(id);
+    }
 }

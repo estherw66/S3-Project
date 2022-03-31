@@ -15,5 +15,5 @@ public class SpecificRoom {
     private int roomNumber;
     private double actualPricePerNight;
     private boolean isAvailable;
-    private RoomType roomType;
+    private Room roomType;
 }

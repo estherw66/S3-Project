@@ -21,7 +21,7 @@ public class RoomController {
         this.roomService = roomService;
     }
 
-    // get all rooms
+    // get all roomtypes
     @GetMapping
     public ResponseEntity<List<Room>> getAllRooms(){
         List<Room> rooms = roomService.readRooms();
@@ -34,7 +34,7 @@ public class RoomController {
     }
 
 
-    // get all room types
+    // get all rooms
 
     //
 }

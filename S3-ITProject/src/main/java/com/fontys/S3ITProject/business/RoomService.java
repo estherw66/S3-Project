@@ -14,4 +14,5 @@ public interface RoomService {
 
     public boolean addRoomToReservation(Room room, Reservation reservation);
     public double calculatePricePerNight(Room room);
+    public Room getRoomByID(int id);
 }
