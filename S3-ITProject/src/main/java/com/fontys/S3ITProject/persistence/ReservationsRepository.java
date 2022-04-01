@@ -11,4 +11,5 @@ public interface ReservationsRepository {
       public List<Reservation> readMyReservations(User u);
       public boolean updateReservation(Reservation r);
       public boolean deleteReservation(Reservation r);
+      public Reservation getReservationById(int id);
 }

@@ -18,26 +18,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public boolean createEmployee(Employee employee) {
-        return false;
+        return employeeRepo.createEmployee(employee);
     }
 
     @Override
     public List<Employee> readEmployees() {
-        return null;
+        return employeeRepo.readEmployees();
     }
 
     @Override
     public Employee readEmployeeByID(int id) {
-        return null;
+        return employeeRepo.readEmployeeByID(id);
     }
 
     @Override
     public boolean updateEmployee(Employee employee) {
-        return false;
+        return employeeRepo.updateEmployee(employee);
     }
 
     @Override
-    public boolean deleteEmployee(int employeeID) {
-        return false;
+    public boolean deleteEmployee(Employee employee) {
+        return employeeRepo.deleteEmployee(employee);
     }
 }

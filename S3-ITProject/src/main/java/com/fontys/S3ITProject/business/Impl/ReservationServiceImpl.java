@@ -19,26 +19,57 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public boolean createReservation(Reservation r) {
-        return false;
+        return reservationsRepo.createReservation(r);
     }
 
     @Override
     public List<Reservation> readAllReservations() {
-        return null;
+        return reservationsRepo.readAllReservations();
     }
 
     @Override
     public List<Reservation> readMyReservations(User u) {
-        return null;
+        return reservationsRepo.readMyReservations(u);
     }
 
     @Override
     public boolean updateReservation(Reservation r) {
-        return false;
+        return reservationsRepo.updateReservation(r);
     }
 
     @Override
     public boolean deleteReservation(Reservation r) {
+        return reservationsRepo.deleteReservation(r);
+    }
+
+    @Override
+    public boolean checkDate() {
         return false;
+    }
+
+    @Override
+    public double calculatePricePerNight() {
+        return 0;
+    }
+
+    @Override
+    public double calculateTotalPrice() {
+        return 0;
+    }
+
+    @Override
+    public boolean addGuestToReservation() {
+        return false;
+    }
+
+    @Override
+    public boolean addRoomToReservation() {
+        return false;
+    }
+
+    @Override
+    public boolean updateStatusOfReservation(Reservation reservation) {
+        reservation.setStatus(reservation.getStatus());
+        return true;
     }
 }

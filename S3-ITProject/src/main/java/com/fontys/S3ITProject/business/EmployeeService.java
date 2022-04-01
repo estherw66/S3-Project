@@ -9,5 +9,5 @@ public interface EmployeeService {
     public List<Employee> readEmployees();
     public Employee readEmployeeByID(int id);
     public boolean updateEmployee(Employee employee);
-    public boolean deleteEmployee(int employeeID);
+    public boolean deleteEmployee(Employee employee);
 }

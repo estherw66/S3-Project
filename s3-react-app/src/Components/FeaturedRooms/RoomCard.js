@@ -1,43 +1,23 @@
-// import React, { Component } from "react";
-
-// export default class RoomCard extends Component {
-
-//     state = {
-//         type: '',
-
-//     };
-
-//     componentDidMount(){
-//         const { type } = this.props;
-
-//         this.setState({
-//             type
-//         });
-//     }
-
-//     render(){
-
-//         return(
-//             <div>
-//                 <div>
-//                     <h5>{this.state.type}</h5>
-//                 </div>
-//             </div>
-//         );
-//     }
-// }
-
 import React from 'react'
-import { RoomCol, Image, Heading3, SubTitle } from './FeaturedRoomStyled'
+import { RoomCol, Card, Image, Heading3, SubTitle } from './FeaturedRoomStyled'
 
-const RoomCard = ({ type, price }) => {
+const RoomCard = ({ type, price, imgUrl, availableRooms }) => {
   return (
     <>
-        <RoomCol>
-            <Image src="../img/double.jpeg" />
-            <Heading3>{type}</Heading3>
+      <RoomCol>
+        <Card>
+          <Image src={imgUrl} />
+            {type === "SINGLE" ? (<Heading3>Single Room</Heading3>) : 
+            type === "DOUBLE" ? (<Heading3>Double Room</Heading3>) : 
+            type === "SINGLE_XXL" ? (<Heading3>Single XXL Room</Heading3>) :
+            type === "DOUBLE_DELUXE" ? (<Heading3>Double Deluxe Room</Heading3>) :
+            type === "FAMILY" ? (<Heading3>Family Room</Heading3>) :
+            type === "FAMILY_SUPERIOR" ? (<Heading3>Superior Family Room</Heading3>) :
+            (<></>)}
             <SubTitle>From ${price} per night</SubTitle>
-        </RoomCol>
+            <SubTitle>Still available: {availableRooms}</SubTitle>
+        </Card>
+      </RoomCol>
     </>
   )
 }

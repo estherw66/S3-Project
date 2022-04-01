@@ -16,4 +16,5 @@ public class Room {
     private int maxCapacity;
     private double basePricePerNight;
     private RoomType type;
+    private String imgUrl;
 }

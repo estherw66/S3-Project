@@ -16,6 +16,6 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Person checkLogin(Login l) {
-        return null;
+        return loginRepo.checkLogin(l);
     }
 }

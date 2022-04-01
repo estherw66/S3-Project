@@ -3,6 +3,7 @@ package com.fontys.S3ITProject.business.Impl;
 import com.fontys.S3ITProject.business.RoomService;
 import com.fontys.S3ITProject.models.Reservation;
 import com.fontys.S3ITProject.models.Room;
+import com.fontys.S3ITProject.models.SpecificRoom;
 import com.fontys.S3ITProject.persistence.RoomRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +28,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<Room> readAvailableRooms() {
-        return this.roomRepo.readAvailableRooms();
+    public List<SpecificRoom> getAvailableRooms() {
+        return this.roomRepo.getAvailableRooms();
     }
 
     @Override
@@ -42,17 +43,29 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public boolean addRoomToReservation(Room room, Reservation reservation) {
+    public boolean addRoomToReservation(SpecificRoom room, Reservation reservation) {
         return false;
     }
 
     @Override
-    public double calculatePricePerNight(Room room) {
-        return 0;
+    public double calculatePricePerNight(SpecificRoom room) {
+        return 150;
     }
 
     @Override
     public Room getRoomByID(int id) {
         return this.roomRepo.getRoomByID(id);
+    }
+
+    @Override
+    public boolean updatePricePerNight(SpecificRoom room) {
+        room.setActualPricePerNight(calculatePricePerNight(room));
+
+        return updateSpecificRoom(room);
+    }
+
+    @Override
+    public boolean updateSpecificRoom(SpecificRoom room) {
+        return this.roomRepo.updateSpecificRoom(room);
     }
 }

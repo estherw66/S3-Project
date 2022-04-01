@@ -34,7 +34,12 @@ export const RoomCol = styled.div`
     border-radius: 10px;
     margin-bottom: 5%;
     text-align: center;
+    border: 1px solid #000;
 `
+export const Card = styled.div`
+    width: 100%;
+`
+
 export const Image = styled.img`   
     width: 100%;
     border-radius: 10px;

@@ -1,9 +1,7 @@
 package com.fontys.S3ITProject.models;
 
 import com.fontys.S3ITProject.models.enums.ReservationStatus;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -31,7 +29,7 @@ public class Reservation {
     }
 
     public Reservation(int id, int referenceNumber, LocalDate reservationDate, LocalDate checkIn, LocalDate checkOut,
-    User mainGuest, int amountOfGuests, double totalPrice, ReservationStatus status){
+    User mainGuest, int amountOfGuests, double totalPrice){
         this.roomList = new ArrayList<>();
 
         this.id = id;
@@ -42,6 +40,13 @@ public class Reservation {
         this.mainGuest = mainGuest;
         this.amountOfGuests = amountOfGuests;
         this.totalPrice = totalPrice;
-        this.status = status;
+    }
+
+    public User getUser(){
+        if (mainGuest != null){
+            return mainGuest;
+        }
+
+        return null;
     }
 }

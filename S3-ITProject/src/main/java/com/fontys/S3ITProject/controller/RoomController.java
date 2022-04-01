@@ -2,7 +2,7 @@ package com.fontys.S3ITProject.controller;
 
 import com.fontys.S3ITProject.business.RoomService;
 import com.fontys.S3ITProject.models.Room;
-import lombok.Getter;
+import com.fontys.S3ITProject.models.SpecificRoom;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +33,17 @@ public class RoomController {
         }
     }
 
+    // get available rooms
+    @GetMapping("/available")
+    public ResponseEntity<List<SpecificRoom>> getAllAvailableRooms(){
+        List<SpecificRoom> rooms = roomService.getAvailableRooms();
 
+        if (rooms != null){
+            return ResponseEntity.ok().body(rooms);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
     // get all rooms
 
     //

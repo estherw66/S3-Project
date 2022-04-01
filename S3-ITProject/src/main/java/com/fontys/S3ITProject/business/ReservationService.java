@@ -11,4 +11,10 @@ public interface ReservationService {
     public List<Reservation> readMyReservations(User u);
     public boolean updateReservation(Reservation r);
     public boolean deleteReservation(Reservation r);
+
+    public boolean checkDate();
+    public double calculatePricePerNight();
+    public double calculateTotalPrice();
+    public boolean addGuestToReservation();
+    public boolean addRoomToReservation();
 }
