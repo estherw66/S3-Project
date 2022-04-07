@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class RepositoryImpl implements ReservationsRepository, UserRepository, RoomRepository, EmployeeRepository,
@@ -129,7 +130,7 @@ public class RepositoryImpl implements ReservationsRepository, UserRepository, R
         // room types
         roomTypes.add(new Room(1, 1, 50, RoomType.SINGLE, ""));
         roomTypes.add(new Room(2, 1, 112.50, RoomType.SINGLE_XXL, ""));
-        roomTypes.add(new Room(3, 2, 75, RoomType.DOUBLE, "C:\\Users\\esthe\\Desktop\\s3-estherwolfs-it\\s3-react-app\\src\\img\\double.jpg"));
+        roomTypes.add(new Room(3, 2, 75, RoomType.DOUBLE, ""));
         roomTypes.add(new Room(4,  2, 190, RoomType.DOUBLE_DELUXE, ""));
         roomTypes.add(new Room(5,  4, 175, RoomType.FAMILY, ""));
         roomTypes.add(new Room(6,  6, 225, RoomType.FAMILY_SUPERIOR, ""));
@@ -260,6 +261,22 @@ public class RepositoryImpl implements ReservationsRepository, UserRepository, R
         }
 
         return false;
+    }
+
+    @Override
+    public List<Room> searchAvailableRoom(RoomType type, int amountOfGuests) {
+        List<Room> rooms = new ArrayList<>();
+
+        for (SpecificRoom specificRoom : this.specificRooms){
+            if (specificRoom.getRoomType().getType() == type || specificRoom.getRoomType().
+            getMaxCapacity() >= amountOfGuests  && specificRoom.isAvailable()){
+                rooms.add(specificRoom.getRoomType());
+            }
+        }
+
+        List<Room> results = rooms.stream().distinct().collect(Collectors.toList());
+
+        return results;
     }
     /* end rooms */
 

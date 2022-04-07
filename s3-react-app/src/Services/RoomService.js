@@ -4,8 +4,13 @@ const getAll = () => {
     return httpCommon.get("/rooms")
 }
 
+const getSearchResults = () => {
+    return httpCommon.get("/rooms/search")
+}
+
 const RoomService = {
-    getAll
+    getAll,
+    getSearchResults
 };
 
 export default RoomService;

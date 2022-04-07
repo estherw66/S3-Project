@@ -20,9 +20,10 @@ public class Reservation {
     private int amountOfGuests;
     private double totalPrice;
     private ReservationStatus status;
+    private SpecificRoom room;
 
     // list of rooms
-    private List<Room> roomList;
+    private List<SpecificRoom> roomList;
 
     public Reservation(){
         this.roomList = new ArrayList<>();
@@ -49,4 +50,6 @@ public class Reservation {
 
         return null;
     }
+
+
 }

@@ -3,6 +3,7 @@ package com.fontys.S3ITProject.persistence;
 import com.fontys.S3ITProject.models.Reservation;
 import com.fontys.S3ITProject.models.Room;
 import com.fontys.S3ITProject.models.SpecificRoom;
+import com.fontys.S3ITProject.models.enums.RoomType;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface RoomRepository {
     public SpecificRoom getSpecificRoomByID(int id);
 
     public boolean updateSpecificRoom(SpecificRoom room);
+
+    public List<Room> searchAvailableRoom(RoomType type, int amountOfGuests);
 }

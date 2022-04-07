@@ -3,6 +3,7 @@ package com.fontys.S3ITProject.business;
 import com.fontys.S3ITProject.models.Reservation;
 import com.fontys.S3ITProject.models.Room;
 import com.fontys.S3ITProject.models.SpecificRoom;
+import com.fontys.S3ITProject.models.enums.RoomType;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface RoomService {
 
     public boolean updatePricePerNight(SpecificRoom room);
     public boolean updateSpecificRoom(SpecificRoom room);
+
+    public List<Room> searchAvailableRoom(RoomType type, int amountOfGuests);
 }

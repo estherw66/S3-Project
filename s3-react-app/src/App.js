@@ -5,6 +5,7 @@ import Home from "./Pages";
 import LoginPage from "./Pages/login";
 import Navbar from "./Components/Navbar";
 import Sidebar from "./Components/Sidebar";
+import Footer from "./Components/Footer";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginPage />} />
         </Routes>
+        <Footer />
        </>
     );
 }

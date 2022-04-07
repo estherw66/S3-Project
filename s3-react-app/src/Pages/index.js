@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import Sidebar from '../Components/Sidebar'
-import Navbar from '../Components/Navbar'
 import FeaturedRooms from '../Components/FeaturedRooms'
+import ReservationForm from '../Components/ReservationForm'
+import About from '../Components/About'
 
 const Home = () => {
 
   return (
     <>
-        <h1> Homepage</h1>
+        <ReservationForm />
         <FeaturedRooms />
-        <h1> About </h1>
+        <About />
     </>
   )
 }

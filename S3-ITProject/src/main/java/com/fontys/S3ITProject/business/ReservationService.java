@@ -12,9 +12,10 @@ public interface ReservationService {
     public boolean updateReservation(Reservation r);
     public boolean deleteReservation(Reservation r);
 
-    public boolean checkDate();
-    public double calculatePricePerNight();
-    public double calculateTotalPrice();
+    public boolean checkDate(Reservation reservation);
+    public void calculatePricePerNight(Reservation reservation);
+    public void calculateTotalPrice(Reservation reservation);
     public boolean addGuestToReservation();
     public boolean addRoomToReservation();
+    public boolean checkCapacity(Reservation reservation);
 }

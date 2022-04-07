@@ -4,6 +4,7 @@ import com.fontys.S3ITProject.business.RoomService;
 import com.fontys.S3ITProject.models.Reservation;
 import com.fontys.S3ITProject.models.Room;
 import com.fontys.S3ITProject.models.SpecificRoom;
+import com.fontys.S3ITProject.models.enums.RoomType;
 import com.fontys.S3ITProject.persistence.RoomRepository;
 import org.springframework.stereotype.Service;
 
@@ -67,5 +68,10 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public boolean updateSpecificRoom(SpecificRoom room) {
         return this.roomRepo.updateSpecificRoom(room);
+    }
+
+    @Override
+    public List<Room> searchAvailableRoom(RoomType type, int amountOfGuests) {
+        return this.roomRepo.searchAvailableRoom(type, amountOfGuests);
     }
 }

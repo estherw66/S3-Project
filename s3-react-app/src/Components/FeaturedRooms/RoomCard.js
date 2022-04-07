@@ -6,7 +6,6 @@ const RoomCard = ({ type, price, imgUrl, availableRooms }) => {
     <>
       <RoomCol>
         <Card>
-          <Image src={imgUrl} />
             {type === "SINGLE" ? (<Heading3>Single Room</Heading3>) : 
             type === "DOUBLE" ? (<Heading3>Double Room</Heading3>) : 
             type === "SINGLE_XXL" ? (<Heading3>Single XXL Room</Heading3>) :
@@ -14,8 +13,8 @@ const RoomCard = ({ type, price, imgUrl, availableRooms }) => {
             type === "FAMILY" ? (<Heading3>Family Room</Heading3>) :
             type === "FAMILY_SUPERIOR" ? (<Heading3>Superior Family Room</Heading3>) :
             (<></>)}
+            <Image src={imgUrl} />
             <SubTitle>From ${price} per night</SubTitle>
-            <SubTitle>Still available: {availableRooms}</SubTitle>
         </Card>
       </RoomCol>
     </>

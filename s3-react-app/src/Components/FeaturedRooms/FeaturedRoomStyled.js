@@ -15,7 +15,7 @@ export const RoomContainer = styled.div`
     width: 80%;
     margin: auto;
     text-align: center;
-    background: #D2D7DF;
+    /* background: #D2D7DF; */
 `
 
 export const Heading = styled.h1`
@@ -23,9 +23,16 @@ export const Heading = styled.h1`
 `
 
 export const Row = styled.div`
-    margin-top: 5%;
-    display: flex;
     justify-content: space-between;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    margin-left: 5%;
+    margin-right: 5%;
+
+    @media screen and (max-width: 480px){
+        display: grid;
+        grid-template-columns: 100%;
+    }
 `
 
 /* room col */
