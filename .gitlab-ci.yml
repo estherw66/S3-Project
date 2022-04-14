@@ -1,24 +1,17 @@
 stages:
 - build
 - test 
-- sonarqube
 
 build:
   stage: build
   script:
     - cd S3-ITProject
-    - ./gradlew build -x test, -x sonarqube
+    - ./gradlew build -x test
     - ./gradlew.bat --stop 
 test:
   stage: test
   script:
     - cd S3-ITProject
-    - ./gradlew test -x sonarqube
+    - ./gradlew test
     - ./gradlew.bat --stop
-sonarqube:
-  stage: sonarqube
-  script:
-    - cd S3-ITProject
-    - ./gradlew sonarqube -D'sonar.qualitygate.wait=true' -D 'sonar.projectKey=S3-IndividualProject' -D 'sonar.host.url=http://localhost:9000' -D   'sonar.login=57b0a5f0b7fbd19036c83893d19cb9d3da50b8bb'
-    - allow_failure true
-    - ./gradlew --stop
+
