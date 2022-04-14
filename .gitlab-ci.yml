@@ -14,3 +14,4 @@ test:
     - cd S3-ITProject
     - ./gradlew test
     - ./gradlew.bat --stop
+
