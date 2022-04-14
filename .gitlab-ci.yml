@@ -18,6 +18,6 @@ test:
 sonarqube:
   stage: sonarqube
   script:
-    - cd S3=ITProject
+    - cd S3-ITProject
     - ./gradlew sonarqube -D'sonar.qualitygate.wait=true' -D 'sonar.projectKey=S3-IndividualProject' -D 'sonar.host.url=http://localhost:9000' -D   'sonar.login=57b0a5f0b7fbd19036c83893d19cb9d3da50b8bb'
     - ./gradlew --stop
