@@ -1,6 +1,6 @@
-package com.fontys.S3ITProject.business;
+package com.fontys.s3itproject.business;
 
-import com.fontys.S3ITProject.models.User;
+import com.fontys.s3itproject.models.User;
 
 import java.util.List;
 

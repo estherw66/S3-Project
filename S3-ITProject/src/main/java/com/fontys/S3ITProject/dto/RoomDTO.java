@@ -1,6 +1,6 @@
-package com.fontys.S3ITProject.dto;
+package com.fontys.s3itproject.dto;
 
-import com.fontys.S3ITProject.models.enums.RoomType;
+import com.fontys.s3itproject.models.enums.RoomType;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,13 +1,12 @@
-package com.fontys.S3ITProject.persistence.Impl;
+package com.fontys.s3itproject.persistence.impl;
 
-import com.fontys.S3ITProject.models.*;
-import com.fontys.S3ITProject.models.enums.RoomType;
-import com.fontys.S3ITProject.persistence.*;
+import com.fontys.s3itproject.models.*;
+import com.fontys.s3itproject.models.enums.RoomType;
+import com.fontys.s3itproject.persistence.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class RepositoryImpl implements ReservationsRepository, UserRepository, RoomRepository, EmployeeRepository,
@@ -27,12 +26,14 @@ public class RepositoryImpl implements ReservationsRepository, UserRepository, R
     /* start reservations */
     @Override
     public boolean createReservation(Reservation r) {
+        boolean result = true;
+
         if (getReservationById(r.getId()) != null) {
-            return false;
+            result = false;
         }
 
         reservations.add(r);
-        return true;
+        return result;
     }
 
     @Override
@@ -223,10 +224,11 @@ public class RepositoryImpl implements ReservationsRepository, UserRepository, R
 
     @Override
     public boolean addRoomToReservation(SpecificRoom room, Reservation reservation) {
+        boolean result = false;
         if (room.isAvailable()){
-            return true;
+            result = true;
         }
-        return false;
+        return result;
     }
 
     @Override
@@ -268,15 +270,16 @@ public class RepositoryImpl implements ReservationsRepository, UserRepository, R
         List<Room> rooms = new ArrayList<>();
 
         for (SpecificRoom specificRoom : this.specificRooms){
-            if (specificRoom.getRoomType().getType() == type || specificRoom.getRoomType().
-            getMaxCapacity() >= amountOfGuests  && specificRoom.isAvailable()){
+            if (specificRoom.getRoomType().getMaxCapacity() >= amountOfGuests){
                 rooms.add(specificRoom.getRoomType());
+                if (specificRoom.getRoomType().getType() == type){
+                    rooms.add(specificRoom.getRoomType());
+                }
             }
         }
+        return rooms.stream().distinct().toList();
 
-        List<Room> results = rooms.stream().distinct().collect(Collectors.toList());
 
-        return results;
     }
     /* end rooms */
 

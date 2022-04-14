@@ -1,6 +1,6 @@
-package com.fontys.S3ITProject.persistence;
+package com.fontys.s3itproject.persistence;
 
-import com.fontys.S3ITProject.models.User;
+import com.fontys.s3itproject.models.User;
 
 import java.util.List;
 

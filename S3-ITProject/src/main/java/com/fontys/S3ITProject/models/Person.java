@@ -1,4 +1,4 @@
-package com.fontys.S3ITProject.models;
+package com.fontys.s3itproject.models;
 
 
 import lombok.AllArgsConstructor;

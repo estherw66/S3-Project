@@ -1,7 +1,7 @@
-package com.fontys.S3ITProject.controller;
+package com.fontys.s3itproject.controller;
 
-import com.fontys.S3ITProject.business.UserService;
-import com.fontys.S3ITProject.models.User;
+import com.fontys.s3itproject.business.UserService;
+import com.fontys.s3itproject.models.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,11 +1,11 @@
-package com.fontys.S3ITProject.business.Impl;
+package com.fontys.s3itproject.business.impl;
 
-import com.fontys.S3ITProject.business.RoomService;
-import com.fontys.S3ITProject.models.Reservation;
-import com.fontys.S3ITProject.models.Room;
-import com.fontys.S3ITProject.models.SpecificRoom;
-import com.fontys.S3ITProject.models.enums.RoomType;
-import com.fontys.S3ITProject.persistence.RoomRepository;
+import com.fontys.s3itproject.business.RoomService;
+import com.fontys.s3itproject.models.Reservation;
+import com.fontys.s3itproject.models.Room;
+import com.fontys.s3itproject.models.SpecificRoom;
+import com.fontys.s3itproject.models.enums.RoomType;
+import com.fontys.s3itproject.persistence.RoomRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

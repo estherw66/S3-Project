@@ -1,8 +1,8 @@
-package com.fontys.S3ITProject.business.Impl;
+package com.fontys.s3itproject.business.impl;
 
-import com.fontys.S3ITProject.business.UserService;
-import com.fontys.S3ITProject.models.User;
-import com.fontys.S3ITProject.persistence.UserRepository;
+import com.fontys.s3itproject.business.UserService;
+import com.fontys.s3itproject.models.User;
+import com.fontys.s3itproject.persistence.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

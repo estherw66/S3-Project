@@ -1,4 +1,4 @@
-package com.fontys.S3ITProject;
+package com.fontys.s3itproject;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

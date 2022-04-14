@@ -1,7 +1,7 @@
-package com.fontys.S3ITProject.persistence;
+package com.fontys.s3itproject.persistence;
 
-import com.fontys.S3ITProject.models.Login;
-import com.fontys.S3ITProject.models.Person;
+import com.fontys.s3itproject.models.Login;
+import com.fontys.s3itproject.models.Person;
 
 public interface LoginRepository {
     public Person checkLogin(Login l);

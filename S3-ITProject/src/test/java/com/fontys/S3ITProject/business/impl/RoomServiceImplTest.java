@@ -1,16 +1,16 @@
-package com.fontys.S3ITProject.business.impl;
+package com.fontys.s3itproject.business.impl;
 
-import com.fontys.S3ITProject.models.Room;
-import com.fontys.S3ITProject.models.enums.RoomType;
-import com.fontys.S3ITProject.persistence.Impl.RepositoryImpl;
-import com.fontys.S3ITProject.persistence.RoomRepository;
+import com.fontys.s3itproject.models.Room;
+import com.fontys.s3itproject.models.enums.RoomType;
+import com.fontys.s3itproject.persistence.impl.RepositoryImpl;
+import com.fontys.s3itproject.persistence.RoomRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class RoomServiceImplTest {
+class RoomServiceImplTest {
 
     @BeforeEach
     void setUp() {

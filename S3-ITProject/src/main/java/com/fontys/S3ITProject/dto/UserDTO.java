@@ -1,4 +1,4 @@
-package com.fontys.S3ITProject.dto;
+package com.fontys.s3itproject.dto;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import RoomService from '../../Services/RoomService';
 import { FormContainer, Heading, Row, Form, InputDiv, Label, Input } from './ReservationFormStyled'
+import { Link } from 'react-router-dom'
 
 const ReservationForm = () => {
 
     const [rooms, setRooms] = useState([]);
 
-
-    const handleSubmit = () => {
-        RoomService.getAll()
-        .then(res => {
-            setRooms(res.data)
-            console.log(res.data);
-        })
-        .catch(err =>{
-            console.log(err);
-        })
-    }
 
   return (
     <>
@@ -26,7 +16,7 @@ const ReservationForm = () => {
                 <div>
                     <img src='./img/hotel.jpeg' />
                 </div>
-                <Form onSubmit={handleSubmit}>
+                <Form>
                     <InputDiv>
                         <Label>Check-In:</Label>
                         <Input type={'date'} />
@@ -51,12 +41,10 @@ const ReservationForm = () => {
                             <option value='familysuperior'>Family Superior Room</option>
                         </select>
                     </InputDiv>
-                    <button type='submit'>Search Room</button>
-                </Form>
-                <form onSubmit={handleSubmit}>
-                    <button type='submit'>Search</button>
-                </form>
-                
+                    <Link to="/rooms">
+                        <button type='submit'>Search Room</button>
+                    </Link>
+                </Form>                
             </Row>
         </FormContainer>
     </>

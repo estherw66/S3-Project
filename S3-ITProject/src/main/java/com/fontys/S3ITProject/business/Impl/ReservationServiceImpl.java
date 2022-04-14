@@ -1,13 +1,12 @@
-package com.fontys.S3ITProject.business.Impl;
+package com.fontys.s3itproject.business.impl;
 
-import com.fontys.S3ITProject.business.ReservationService;
-import com.fontys.S3ITProject.models.Reservation;
-import com.fontys.S3ITProject.models.SpecificRoom;
-import com.fontys.S3ITProject.models.User;
-import com.fontys.S3ITProject.persistence.ReservationsRepository;
+import com.fontys.s3itproject.business.ReservationService;
+import com.fontys.s3itproject.models.Reservation;
+import com.fontys.s3itproject.models.SpecificRoom;
+import com.fontys.s3itproject.models.User;
+import com.fontys.s3itproject.persistence.ReservationsRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,9 +21,6 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public boolean createReservation(Reservation r) {
-//        if (!checkDate(r) || !checkCapacity(r)) {
-//            return false;
-//        }
 
         return reservationsRepo.createReservation(r);
     }
@@ -51,20 +47,23 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public boolean checkDate(Reservation reservation) {
+        boolean result = false;
         // check if date is in future
         if (reservation.getCheckIn().isAfter(LocalDate.now())) {
-            return true;
+            result = true;
         }
 
-        return false;
+        return result;
     }
 
     @Override
     public boolean checkCapacity(Reservation reservation){
+        boolean result = false;
+
         if (reservation.getAmountOfGuests() < reservation.getRoom().getRoomType().getMaxCapacity()){
-            return true;
+            result = true;
         }
-        return false;
+        return result;
     }
 
     @Override
@@ -78,13 +77,6 @@ public class ReservationServiceImpl implements ReservationService {
                 room.setActualPricePerNight(room.getRoomType().getBasePricePerNight());
             }
         }
-    }
-
-    @Override
-    public void calculateTotalPrice(Reservation reservation) {
-        long totalDays = Duration.between(reservation.getCheckIn(), reservation.getCheckOut()).toDays();
-
-        //double totalPrice
     }
 
     @Override

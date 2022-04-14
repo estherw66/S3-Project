@@ -1,13 +1,12 @@
-package com.fontys.S3ITProject.controller;
+package com.fontys.s3itproject.controller;
 
-import com.fontys.S3ITProject.business.RoomService;
-import com.fontys.S3ITProject.models.Room;
-import com.fontys.S3ITProject.models.SpecificRoom;
-import com.fontys.S3ITProject.models.enums.RoomType;
+import com.fontys.s3itproject.business.RoomService;
+import com.fontys.s3itproject.models.Room;
+import com.fontys.s3itproject.models.SpecificRoom;
+import com.fontys.s3itproject.models.enums.RoomType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -46,15 +45,14 @@ public class RoomController {
 
     // search rooms
     @GetMapping("/search")
-    public ResponseEntity<List<Room>> getSearchRooms(@RequestParam RoomType type, int guests){
+    public ResponseEntity<List<Room>> getSearchRooms(@RequestParam RoomType type, @RequestParam int guests) {
 
         List<Room> rooms = roomService.searchAvailableRoom(type, guests);
 
-        if (rooms != null){
+        if (rooms != null) {
             return ResponseEntity.ok().body(rooms);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
-    //
 }
