@@ -7,13 +7,13 @@ build:
   stage: build
   script:
     - cd S3-ITProject
-    - ./gradlew build -x test
+    - ./gradlew build -x test, -x sonarqube
     - ./gradlew.bat --stop 
 test:
   stage: test
   script:
     - cd S3-ITProject
-    - ./gradlew test
+    - ./gradlew test -x sonarqube
     - ./gradlew.bat --stop
 sonarqube:
   stage: sonarqube
