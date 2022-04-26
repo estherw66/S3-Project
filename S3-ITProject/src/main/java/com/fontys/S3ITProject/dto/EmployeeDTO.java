@@ -1,6 +1,6 @@
 package com.fontys.s3itproject.dto;
 
-import com.fontys.s3itproject.models.Address;
+import com.fontys.s3itproject.entity.Address;
 import lombok.Getter;
 import lombok.Setter;
 

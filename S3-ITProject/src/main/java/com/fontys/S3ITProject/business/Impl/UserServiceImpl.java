@@ -1,19 +1,20 @@
 package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.UserService;
-import com.fontys.s3itproject.models.User;
+import com.fontys.s3itproject.entity.Employee;
+import com.fontys.s3itproject.entity.User;
 import com.fontys.s3itproject.persistence.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Primary
+@RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepo;
-
-    public UserServiceImpl(UserRepository userRepo) {
-        this.userRepo = userRepo;
-    }
 
     @Override
     public boolean createUser(User u) {
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User readUserByID(int id) {
+    public User readUserByID(Long id) {
         return userRepo.readUserByID(id);
     }
 
@@ -39,4 +40,5 @@ public class UserServiceImpl implements UserService {
     public boolean deleteUser(User u) {
         return userRepo.deleteUser(u);
     }
+
 }

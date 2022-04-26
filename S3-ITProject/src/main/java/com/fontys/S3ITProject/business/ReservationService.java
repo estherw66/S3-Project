@@ -1,7 +1,8 @@
 package com.fontys.s3itproject.business;
 
-import com.fontys.s3itproject.models.Reservation;
-import com.fontys.s3itproject.models.User;
+import com.fontys.s3itproject.entity.Reservation;
+import com.fontys.s3itproject.entity.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

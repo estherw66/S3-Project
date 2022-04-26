@@ -1,4 +1,4 @@
-package com.fontys.s3itproject.models;
+package com.fontys.s3itproject.entity;
 
 import lombok.Getter;
 import lombok.Setter;

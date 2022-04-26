@@ -1,9 +1,10 @@
 package com.fontys.s3itproject.business.impl;
 
-import com.fontys.s3itproject.models.Room;
-import com.fontys.s3itproject.models.enums.RoomType;
+import com.fontys.s3itproject.entity.Room;
+import com.fontys.s3itproject.entity.enums.RoomType;
 import com.fontys.s3itproject.persistence.impl.RepositoryImpl;
 import com.fontys.s3itproject.persistence.RoomRepository;
+import com.fontys.s3itproject.persistence.impl.RoomRepositoryImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +20,9 @@ class RoomServiceImplTest {
     @Test
     void createNewRoomSuccessfull(){
         // arrange
-        RoomRepository roomRepo = new RepositoryImpl();
-        Room newRoom = new Room(7, 2, 50, RoomType.DOUBLE, "");
+        RepositoryImpl repo = new RepositoryImpl();
+        RoomRepository roomRepo = new RoomRepositoryImpl(repo);
+        Room newRoom = new Room(7L, 2, 50, RoomType.DOUBLE, "", false);
 
         // act
         boolean result = roomRepo.createRoom(newRoom);
@@ -31,9 +33,10 @@ class RoomServiceImplTest {
 
     @Test
     void createNewRoomFailedRoomIDAlreadyExists(){
-        RoomRepository roomRepo = new RepositoryImpl();
-        Room newRoom1 = new Room(7, 2, 50, RoomType.DOUBLE, "");
-        Room newRoom2 = new Room(7, 2, 50, RoomType.DOUBLE, "");
+        RepositoryImpl repo = new RepositoryImpl();
+        RoomRepository roomRepo = new RoomRepositoryImpl(repo);
+        Room newRoom1 = new Room(7L, 2, 50, RoomType.DOUBLE, "", false);
+        Room newRoom2 = new Room(7L, 2, 50, RoomType.DOUBLE, "", false);
 
         boolean result1 = roomRepo.createRoom(newRoom1);
         boolean result2 = roomRepo.createRoom(newRoom2);
@@ -44,7 +47,8 @@ class RoomServiceImplTest {
 
     @Test
     void readAllRoomsContainsSixRooms(){
-        RoomRepository roomRepo = new RepositoryImpl();
+        RepositoryImpl repo = new RepositoryImpl();
+        RoomRepository roomRepo = new RoomRepositoryImpl(repo);
 
         long result = roomRepo.readRooms().stream().count();
 
@@ -53,7 +57,8 @@ class RoomServiceImplTest {
 
     @Test
     void readRoomByIDOneIsSingleRoom(){
-        RoomRepository roomRepo = new RepositoryImpl();
+        RepositoryImpl repo = new RepositoryImpl();
+        RoomRepository roomRepo = new RoomRepositoryImpl(repo);
 
         Room testRoom = roomRepo.getRoomByID(1);
 
@@ -62,7 +67,8 @@ class RoomServiceImplTest {
 
     @Test
     void readRoomByIDSevenRoomDoesntExist(){
-        RoomRepository roomRepo = new RepositoryImpl();
+        RepositoryImpl repo = new RepositoryImpl();
+        RoomRepository roomRepo = new RoomRepositoryImpl(repo);
 
         Room testRoom = roomRepo.getRoomByID(7);
 
@@ -71,7 +77,8 @@ class RoomServiceImplTest {
 
     @Test
     void updateRoomSetNewBasePricePerNight(){
-        RoomRepository roomRepo = new RepositoryImpl();
+        RepositoryImpl repo = new RepositoryImpl();
+        RoomRepository roomRepo = new RoomRepositoryImpl(repo);
         Room old = roomRepo.getRoomByID(2);
         double oldPrice = old.getBasePricePerNight();
 
@@ -84,7 +91,8 @@ class RoomServiceImplTest {
 
     @Test
     void deleteRoomFiveRoomsLeft(){
-        RoomRepository roomRepo = new RepositoryImpl();
+        RepositoryImpl repo = new RepositoryImpl();
+        RoomRepository roomRepo = new RoomRepositoryImpl(repo);
 
         Room deleted = roomRepo.getRoomByID(2);
         roomRepo.deleteRoom(deleted);

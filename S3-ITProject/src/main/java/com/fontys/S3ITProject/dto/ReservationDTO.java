@@ -1,7 +1,7 @@
 package com.fontys.s3itproject.dto;
 
-import com.fontys.s3itproject.models.User;
-import com.fontys.s3itproject.models.enums.ReservationStatus;
+import com.fontys.s3itproject.entity.User;
+import com.fontys.s3itproject.entity.enums.ReservationStatus;
 import lombok.Getter;
 import lombok.Setter;
 

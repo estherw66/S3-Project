@@ -1,127 +1,53 @@
 package com.fontys.s3itproject.persistence.impl;
 
-import com.fontys.s3itproject.models.*;
-import com.fontys.s3itproject.models.enums.RoomType;
-import com.fontys.s3itproject.persistence.*;
+import com.fontys.s3itproject.entity.*;
+import com.fontys.s3itproject.entity.enums.RoomType;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Primary
 @Repository
-public class RepositoryImpl implements ReservationsRepository, UserRepository, RoomRepository, EmployeeRepository,
-        LoginRepository {
+public class RepositoryImpl {
 
-    private final List<Employee> employees = new ArrayList<>();
-    private final List<Reservation> reservations = new ArrayList<>();
-    private final List<Room> roomTypes = new ArrayList<>();
-    private final List<SpecificRoom> specificRooms = new ArrayList<>();
-    private final List<User> users = new ArrayList<>();
+    public List<Employee> employees;
+    public List<Reservation> reservations;
+    public List<Room> roomTypes;
+    public List<SpecificRoom> specificRooms;
+    public List<User> users;
 
     public RepositoryImpl(){
+        employees = new ArrayList<>();
+        reservations = new ArrayList<>();
+        roomTypes = new ArrayList<>();
+        specificRooms = new ArrayList<>();
+        users = new ArrayList<>();
+
+//        specificRooms.add(new SpecificRoom(1, 101, false, getRoomByID(1)));
+//        specificRooms.add(new SpecificRoom(2, 102, false, getRoomByID(1)));
+//        specificRooms.add(new SpecificRoom(3, 103, false, getRoomByID(1)));
+//        specificRooms.add(new SpecificRoom(4, 104, false, getRoomByID(1)));
+//        specificRooms.add(new SpecificRoom(5, 105, true, getRoomByID(1)));
+//        specificRooms.add(new SpecificRoom(6, 106, true, getRoomByID(1)));
+//        specificRooms.add(new SpecificRoom(7, 107, true, getRoomByID(1)));
+//        specificRooms.add(new SpecificRoom(8, 108, true, getRoomByID(1)));
+//        specificRooms.add(new SpecificRoom(9, 109, true, getRoomByID(1)));
+//        specificRooms.add(new SpecificRoom(10, 110, true, getRoomByID(1)));
+
         addInitialRooms();
         addInitialSpecificRooms();
+        addInitialUser();
     }
 
     /* start reservations */
-    @Override
-    public boolean createReservation(Reservation r) {
-        boolean result = true;
 
-        if (getReservationById(r.getId()) != null) {
-            result = false;
-        }
-
-        reservations.add(r);
-        return result;
-    }
-
-    @Override
-    public List<Reservation> readAllReservations() {
-        return this.reservations;
-    }
-
-    @Override
-    public List<Reservation> readMyReservations(User u) {
-        List<Reservation> userReservations = new ArrayList<>();
-
-        for (Reservation reservation : reservations){
-            if (reservation.getUser().getId() == u.getId()){
-                userReservations.add(reservation);
-            }
-        }
-
-        return  userReservations;
-    }
-
-    @Override
-    public boolean updateReservation(Reservation r) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteReservation(Reservation r) {
-        if (getReservationById(r.getId()) != null){
-            reservations.remove(r);
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public Reservation getReservationById(int id) {
-        for (Reservation reservation : reservations){
-            if (reservation.getId() == id){
-                return reservation;
-            }
-        }
-
-        return null;
-    }
     /* end reservations */
 
     /* start users */
-    @Override
-    public boolean createUser(User u) {
-        if (readUserByID(u.getId()) != null){
-            users.add(u);
-            return true;
-        }
 
-        return false;
-    }
-
-    @Override
-    public List<User> readAllUsers() {
-        return this.users;
-    }
-
-    @Override
-    public User readUserByID(int id) {
-        for (User user : users){
-            if (user.getId() == id){
-                return user;
-            }
-        }
-
-        return null;
-    }
-
-    @Override
-    public boolean updateUser(User u) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteUser(User u) {
-        if (readUserByID(u.getId()) != null){
-            users.remove(u);
-            return true;
-        }
-
-        return false;
-    }
 
     /* end users*/
 
@@ -129,12 +55,12 @@ public class RepositoryImpl implements ReservationsRepository, UserRepository, R
     private void addInitialRooms(){
 
         // room types
-        roomTypes.add(new Room(1, 1, 50, RoomType.SINGLE, ""));
-        roomTypes.add(new Room(2, 1, 112.50, RoomType.SINGLE_XXL, ""));
-        roomTypes.add(new Room(3, 2, 75, RoomType.DOUBLE, ""));
-        roomTypes.add(new Room(4,  2, 190, RoomType.DOUBLE_DELUXE, ""));
-        roomTypes.add(new Room(5,  4, 175, RoomType.FAMILY, ""));
-        roomTypes.add(new Room(6,  6, 225, RoomType.FAMILY_SUPERIOR, ""));
+        roomTypes.add(new Room(1, 1, 50, RoomType.SINGLE, "", false));
+        roomTypes.add(new Room(2, 1, 112.50, RoomType.SINGLE_XXL, "", true));
+        roomTypes.add(new Room(3, 2, 75, RoomType.DOUBLE, "", true));
+        roomTypes.add(new Room(4,  2, 190, RoomType.DOUBLE_DELUXE, "", false));
+        roomTypes.add(new Room(5,  4, 175, RoomType.FAMILY, "", true));
+        roomTypes.add(new Room(6,  6, 225, RoomType.FAMILY_SUPERIOR, "", false));
     }
     private void addInitialSpecificRooms(){
         // single rooms
@@ -170,177 +96,28 @@ public class RepositoryImpl implements ReservationsRepository, UserRepository, R
         specificRooms.add(new SpecificRoom(25, 302, true, getRoomByID(6)));
     }
 
-    @Override
-    public boolean createRoom(Room r) {
-
-        if (getRoomByID(r.getId()) != null){
-            return false;
-        }
-
-        roomTypes.add(r);
-        return true;
-    }
-
-    @Override
-    public List<Room> readRooms() {
-        return this.roomTypes;
-    }
-
-    @Override
-    public List<SpecificRoom> getAvailableRooms() {
-        List<SpecificRoom> availableRooms = new ArrayList<>();
-
-        for (SpecificRoom room : specificRooms){
-            if (room.isAvailable()){
-                availableRooms.add(room);
-            }
-        }
-
-        return availableRooms;
-    }
-
-    @Override
-    public boolean updateRoom(Room r) {
-        if (getRoomByID(r.getId()) != null){
-            r.setBasePricePerNight(r.getBasePricePerNight());
-            r.setMaxCapacity(r.getMaxCapacity());
-            r.setType(r.getType());
-
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean deleteRoom(Room r) {
-        if (getRoomByID(r.getId()) != null){
-            roomTypes.remove(r);
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean addRoomToReservation(SpecificRoom room, Reservation reservation) {
-        boolean result = false;
-        if (room.isAvailable()){
-            result = true;
-        }
-        return result;
-    }
-
-    @Override
     public Room getRoomByID(int id) {
-        for (Room room : roomTypes){
+        for (Room room : this.roomTypes){
             if (room.getId() == id){
                 return room;
             }
         }
 
         return null;
-    }
-
-    @Override
-    public SpecificRoom getSpecificRoomByID(int id) {
-        for (SpecificRoom room : specificRooms){
-            if (room.getId() == id){
-                return room;
-            }
-        }
-
-        return null;
-    }
-
-    @Override
-    public boolean updateSpecificRoom(SpecificRoom room) {
-        if (getSpecificRoomByID(room.getId()) != null){
-            room.setActualPricePerNight(room.getActualPricePerNight());
-            room.setAvailable(room.isAvailable());
-
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public List<Room> searchAvailableRoom(RoomType type, int amountOfGuests) {
-        List<Room> rooms = new ArrayList<>();
-
-        for (SpecificRoom specificRoom : this.specificRooms){
-            if (specificRoom.getRoomType().getMaxCapacity() >= amountOfGuests){
-                rooms.add(specificRoom.getRoomType());
-                if (specificRoom.getRoomType().getType() == type){
-                    rooms.add(specificRoom.getRoomType());
-                }
-            }
-        }
-        return rooms.stream().distinct().toList();
-
-
     }
     /* end rooms */
 
     /* start employees */
-    @Override
-    public boolean createEmployee(Employee e) {
-        if (readEmployeeByID(e.getId()) != null){
-            employees.add(e);
-        }
-
-        return false;
+    private void addInitialEmployees(){
+        employees.add(new Employee(1L, "Esther", "Wolfs", "estherwolfs@goldskye.com", "ewolfs", "password", new Address(1L, "Mozartlaan 41", "5151KA", "Drunen"), "+31612901749", LocalDate.of(1998,01,01)));
     }
 
-    @Override
-    public List<Employee> readEmployees() {
-        return this.employees;
-    }
-
-    @Override
-    public Employee readEmployeeByID(int id) {
-        for (Employee employee : employees){
-            if(employee.getId() == id){
-                return employee;
-            }
-        }
-
-        return null;
-    }
-
-    @Override
-    public boolean updateEmployee(Employee e) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteEmployee(Employee e) {
-        if (readEmployeeByID(e.getId()) != null){
-            employees.remove(e);
-            return true;
-        }
-
-        return false;
+    private void addInitialUser(){
+        users.add(new User(1L, "Fake", "Data", "fakedata@mail.com", "fake", "djkfsf"));
     }
     /* end employees */
 
     /* start login */
-    @Override
-    public Person checkLogin(Login l) {
-        for (Person person : users){
-            if (person.getUsername().equals(l.getUsername()) && person.getPassword().equals(l.getPassword())){
-                return person;
-            }
-        }
 
-        for (Person person : employees){
-            if (person.getUsername().equals(l.getUsername()) && person.getPassword().equals(l.getPassword())){
-                return person;
-            }
-        }
-
-        return null;
-    }
     /* end login */
 }

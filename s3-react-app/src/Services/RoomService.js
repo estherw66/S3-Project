@@ -1,7 +1,7 @@
 import httpCommon from "../http-common";
 
 const getAll = () => {
-    return httpCommon.get("/rooms")
+    return httpCommon.get("/api/rooms")
 }
 
 const getSearchResults = () => {

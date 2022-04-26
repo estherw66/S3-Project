@@ -1,22 +1,22 @@
 package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.RoomService;
-import com.fontys.s3itproject.models.Reservation;
-import com.fontys.s3itproject.models.Room;
-import com.fontys.s3itproject.models.SpecificRoom;
-import com.fontys.s3itproject.models.enums.RoomType;
+import com.fontys.s3itproject.entity.Reservation;
+import com.fontys.s3itproject.entity.Room;
+import com.fontys.s3itproject.entity.SpecificRoom;
+import com.fontys.s3itproject.entity.enums.RoomType;
 import com.fontys.s3itproject.persistence.RoomRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Primary
+@RequiredArgsConstructor
 @Service
 public class RoomServiceImpl implements RoomService {
     private final RoomRepository roomRepo;
-
-    public RoomServiceImpl(RoomRepository roomRepo) {
-        this.roomRepo = roomRepo;
-    }
 
     @Override
     public boolean createRoom(Room r) {
@@ -60,7 +60,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public boolean updatePricePerNight(SpecificRoom room) {
-        room.setActualPricePerNight(calculatePricePerNight(room));
+        room.setPricePerNight(calculatePricePerNight(room));
 
         return updateSpecificRoom(room);
     }

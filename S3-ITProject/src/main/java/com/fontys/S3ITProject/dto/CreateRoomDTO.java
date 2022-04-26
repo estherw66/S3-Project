@@ -1,14 +1,13 @@
 package com.fontys.s3itproject.dto;
 
 import com.fontys.s3itproject.entity.enums.RoomType;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 
-@Setter
-@Getter
-public class RoomDTO {
-    private int id;
+@RequiredArgsConstructor
+public class CreateRoomDTO {
+
     private int maxCapacity;
     private double basePricePerNight;
     private RoomType type;
+    private String imgUrl;
 }

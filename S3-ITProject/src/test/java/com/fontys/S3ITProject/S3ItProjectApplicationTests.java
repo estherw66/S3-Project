@@ -8,6 +8,7 @@ class S3ItProjectApplicationTests {
 
 	@Test
 	void contextLoads() {
+		S3ItProjectApplication.main(new String[] {});
 	}
 
 }

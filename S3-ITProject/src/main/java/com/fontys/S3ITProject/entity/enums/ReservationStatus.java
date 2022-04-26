@@ -1,4 +1,4 @@
-package com.fontys.s3itproject.models.enums;
+package com.fontys.s3itproject.entity.enums;
 
 public enum ReservationStatus {
     APPROVED,

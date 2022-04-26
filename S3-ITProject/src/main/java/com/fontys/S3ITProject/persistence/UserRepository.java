@@ -1,13 +1,15 @@
 package com.fontys.s3itproject.persistence;
 
-import com.fontys.s3itproject.models.User;
+import com.fontys.s3itproject.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 public interface UserRepository {
     public boolean createUser(User u);
     public List<User> readAllUsers();
-    public User readUserByID(int id);
+    public User readUserByID(Long id);
     public boolean updateUser(User u);
     public boolean deleteUser(User u);
 }

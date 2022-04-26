@@ -1,23 +1,23 @@
 package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.ReservationService;
-import com.fontys.s3itproject.models.Reservation;
-import com.fontys.s3itproject.models.SpecificRoom;
-import com.fontys.s3itproject.models.User;
-import com.fontys.s3itproject.persistence.ReservationsRepository;
+import com.fontys.s3itproject.entity.Reservation;
+import com.fontys.s3itproject.entity.SpecificRoom;
+import com.fontys.s3itproject.entity.User;
+import com.fontys.s3itproject.persistence.ReservationRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Primary
+@RequiredArgsConstructor
 @Service
 public class ReservationServiceImpl implements ReservationService {
 
-    private final ReservationsRepository reservationsRepo;
-
-    public ReservationServiceImpl(ReservationsRepository reservationsRepo) {
-        this.reservationsRepo = reservationsRepo;
-    }
+    private final ReservationRepository reservationsRepo;
 
     @Override
     public boolean createReservation(Reservation r) {
@@ -68,15 +68,17 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public void calculatePricePerNight(Reservation reservation) {
-        List<SpecificRoom> rooms = reservation.getRoomList();
+//        List<SpecificRoom> rooms = reservation.getRoomList();
+//
+//        for (SpecificRoom room : rooms) {
+//            if (reservation.getCheckIn().isAfter(reservation.getReservationDate().plusMonths(1))) {
+//                room.setPricePerNight(room.getRoomType().getBasePricePerNight() + 1000);
+//            } else {
+//                room.setPricePerNight(room.getRoomType().getBasePricePerNight());
+//            }
+//        }
 
-        for (SpecificRoom room : rooms) {
-            if (reservation.getCheckIn().isAfter(reservation.getReservationDate().plusMonths(1))) {
-                room.setActualPricePerNight(room.getRoomType().getBasePricePerNight() + 1000);
-            } else {
-                room.setActualPricePerNight(room.getRoomType().getBasePricePerNight());
-            }
-        }
+
     }
 
     @Override
