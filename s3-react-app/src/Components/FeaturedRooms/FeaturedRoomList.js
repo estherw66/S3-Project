@@ -4,8 +4,8 @@ import RoomService from '../../Services/RoomService'
 import RoomCard from './RoomCard'
 
 const FeaturedRoomList = () => {
-
   const [rooms, setRooms] = useState([]);
+
 
   useEffect(() => {
     getRooms();
@@ -24,19 +24,16 @@ const FeaturedRoomList = () => {
 
   return (
     <>
-      {rooms.length > 0 ? (
+      {rooms.rooms ? (
         <>
-          <h1>room</h1>
-          {rooms.map((room) => (
-            <RoomCard key={room.id} type={room.type} price={room.basePricePerNight} imgUrl={room.imgUrl} />
+          {rooms.rooms && rooms.rooms.map((room) => (
+            // <RoomCard key={room.id} type={room.roomType} price={room.pricePerNight} imgUrl={room.imageUrl} />
+            <RoomCard key={room.id} room={room} />
           ))}
         </>
       ) : (
         <p>Loading rooms...</p>
       )}
-      {/* {rooms.map((room) => (
-        <h1 key={room.id}>Room</h1>
-      ))} */}
     </>
   )
 }

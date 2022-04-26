@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/rooms")
 @CrossOrigin(origins = "http://localhost:3000")
 public class RoomController {
     private final RoomService roomService;
@@ -30,7 +29,8 @@ public class RoomController {
     }
 
     // get available rooms
-    @GetMapping("/available")
+    @RequestMapping("/api/rooms/available")
+    @GetMapping()
     public ResponseEntity<List<SpecificRoom>> getAllAvailableRooms(){
         List<SpecificRoom> rooms = roomService.getAvailableRooms();
 
