@@ -3,8 +3,6 @@ package com.fontys.s3itproject.repository.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.*;
-
 @Getter
 @Setter
 public class Hotel {
