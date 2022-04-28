@@ -1,13 +1,7 @@
-package com.fontys.s3itproject.entity;
+package com.fontys.s3itproject.persistence.entity;
 
-import com.fontys.s3itproject.entity.enums.RoomType;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 //
 //@Entity
 //@Table(name = "rooms")
@@ -37,7 +31,6 @@ public class Room {
 
 //    @NotBlank
 //    @Column(name = "room_type")
-    private RoomType type;
 
 //    @NotBlank
 //    @Column(name = "img_url")

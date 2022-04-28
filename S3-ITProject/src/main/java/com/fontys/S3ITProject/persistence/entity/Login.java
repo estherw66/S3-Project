@@ -1,4 +1,4 @@
-package com.fontys.s3itproject.entity;
+package com.fontys.s3itproject.persistence.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

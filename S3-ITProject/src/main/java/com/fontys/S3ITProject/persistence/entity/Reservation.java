@@ -1,16 +1,9 @@
-package com.fontys.s3itproject.entity;
+package com.fontys.s3itproject.persistence.entity;
 
-import com.fontys.s3itproject.entity.enums.ReservationStatus;
+import com.fontys.s3itproject.persistence.entity.enums.ReservationStatus;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.*;
 
 //@Entity
 //@Table(name = "reservation")

@@ -1,7 +1,6 @@
 package com.fontys.s3itproject.business.impl;
 
-import com.fontys.s3itproject.entity.Room;
-import com.fontys.s3itproject.entity.enums.RoomType;
+import com.fontys.s3itproject.persistence.entity.Room;
 import com.fontys.s3itproject.persistence.impl.RepositoryImpl;
 import com.fontys.s3itproject.persistence.RoomRepository;
 import com.fontys.s3itproject.persistence.impl.RoomRepositoryImpl;

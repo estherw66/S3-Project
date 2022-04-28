@@ -1,21 +1,10 @@
 package com.fontys.s3itproject.business;
 
-import com.fontys.s3itproject.entity.Reservation;
-import com.fontys.s3itproject.entity.User;
-import org.springframework.stereotype.Service;
+import com.fontys.s3itproject.persistence.entity.Reservation;
+import com.fontys.s3itproject.persistence.entity.User;
 
 import java.util.List;
 
 public interface ReservationService {
-    public boolean createReservation(Reservation r);
-    public List<Reservation> readAllReservations();
-    public List<Reservation> readMyReservations(User u);
-    public boolean updateReservation(Reservation r);
-    public boolean deleteReservation(Reservation r);
 
-    public boolean checkDate(Reservation reservation);
-    public void calculatePricePerNight(Reservation reservation);
-    public boolean addGuestToReservation();
-    public boolean addRoomToReservation();
-    public boolean checkCapacity(Reservation reservation);
 }

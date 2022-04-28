@@ -1,10 +1,7 @@
-package com.fontys.s3itproject.entity;
+package com.fontys.s3itproject.persistence.entity;
 
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 //@Entity
