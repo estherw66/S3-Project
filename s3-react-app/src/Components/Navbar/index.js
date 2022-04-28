@@ -7,7 +7,7 @@ const Navbar = ({ toggleMenu }) => {
     <>
       <Nav>
         <NavbarContainer>
-          <NavLogo to='/'>LOGO</NavLogo>
+          <NavLogo to='/'>GOLD SKYE</NavLogo>
           <HamburgerMenu onClick={toggleMenu}>
             <FaBars />
           </HamburgerMenu>

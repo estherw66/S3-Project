@@ -1,4 +1,4 @@
-package com.fontys.s3itproject.persistence.entity;
+package com.fontys.s3itproject.repository.entity;
 
 import lombok.*;
 
@@ -18,9 +18,9 @@ public class User extends Person{
 //    @NotBlank
 //    @EqualsAndHashCode.Exclude
 //    @ToString.Exclude
-    private List<Reservation> reservations;
-
-    public User(long l, String fake, String data, String s, String fake1, String djkfsf) {
-        this.reservations = new ArrayList<>();
-    }
+//    private List<Reservation> reservations;
+//
+//    public User(long l, String fake, String data, String s, String fake1, String djkfsf) {
+//        this.reservations = new ArrayList<>();
+//    }
 }
