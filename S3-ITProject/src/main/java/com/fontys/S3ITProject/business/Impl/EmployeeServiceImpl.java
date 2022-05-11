@@ -6,12 +6,10 @@ import com.fontys.s3itproject.dto.CreateEmployeeRequestDTO;
 import com.fontys.s3itproject.dto.CreateEmployeeResponseDTO;
 import com.fontys.s3itproject.dto.EmployeeDTO;
 import com.fontys.s3itproject.dto.GetEmployeesResponseDTO;
+import com.fontys.s3itproject.repository.AddressRepository;
 import com.fontys.s3itproject.repository.EmployeeRepository;
 import com.fontys.s3itproject.repository.UserRepository;
-import com.fontys.s3itproject.repository.entity.Employee;
-import com.fontys.s3itproject.repository.entity.RoleEnum;
-import com.fontys.s3itproject.repository.entity.User;
-import com.fontys.s3itproject.repository.entity.UserRole;
+import com.fontys.s3itproject.repository.entity.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,6 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final UserRepository userRepository;
+    private final AddressRepository addressRepository;
 
     @Override
     public CreateEmployeeResponseDTO createEmployee(CreateEmployeeRequestDTO request) {
@@ -38,6 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee savedEmployee = saveNewEmployee(request);
 
         saveNewUser(savedEmployee, request.getPassword());
+        saveNewAddress(savedEmployee, request.getStreetName(), request.getZipCode(), request.getCity());
 
         return CreateEmployeeResponseDTO.builder()
                 .employeeID(savedEmployee.getId())
@@ -72,6 +72,17 @@ public class EmployeeServiceImpl implements EmployeeService {
                         .build()));
 
         userRepository.save(newUser);
+    }
+
+    private void saveNewAddress(Employee employee, String streetName, String zipCode, String city){
+        Address newAddress = Address.builder()
+                .streetName(streetName)
+                .zipCode(zipCode)
+                .city(city)
+                .employee(employee)
+                .build();
+
+        addressRepository.save(newAddress);
     }
 
     private Employee saveNewEmployee(CreateEmployeeRequestDTO request){

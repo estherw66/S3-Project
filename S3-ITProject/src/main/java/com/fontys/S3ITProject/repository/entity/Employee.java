@@ -45,7 +45,4 @@ public class Employee{
     @NotNull
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
-
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
-    private Address address;
 }
