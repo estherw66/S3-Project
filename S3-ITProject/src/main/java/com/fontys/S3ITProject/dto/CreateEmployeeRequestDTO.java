@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -14,20 +15,20 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateEmployeeRequestDTO {
-    @NotNull
+    @NotBlank
     @Length(min = 2, max = 25)
     private String firstName;
 
-    @NotNull
+    @NotBlank
     @Length(min = 2, max = 50)
     private String lastName;
 
-    @NotNull
+    @NotBlank
     @Length(min = 2, max = 50)
     private String email;
 
-    @NotNull
-    @Length(min = 12, max = 12)
+    @NotBlank
+    @Length(max = 2)
     private String phoneNumber;
 
     @NotNull

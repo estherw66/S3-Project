@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -21,14 +22,14 @@ public class CreateRoomRequestDTO {
     private int capacity;
 
     @NotNull
+    @Min(45)
     private double pricePerNight;
 
     private String imageUrl;
 
-    @NotNull
+    @NotBlank
     @Length(min = 1, max = 25)
     private String roomType;
 
-    @NotNull
     private boolean isFeatured;
 }

@@ -98,4 +98,36 @@ class EmployeeControllerTest {
 
         verify(employeeServiceMock).createEmployee(requestDTO);
     }
+
+    @Test
+    void createEmployee_shouldNotCreateEmployeeAndReturn400_WhenMissingFields() throws Exception{
+        mockMvc.perform(post("/api/employees")
+                .contentType(APPLICATION_JSON_VALUE)
+                .content("""
+                            {
+                                "firstName": "",
+                                "lastName": "",
+                                "email": "",
+                                "phoneNumber": "",
+                                "dateOfBirth": ""
+                            }
+                        """))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(header().string("Content-Type", APPLICATION_JSON_VALUE))
+                .andExpect(content().json("""
+                            [
+                                {"field": "firstName", "error":  "must not be blank"},
+                                {"field": "lastName", "error":  "must not be blank"},
+                                {"field": "email", "error":  "must not be blank"},
+                                {"field": "phoneNumber", "error":  "must not be blank"},
+                                {"field": "dateOfBirth", "error":  "must not be null"},
+                                {"field": "firstName", "error":  "length must be between 2 and 25"},
+                                {"field": "lastName", "error":  "length must be between 2 and 50"},
+                                {"field": "email", "error":  "length must be between 2 and 50"}
+                            ]
+                        """));
+
+        verifyNoInteractions(employeeServiceMock);
+    }
 }

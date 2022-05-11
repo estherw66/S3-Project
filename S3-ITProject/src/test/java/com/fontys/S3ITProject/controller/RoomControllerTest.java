@@ -114,4 +114,31 @@ class RoomControllerTest {
 
         verify(roomServiceMock).createRoom(requestDTO);
     }
+
+    @Test
+    void createRoom_shouldNotCreateRoomAndReturn400_WhenMissingFields() throws Exception {
+        mockMvc.perform(post("/api/rooms")
+                .contentType(APPLICATION_JSON_VALUE)
+                .content("""
+                            {
+                                "capacity": 0,
+                                "pricePerNight": 0,
+                                "imageUrl": "",
+                                "roomType": "",
+                                "featured": 0
+                            }
+                        """))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(header().string("Content-Type", APPLICATION_JSON_VALUE))
+                .andExpect(content().json("""
+                                                        [
+                                                            {"field": "pricePerNight", "error":  "must be greater than or equal to 45"},
+                                                            {"field": "roomType", "error":  "must not be blank"},
+                                                            {"field": "capacity", "error":  "must be greater than or equal to 1"},
+                                                            {"field": "roomType", "error":  "length must be between 1 and 25"}
+                                                        ]
+                                                    """));
+        verifyNoInteractions(roomServiceMock);
+    }
 }
