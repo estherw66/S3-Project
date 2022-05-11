@@ -28,9 +28,13 @@ public class CreateEmployeeRequestDTO {
     private String email;
 
     @NotBlank
-    @Length(max = 2)
+    @Length(max = 12)
     private String phoneNumber;
 
     @NotNull
     private LocalDate dateOfBirth;
+
+    @NotBlank
+    @Length(max = 50)
+    private String password;
 }

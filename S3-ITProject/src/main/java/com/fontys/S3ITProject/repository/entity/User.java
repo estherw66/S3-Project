@@ -1,26 +1,38 @@
 package com.fontys.s3itproject.repository.entity;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
-//@Entity
-//@Table(name = "user")
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-//@EqualsAndHashCode(callSuper = false)
-//@Data
-@Getter
-@Setter
-public class User extends Person{
+@Entity
+@Table(name = "user")
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class User{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-//    @OneToMany
-//    @NotBlank
-//    @EqualsAndHashCode.Exclude
-//    @ToString.Exclude
-//    private List<Reservation> reservations;
-//
-//    public User(long l, String fake, String data, String s, String fake1, String djkfsf) {
-//        this.reservations = new ArrayList<>();
-//    }
+    @NotBlank
+    @Length(min = 2, max = 20)
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password")
+    @Length(max = 100)
+    private String password;
+
+    @OneToOne(optional = true)
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private Set<UserRole> userRoles;
 }
