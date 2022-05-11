@@ -14,7 +14,6 @@ final class AddressDTOConverter {
                 .streetName(address.getStreetName())
                 .zipCode(address.getZipCode())
                 .city(address.getCity())
-                .employee(address.getEmployee())
                 .build();
     }
 }

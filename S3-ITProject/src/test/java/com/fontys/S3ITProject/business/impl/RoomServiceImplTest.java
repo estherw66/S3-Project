@@ -1,6 +1,5 @@
 package com.fontys.s3itproject.business.impl;
 
-import com.fontys.s3itproject.business.RoomService;
 import com.fontys.s3itproject.dto.CreateRoomRequestDTO;
 import com.fontys.s3itproject.dto.CreateRoomResponseDTO;
 import com.fontys.s3itproject.dto.GetRoomsResponseDTO;
@@ -109,6 +108,39 @@ class RoomServiceImplTest {
 
         GetRoomsResponseDTO expectedResult = GetRoomsResponseDTO.builder()
                 .rooms(List.of(singleDTO, singleXXLDTO))
+                .build();
+
+        assertEquals(expectedResult, actualResult);
+        verify(roomRepositoryMock).findAll();
+    }
+
+    @Test
+    void getRooms_shouldReturnAllFeaturedRoomsConvertedToDTO() {
+        Room singleXXL = Room.builder()
+                .id(2L)
+                .capacity(1)
+                .pricePerNight(115)
+                .imageUrl("")
+                .roomType("Single XXL")
+                .isFeatured(true)
+                .build();
+
+        when(roomRepositoryMock.findAll())
+                .thenReturn(List.of(singleXXL));
+
+        GetRoomsResponseDTO actualResult = roomService.getFeaturedRooms();
+
+        RoomDTO singleXXLDTO = RoomDTO.builder()
+                .id(2L)
+                .capacity(1)
+                .pricePerNight(115)
+                .imageUrl("")
+                .roomType("Single XXL")
+                .isFeatured(true)
+                .build();
+
+        GetRoomsResponseDTO expectedResult = GetRoomsResponseDTO.builder()
+                .rooms(List.of(singleXXLDTO))
                 .build();
 
         assertEquals(expectedResult, actualResult);

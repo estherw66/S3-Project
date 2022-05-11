@@ -23,6 +23,9 @@ public class RoomController {
         return ResponseEntity.ok(roomService.getRooms());
     }
 
+    @GetMapping(path = "/featured")
+    public ResponseEntity<GetRoomsResponseDTO> getFeaturedRooms(){return ResponseEntity.ok(roomService.getFeaturedRooms());}
+
     @PostMapping
     public ResponseEntity<CreateRoomResponseDTO> createRoom(
             @RequestBody @Valid CreateRoomRequestDTO createRoomRequest){

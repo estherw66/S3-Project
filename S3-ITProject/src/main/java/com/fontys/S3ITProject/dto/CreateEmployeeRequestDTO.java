@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -31,5 +31,5 @@ public class CreateEmployeeRequestDTO {
     private String phoneNumber;
 
     @NotNull
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 }

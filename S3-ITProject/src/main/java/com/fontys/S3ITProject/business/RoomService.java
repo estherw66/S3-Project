@@ -7,4 +7,5 @@ import com.fontys.s3itproject.dto.GetRoomsResponseDTO;
 public interface RoomService {
     CreateRoomResponseDTO createRoom(CreateRoomRequestDTO request);
     GetRoomsResponseDTO getRooms();
+    GetRoomsResponseDTO getFeaturedRooms();
 }

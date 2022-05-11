@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -20,7 +21,7 @@ public class Room {
     private Long id;
 
     @NotNull
-    @Max(1)
+    @Min(1)
     @Max(10)
     @Column(name = "capacity")
     private int capacity;

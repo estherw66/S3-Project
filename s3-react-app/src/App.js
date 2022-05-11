@@ -8,6 +8,7 @@ import Error from "./Pages/error";
 import Navbar from "./Components/Navbar";
 import Sidebar from "./Components/Sidebar";
 import Footer from "./Components/Footer";
+import AllRoomsPage from "./Pages/allrooms";
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/rooms" element={<RoomsPage />} />
+            <Route path="/all-rooms" element={<AllRoomsPage />} />
             <Route path="/*" element={<Error />} />
         </Routes>
         <Footer />

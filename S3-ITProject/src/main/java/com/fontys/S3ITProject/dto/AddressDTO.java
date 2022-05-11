@@ -15,5 +15,5 @@ public class AddressDTO {
     private String streetName;
     private String zipCode;
     private String city;
-    private Employee employee;
+    //private Employee employee;
 }

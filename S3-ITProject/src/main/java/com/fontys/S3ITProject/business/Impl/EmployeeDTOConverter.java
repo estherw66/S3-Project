@@ -16,7 +16,6 @@ final class EmployeeDTOConverter {
                 .email(employee.getEmail())
                 .phoneNumber(employee.getPhoneNumber())
                 .dateOfBirth(employee.getDateOfBirth())
-                .address(employee.getAddress())
                 .build();
     }
 }

@@ -1,6 +1,5 @@
 package com.fontys.s3itproject.business.impl;
 
-import com.fontys.s3itproject.business.EmployeeService;
 import com.fontys.s3itproject.business.exception.InvalidEmployeeException;
 import com.fontys.s3itproject.dto.*;
 import com.fontys.s3itproject.repository.EmployeeRepository;
@@ -11,7 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,7 +32,7 @@ class EmployeeServiceImplTest {
                 .firstName("Esther")
                 .lastName("Wolfs")
                 .email("estherwolfs@goldskye.com")
-                .dateOfBirth(new Date(1998,01,01))
+                .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
                 .build();
 
@@ -43,7 +42,7 @@ class EmployeeServiceImplTest {
                 .firstName("Esther")
                 .lastName("Wolfs")
                 .email("estherwolfs@goldskye.com")
-                .dateOfBirth(new Date(1998,01,01))
+                .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
                 .build();
 
@@ -54,7 +53,7 @@ class EmployeeServiceImplTest {
                 .firstName("Esther")
                 .lastName("Wolfs")
                 .email("estherwolfs@goldskye.com")
-                .dateOfBirth(new Date(1998,01,01))
+                .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
                 .build();
 
@@ -78,7 +77,7 @@ class EmployeeServiceImplTest {
                 .firstName("Esther")
                 .lastName("Wolfs")
                 .email("estherwolfs@goldskye.com")
-                .dateOfBirth(new Date(1998,01,01))
+                .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
                 .build();
 
@@ -94,7 +93,7 @@ class EmployeeServiceImplTest {
                 .firstName("Esther")
                 .lastName("Wolfs")
                 .email("estherwolfs@goldskye.com")
-                .dateOfBirth(new Date(1998,01,01))
+                .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
                 .build();
         Employee john = Employee.builder()
@@ -102,7 +101,7 @@ class EmployeeServiceImplTest {
                 .firstName("John")
                 .lastName("Floreani")
                 .email("johnfloreani@goldskye.com")
-                .dateOfBirth(new Date(1995,10,13))
+                .dateOfBirth(LocalDate.of(1995,10,13))
                 .phoneNumber("+31645887651")
                 .build();
 
@@ -119,7 +118,7 @@ class EmployeeServiceImplTest {
                 .firstName("Esther")
                 .lastName("Wolfs")
                 .email("estherwolfs@goldskye.com")
-                .dateOfBirth(new Date(1998,01,01))
+                .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
                 .build();
         EmployeeDTO johnDTO = EmployeeDTO.builder()
@@ -127,7 +126,7 @@ class EmployeeServiceImplTest {
                 .firstName("John")
                 .lastName("Floreani")
                 .email("johnfloreani@goldskye.com")
-                .dateOfBirth(new Date(1995,10,13))
+                .dateOfBirth(LocalDate.of(1995,10,13))
                 .phoneNumber("+31645887651")
                 .build();
 

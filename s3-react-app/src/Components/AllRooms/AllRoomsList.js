@@ -1,9 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import RoomService from '../../Services/RoomService'
-import RoomCard from './RoomCard'
+import RoomCard from '../FeaturedRooms/RoomCard';
 
-const FeaturedRoomList = () => {
+const AllRoomsList = () => {
   const [rooms, setRooms] = useState([]);
 
 
@@ -12,7 +11,7 @@ const FeaturedRoomList = () => {
   }, []);
 
   const getRooms = () => {
-    axios.get(`http://localhost:8080/api/rooms/featured`)
+    axios.get(`http://localhost:8080/api/rooms`)
     .then(res => {
       setRooms(res.data);
       console.log(res.data);
@@ -27,7 +26,6 @@ const FeaturedRoomList = () => {
       {rooms.rooms ? (
         <>
           {rooms.rooms && rooms.rooms.map((room) => (
-            // <RoomCard key={room.id} type={room.roomType} price={room.pricePerNight} imgUrl={room.imageUrl} />
             <RoomCard key={room.id} room={room} />
           ))}
         </>
@@ -38,4 +36,4 @@ const FeaturedRoomList = () => {
   )
 }
 
-export default FeaturedRoomList
+export default AllRoomsList

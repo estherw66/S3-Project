@@ -48,6 +48,19 @@ public class RoomServiceImpl implements RoomService {
                 .build();
     }
 
+    @Override
+    public GetRoomsResponseDTO getFeaturedRooms() {
+        List<RoomDTO> featuredRooms = findAll()
+                .stream()
+                .filter(r -> r.isFeatured())
+                .map(RoomDTOConverter::convertToDTO)
+                .toList();
+
+        return GetRoomsResponseDTO.builder()
+                .rooms(featuredRooms)
+                .build();
+    }
+
     private Room save(Room room) {
         return roomRepository.save(room);
     }
