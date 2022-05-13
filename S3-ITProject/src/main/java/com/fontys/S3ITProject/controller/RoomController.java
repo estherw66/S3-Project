@@ -1,6 +1,7 @@
 package com.fontys.s3itproject.controller;
 
 import com.fontys.s3itproject.business.RoomService;
+import com.fontys.s3itproject.configuration.security.isauthenticated.IsAuthenticated;
 import com.fontys.s3itproject.dto.CreateRoomRequestDTO;
 import com.fontys.s3itproject.dto.CreateRoomResponseDTO;
 import com.fontys.s3itproject.dto.GetRoomsResponseDTO;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
@@ -26,6 +28,8 @@ public class RoomController {
     @GetMapping(path = "/featured")
     public ResponseEntity<GetRoomsResponseDTO> getFeaturedRooms(){return ResponseEntity.ok(roomService.getFeaturedRooms());}
 
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_EMPLOYEE"})
     @PostMapping
     public ResponseEntity<CreateRoomResponseDTO> createRoom(
             @RequestBody @Valid CreateRoomRequestDTO createRoomRequest){
