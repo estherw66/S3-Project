@@ -2,13 +2,16 @@ package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.exception.InvalidEmployeeException;
 import com.fontys.s3itproject.dto.*;
+import com.fontys.s3itproject.repository.AddressRepository;
 import com.fontys.s3itproject.repository.EmployeeRepository;
+import com.fontys.s3itproject.repository.UserRepository;
 import com.fontys.s3itproject.repository.entity.Employee;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,16 +25,26 @@ class EmployeeServiceImplTest {
     @Mock
     private EmployeeRepository employeeRepositoryMock;
 
+    @Mock
+    private UserRepository userRepository;
+
+    @Mock
+    private AddressRepository addressRepository;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
     @InjectMocks
     private EmployeeServiceImpl employeeService;
 
     @Test
     void createEmployee_shouldSaveNewEmployee() {
         when(employeeRepositoryMock.existsByEmail("estherwolfs@goldskye.com")).thenReturn(false);
+
         Employee esther = Employee.builder()
                 .firstName("Esther")
                 .lastName("Wolfs")
-                .email("estherwolfs@goldskye.com")
+                .email("EstherWolfs@goldskye.com")
                 .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
                 .build();
@@ -40,7 +53,7 @@ class EmployeeServiceImplTest {
                 .id(1L)
                 .firstName("Esther")
                 .lastName("Wolfs")
-                .email("estherwolfs@goldskye.com")
+                .email("EstherWolfs@goldskye.com")
                 .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
                 .build();

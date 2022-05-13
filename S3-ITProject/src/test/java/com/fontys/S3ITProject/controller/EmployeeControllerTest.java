@@ -8,8 +8,10 @@ import com.fontys.s3itproject.dto.GetEmployeesResponseDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -24,7 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(EmployeeController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 class EmployeeControllerTest {
 
     @Autowired
@@ -34,6 +37,7 @@ class EmployeeControllerTest {
     private EmployeeService employeeServiceMock;
 
     @Test
+    @WithMockUser(username = "EstherWolfs", roles = {"EMPLOYEE"})
     void getEmployees_shouldReturn200ResponseWithEmployeesArray() throws Exception {
         // create the list of employees that we want to be returned
         GetEmployeesResponseDTO responseDTO = GetEmployeesResponseDTO
@@ -65,6 +69,7 @@ class EmployeeControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "EstherWolfs", roles = {"ADMIN"})
     void createEmployee_shouldCreateEmployeeAndReturn201_whenRequestValid() throws Exception{
         // create the employee dto we want to save
         CreateEmployeeRequestDTO requestDTO = CreateEmployeeRequestDTO.builder()
@@ -99,7 +104,6 @@ class EmployeeControllerTest {
                                 """))
                 .andDo(print())
                 .andExpect(status().isCreated())
-                .andExpect(header().string("Content-Type", APPLICATION_JSON_VALUE))
                 .andExpect(content().json("""
                             {"employeeID":  1}
                         """));
@@ -108,6 +112,7 @@ class EmployeeControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "EstherWolfs", roles = {"ADMIN"})
     void createEmployee_shouldNotCreateEmployeeAndReturn400_WhenMissingFields() throws Exception{
         mockMvc.perform(post("/api/employees")
                 .contentType(APPLICATION_JSON_VALUE)

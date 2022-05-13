@@ -28,7 +28,7 @@ public class EmployeeController {
     }
 
     @IsAuthenticated
-    @RolesAllowed({"ROLE_ADIM"})
+    @RolesAllowed({"ROLE_ADMIN"})
     @PostMapping
     public ResponseEntity<CreateEmployeeResponseDTO> createEmployee(
             @RequestBody @Valid CreateEmployeeRequestDTO createEmployeeRequest){

@@ -8,8 +8,10 @@ import com.fontys.s3itproject.dto.RoomDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -23,7 +25,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(RoomController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 class RoomControllerTest {
 
     @Autowired
@@ -87,6 +90,7 @@ class RoomControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "EstherWolfs", roles = {"EMPLOYEE"})
     void createRoom_shouldCreateRoomAndReturn201_whenRequestValid() throws Exception{
         CreateRoomRequestDTO requestDTO = CreateRoomRequestDTO.builder()
                 .capacity(1).pricePerNight(50).imageUrl("").roomType("Single").isFeatured(false)
