@@ -7,13 +7,13 @@ import com.fontys.s3itproject.dto.GetRoomsResponseDTO;
 import com.fontys.s3itproject.dto.RoomDTO;
 import com.fontys.s3itproject.repository.RoomRepository;
 import com.fontys.s3itproject.repository.entity.Room;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class RoomServiceImpl implements RoomService {
 
     private final RoomRepository roomRepository;
@@ -52,7 +52,7 @@ public class RoomServiceImpl implements RoomService {
     public GetRoomsResponseDTO getFeaturedRooms() {
         List<RoomDTO> featuredRooms = findAll()
                 .stream()
-                .filter(r -> r.isFeatured())
+                .filter(Room::isFeatured)
                 .map(RoomDTOConverter::convertToDTO)
                 .toList();
 

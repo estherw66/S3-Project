@@ -33,10 +33,6 @@ public class Address {
     @Column(name = "city")
     private String city;
 
-//    @JoinColumn(name = "employee_id", referencedColumnName = "id")
-//    @OneToOne
-//    private Employee employee;
-
     @OneToOne(optional = true)
     @JoinColumn(name = "employee_id")
     private Employee employee;

@@ -15,19 +15,19 @@ public class RequestAuthenticatedUserProvider {
 
     @Bean
     @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public AccessTokenDTO getAuthenticatedUserInRequest(){
+    public AccessTokenDTO getAuthenticatedUserInRequest() {
         final SecurityContext context = SecurityContextHolder.getContext();
-        if (context == null){
+        if (context == null) {
             return null;
         }
 
         final Authentication authentication = context.getAuthentication();
-        if (authentication == null){
+        if (authentication == null) {
             return null;
         }
 
         final Object details = authentication.getDetails();
-        if (!(details instanceof AccessTokenDTO)){
+        if (!(details instanceof AccessTokenDTO)) {
             return null;
         }
 

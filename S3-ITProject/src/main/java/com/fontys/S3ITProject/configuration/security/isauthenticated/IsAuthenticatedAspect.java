@@ -22,14 +22,16 @@ import org.springframework.web.server.ResponseStatusException;
 @Component
 public class IsAuthenticatedAspect {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(IsAuthenticatedAspect.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(IsAuthenticatedAspect.class);
 
     @Pointcut("@annotation(com.fontys.s3itproject.configuration.security.isauthenticated.IsAuthenticated)")
     public void annotatedMethod() {
+        // empty method
     }
 
     @Pointcut("@within(com.fontys.s3itproject.configuration.security.isauthenticated.IsAuthenticated)")
     public void annotatedClass() {
+        // empty method
     }
 
     @Around("(annotatedMethod() || annotatedClass()) && execution(* *(..))")

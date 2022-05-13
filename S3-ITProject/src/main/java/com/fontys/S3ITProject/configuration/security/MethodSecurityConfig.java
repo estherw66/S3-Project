@@ -2,6 +2,7 @@ package com.fontys.s3itproject.configuration.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 
 @Configuration
 @EnableGlobalMethodSecurity(
@@ -9,5 +10,5 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
         securedEnabled = true,
         jsr250Enabled = true
 )
-public class MethodSecurityConfig {
+public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 }

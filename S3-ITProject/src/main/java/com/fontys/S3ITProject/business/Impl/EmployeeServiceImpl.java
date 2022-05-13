@@ -2,27 +2,27 @@ package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.EmployeeService;
 import com.fontys.s3itproject.business.exception.InvalidEmployeeException;
-import com.fontys.s3itproject.dto.CreateEmployeeRequestDTO;
-import com.fontys.s3itproject.dto.CreateEmployeeResponseDTO;
-import com.fontys.s3itproject.dto.EmployeeDTO;
-import com.fontys.s3itproject.dto.GetEmployeesResponseDTO;
+import com.fontys.s3itproject.business.exception.UnauthorisedDataAccessException;
+import com.fontys.s3itproject.dto.*;
 import com.fontys.s3itproject.repository.AddressRepository;
 import com.fontys.s3itproject.repository.EmployeeRepository;
 import com.fontys.s3itproject.repository.UserRepository;
 import com.fontys.s3itproject.repository.entity.*;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
     private static final String EMAIL_SUFFIX = "@goldskye.com";
 
     private final PasswordEncoder passwordEncoder;
+    private AccessTokenDTO requestAccessToken;
 
     private final EmployeeRepository employeeRepository;
     private final UserRepository userRepository;
@@ -32,6 +32,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public CreateEmployeeResponseDTO createEmployee(CreateEmployeeRequestDTO request) {
         if (existsByEmail(request.getEmail())){
             throw new InvalidEmployeeException("EMAIL_DUPLICATED");
+        }
+
+        if (existsByPhoneNumber(request.getPhoneNumber())){
+            throw new InvalidEmployeeException("PHONE_NUMBER_DUPLICATED");
         }
 
         Employee savedEmployee = saveNewEmployee(request);
@@ -54,6 +58,47 @@ public class EmployeeServiceImpl implements EmployeeService {
         return GetEmployeesResponseDTO.builder()
                 .employees(employees)
                 .build();
+    }
+
+    @Override
+    public Optional<EmployeeDTO> getEmployee(long employeeID) {
+        if (!requestAccessToken.hasRole(RoleEnum.ADMIN.name())){
+            if (requestAccessToken.getEmployeeId() != employeeID){
+                throw new UnauthorisedDataAccessException("EMPLOYEE_ID_NOT_FROM_LOGGED_IN_USER");
+            }
+        }
+
+        return employeeRepository.findById(employeeID).map(EmployeeDTOConverter::convertToDTO);
+    }
+
+    @Override
+    public void updateEmployee(UpdateEmployeeRequestDTO request) {
+        Optional<Employee> employeeOptional = employeeRepository.findById(request.getId());
+        if (employeeOptional.isEmpty()){
+            throw new InvalidEmployeeException("EMPLOYEE_ID_INVALID");
+        }
+
+        if (!requestAccessToken.hasRole(RoleEnum.ADMIN.name())){
+            if (requestAccessToken.getEmployeeId() != request.getId()){
+                throw new UnauthorisedDataAccessException("EMPLOYEE_ID_NOT_FROM_LOGGED_IN_USER");
+            }
+        }
+
+        Employee employee = employeeOptional.get();
+        updateFields(request, employee);
+    }
+
+    @Override
+    public void deleteEmployee(Long employeeID) {
+        this.employeeRepository.deleteById(employeeID);
+    }
+
+    private void updateFields(UpdateEmployeeRequestDTO request, Employee employee) {
+        employee.setFirstName(request.getFirstName());
+        employee.setLastName(request.getLastName());
+        employee.setPhoneNumber(request.getPhoneNumber());
+
+        employeeRepository.save(employee);
     }
 
     private void saveNewUser(Employee employee, String password){
@@ -101,6 +146,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private boolean existsByEmail(String email){
         return employeeRepository.existsByEmail(email);
     }
+    private boolean existsByPhoneNumber(String phoneNumber) { return employeeRepository.existsByPhoneNumber(phoneNumber); }
 
     private List<Employee> findAll(){
         return employeeRepository.findAll();

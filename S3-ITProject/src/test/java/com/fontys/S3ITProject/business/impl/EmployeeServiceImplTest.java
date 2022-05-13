@@ -40,6 +40,7 @@ class EmployeeServiceImplTest {
     @Test
     void createEmployee_shouldSaveNewEmployee() {
         when(employeeRepositoryMock.existsByEmail("estherwolfs@goldskye.com")).thenReturn(false);
+        when(employeeRepositoryMock.existsByPhoneNumber("+31612901749")).thenReturn(false);
 
         Employee esther = Employee.builder()
                 .firstName("Esther")
