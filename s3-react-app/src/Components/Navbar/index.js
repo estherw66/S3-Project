@@ -27,5 +27,5 @@ const Navbar = ({ toggleMenu }) => {
     </>
   )
 }
-
+ 
 export default Navbar

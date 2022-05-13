@@ -5,16 +5,14 @@ import com.fontys.s3itproject.dto.LoginRequestDTO;
 import com.fontys.s3itproject.dto.LoginResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/login")
+@CrossOrigin(origins = "http://localhost:3000")
 public class LoginController {
 
     private final LoginService loginService;

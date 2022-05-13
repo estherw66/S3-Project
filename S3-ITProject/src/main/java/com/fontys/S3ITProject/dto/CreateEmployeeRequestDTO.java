@@ -35,18 +35,18 @@ public class CreateEmployeeRequestDTO {
     private LocalDate dateOfBirth;
 
     @NotBlank
-    @Length(max = 50)
+    @Length(min=8, max = 50)
     private String password;
 
-    @NotNull
+    @NotBlank
     @Length(min = 2, max = 50)
     private String streetName;
 
-    @NotNull
-    @Length(min = 6, max = 6)
+    @NotBlank
+    @Length(min=6, max = 6)
     private String zipCode;
 
-    @NotNull
+    @NotBlank
     @Length(min = 2, max = 50)
     private String city;
 }

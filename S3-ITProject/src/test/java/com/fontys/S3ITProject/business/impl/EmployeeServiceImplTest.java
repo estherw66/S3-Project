@@ -36,7 +36,6 @@ class EmployeeServiceImplTest {
                 .phoneNumber("+31612901749")
                 .build();
 
-        // Employee saved = employeeRepositoryMock.save(esther)); // why not get the employee from the method???????
         Employee saved = Employee.builder()
                 .id(1L)
                 .firstName("Esther")
@@ -55,6 +54,10 @@ class EmployeeServiceImplTest {
                 .email("estherwolfs@goldskye.com")
                 .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
+                .password("password")
+                .streetName("Mozartlaan 41")
+                .zipCode("5151KA")
+                .city("Drunen")
                 .build();
 
         CreateEmployeeResponseDTO actualResult = employeeService.createEmployee(requestDTO);
