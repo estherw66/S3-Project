@@ -1,20 +1,32 @@
 package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.exception.InvalidEmployeeException;
+import com.fontys.s3itproject.business.exception.UnauthorisedDataAccessException;
 import com.fontys.s3itproject.dto.*;
 import com.fontys.s3itproject.repository.AddressRepository;
 import com.fontys.s3itproject.repository.EmployeeRepository;
 import com.fontys.s3itproject.repository.UserRepository;
+import com.fontys.s3itproject.repository.entity.Address;
 import com.fontys.s3itproject.repository.entity.Employee;
+import com.fontys.s3itproject.repository.entity.RoleEnum;
+import lombok.AllArgsConstructor;
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -34,8 +46,19 @@ class EmployeeServiceImplTest {
     @Mock
     private PasswordEncoder passwordEncoder;
 
+    @Mock
+    private AccessTokenDTO accessTokenDTO;
+
     @InjectMocks
     private EmployeeServiceImpl employeeService;
+
+    private AccessTokenDTO getAccessTokenDTO() {
+        return AccessTokenDTO.builder()
+                .subject("Esther")
+                .roles(null)
+                .employeeId(1L)
+                .build();
+    }
 
     @Test
     void createEmployee_shouldSaveNewEmployee() {
@@ -82,11 +105,12 @@ class EmployeeServiceImplTest {
 
         assertEquals(expectedResult, actualResult);
         verify(employeeRepositoryMock).existsByEmail("estherwolfs@goldskye.com");
+        verify(employeeRepositoryMock).existsByPhoneNumber("+31612901749");
         verify(employeeRepositoryMock).save(esther);
     }
 
     @Test
-    void createEmployee_shouldThrowInvalidEmployeeException_whenSavingNewEmployee(){
+    void createEmployee_shouldThrowInvalidEmployeeException_whenSavingNewEmployeeDuplicatedEmail(){
         when(employeeRepositoryMock.existsByEmail("estherwolfs@goldskye.com"))
                 .thenReturn(true);
 
@@ -100,6 +124,23 @@ class EmployeeServiceImplTest {
 
         assertThrows(InvalidEmployeeException.class,() -> employeeService.createEmployee(request));
         verify(employeeRepositoryMock).existsByEmail("estherwolfs@goldskye.com");
+    }
+
+    @Test
+    void createEmployee_shouldThrowInvalidEmployeeException_whenSavingNewEmployeeDuplicatedPhoneNumber(){
+        when(employeeRepositoryMock.existsByPhoneNumber("+31612901749"))
+                .thenReturn(true);
+
+        CreateEmployeeRequestDTO request = CreateEmployeeRequestDTO.builder()
+                .firstName("Esther")
+                .lastName("Wolfs")
+                .email("estherwolfs@goldskye.com")
+                .dateOfBirth(LocalDate.of(1998,1,1))
+                .phoneNumber("+31612901749")
+                .build();
+
+        assertThrows(InvalidEmployeeException.class,() -> employeeService.createEmployee(request));
+        verify(employeeRepositoryMock).existsByPhoneNumber("+31612901749");
     }
 
     @Test
@@ -156,5 +197,68 @@ class EmployeeServiceImplTest {
         // assert the expected result and the actual result
         assertEquals(expectedResult, actualResult);
         verify(employeeRepositoryMock).findAll();
+    }
+
+    @Test
+    void getEmployee_shouldReturnOptionalEmployeeByIDConvertedToDTO(){
+
+        Employee employee = Employee.builder()
+                .id(1L)
+                .firstName("Esther")
+                .lastName("Wolfs")
+                .email("estherwolfs@goldskye.com")
+                .dateOfBirth(LocalDate.of(1998,1,1))
+                .phoneNumber("+31612901749")
+                .build();
+
+        when(employeeRepositoryMock.findById(0L))
+                .thenReturn(Optional.of(employee));
+
+        Optional<EmployeeDTO> actualResult = employeeService.getEmployee(0L);
+
+        EmployeeDTO employeeDTO = EmployeeDTO.builder()
+                .id(1L)
+                .firstName("Esther")
+                .lastName("Wolfs")
+                .email("estherwolfs@goldskye.com")
+                .dateOfBirth(LocalDate.of(1998,01,01))
+                .phoneNumber("+31612901749")
+                .build();
+
+        assertTrue(actualResult.isPresent());
+        assertEquals(employeeDTO, actualResult.get());
+        verify(employeeRepositoryMock).findById(0L);
+    }
+
+
+    @Test
+    void updateEmployee_shouldUpdateEmployeePhoneNumber(){
+        Employee updated = Employee.builder()
+                .id(0L)
+                .firstName("Esther")
+                .lastName("Wolfs")
+                .email("EstherWolfs@goldskye.com")
+                .dateOfBirth(LocalDate.of(1998,1,1))
+                .phoneNumber("+31612901749")
+                .build();
+
+        when(employeeRepositoryMock.findById(0L))
+                .thenReturn(Optional.of(updated));
+
+        UpdateEmployeeRequestDTO requestDTO = UpdateEmployeeRequestDTO.builder()
+                .id(0L)
+                .firstName("Esther")
+                .lastName("Wolfs")
+                .phoneNumber("+31617491290")
+                .build();
+
+        employeeService.updateEmployee(requestDTO);
+        verify(employeeRepositoryMock).save(updated);
+    }
+
+    @Test
+    void deleteEmployee_shouldDeleteEmployee(){
+        employeeService.deleteEmployee(0L);
+        verify(employeeRepositoryMock).deleteById(0L);
     }
 }

@@ -62,10 +62,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Optional<EmployeeDTO> getEmployee(long employeeID) {
-        if (!requestAccessToken.hasRole(RoleEnum.ADMIN.name())){
-            if (requestAccessToken.getEmployeeId() != employeeID){
-                throw new UnauthorisedDataAccessException("EMPLOYEE_ID_NOT_FROM_LOGGED_IN_USER");
-            }
+        if (!requestAccessToken.hasRole(RoleEnum.ADMIN.name()) && requestAccessToken.getEmployeeId() != employeeID){
+            throw new UnauthorisedDataAccessException("EMPLOYEE_ID_NOT_FROM_LOGGED_IN_USER");
         }
 
         return employeeRepository.findById(employeeID).map(EmployeeDTOConverter::convertToDTO);
@@ -78,10 +76,8 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new InvalidEmployeeException("EMPLOYEE_ID_INVALID");
         }
 
-        if (!requestAccessToken.hasRole(RoleEnum.ADMIN.name())){
-            if (requestAccessToken.getEmployeeId() != request.getId()){
-                throw new UnauthorisedDataAccessException("EMPLOYEE_ID_NOT_FROM_LOGGED_IN_USER");
-            }
+        if (!requestAccessToken.hasRole(RoleEnum.ADMIN.name()) && requestAccessToken.getEmployeeId().equals(request.getId())){
+            throw new UnauthorisedDataAccessException("EMPLOYEE_ID_NOT_FROM_LOGGED_IN_USER");
         }
 
         Employee employee = employeeOptional.get();

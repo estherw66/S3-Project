@@ -1,10 +1,8 @@
 package com.fontys.s3itproject.controller;
 
 import com.fontys.s3itproject.business.EmployeeService;
-import com.fontys.s3itproject.dto.CreateEmployeeRequestDTO;
-import com.fontys.s3itproject.dto.CreateEmployeeResponseDTO;
-import com.fontys.s3itproject.dto.EmployeeDTO;
-import com.fontys.s3itproject.dto.GetEmployeesResponseDTO;
+import com.fontys.s3itproject.dto.*;
+import com.fontys.s3itproject.repository.entity.Address;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +15,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
@@ -35,6 +33,58 @@ class EmployeeControllerTest {
 
     @MockBean
     private EmployeeService employeeServiceMock;
+
+    @Test
+    @WithMockUser(username = "Esther", roles = {"EMPLOYEE"})
+    void getEmployee_shouldReturn200ResponseWithEmployee_whenEmployeeFound() throws Exception {
+        EmployeeDTO employeeDTO = EmployeeDTO.builder()
+                .id(1L)
+                .firstName("Esther")
+                .lastName("Wolfs")
+                .email("EstherWolfs@goldskye.com")
+                .dateOfBirth(LocalDate.of(1998,01,01))
+                .phoneNumber("+31612901749")
+                .address(Address.builder().streetName("Mozartlaan 41").zipCode("5151KA").city("Drunen").build())
+                .build();
+
+        when(employeeServiceMock.getEmployee(1L))
+                .thenReturn(Optional.of(employeeDTO));
+
+        mockMvc.perform(get("/api/employees/1"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(header().string("Content-Type", APPLICATION_JSON_VALUE))
+                .andExpect(content().json("""
+                            {
+                                "id": 1,
+                                "firstName": "Esther",
+                                "lastName": "Wolfs",
+                                "email": "EstherWolfs@goldskye.com",
+                                "phoneNumber": "+31612901749",
+                                "dateOfBirth": "1998-01-01",
+                                "address": {
+                                    "streetName": "Mozartlaan 41",
+                                    "zipCode": "5151KA",
+                                    "city": "Drunen"
+                                }
+                            }
+                    """));
+
+        verify(employeeServiceMock).getEmployee(1L);
+    }
+
+    @Test
+    @WithMockUser(username = "Esther", roles = {"EMPLOYEE"})
+    void getEmployee_shouldReturn404NotFoundError_whenEmployeeNotFound() throws Exception {
+        when(employeeServiceMock.getEmployee(1L))
+                .thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/api/employees/1"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+
+        verify(employeeServiceMock).getEmployee(1L);
+    }
 
     @Test
     @WithMockUser(username = "EstherWolfs", roles = {"EMPLOYEE"})
@@ -154,5 +204,38 @@ class EmployeeControllerTest {
                         """));
 
         verifyNoInteractions(employeeServiceMock);
+    }
+
+    @Test
+    @WithMockUser(username = "Esther", roles = {"ADMIN"})
+    void deleteEmployee_shouldReturn204_whenDeleteEmployee() throws Exception {
+        mockMvc.perform(delete("/api/employees/1"))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+        verify(employeeServiceMock).deleteEmployee(1L);
+    }
+
+    @Test
+    @WithMockUser(username = "Esther", roles = {"EMPLOYEE"})
+    void updateEmployee_shouldReturn204_whenUpdatingEmployee() throws Exception {
+        mockMvc.perform(put("/api/employees/1")
+                        .contentType(APPLICATION_JSON_VALUE)
+                        .content("""
+                                    {
+                                        "firstName": "Esther",
+                                        "lastName": "Wolfs",
+                                        "phoneNumber": "+31612901749"
+                                    }
+                                """))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        UpdateEmployeeRequestDTO expectedRequest = UpdateEmployeeRequestDTO.builder()
+                .id(1L)
+                .firstName("Esther")
+                .lastName("Wolfs")
+                .phoneNumber("+31612901749")
+                .build();
+        verify(employeeServiceMock).updateEmployee(expectedRequest);
     }
 }
