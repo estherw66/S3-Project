@@ -1,10 +1,7 @@
 package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.RoomService;
-import com.fontys.s3itproject.dto.CreateRoomRequestDTO;
-import com.fontys.s3itproject.dto.CreateRoomResponseDTO;
-import com.fontys.s3itproject.dto.GetRoomsResponseDTO;
-import com.fontys.s3itproject.dto.RoomDTO;
+import com.fontys.s3itproject.dto.*;
 import com.fontys.s3itproject.repository.RoomRepository;
 import com.fontys.s3itproject.repository.entity.Room;
 import lombok.AllArgsConstructor;
@@ -27,6 +24,7 @@ public class RoomServiceImpl implements RoomService {
                 .imageUrl(request.getImageUrl())
                 .roomType(request.getRoomType())
                 .isFeatured(request.isFeatured())
+                .totalAmountInHotel(request.getTotalAmountInHotel())
                 .build();
 
         Room savedRoom = save(newRoom);
@@ -59,6 +57,11 @@ public class RoomServiceImpl implements RoomService {
         return GetRoomsResponseDTO.builder()
                 .rooms(featuredRooms)
                 .build();
+    }
+
+    @Override
+    public void updateRoom(UpdateRoomRequestDTO request) {
+        
     }
 
     private Room save(Room room) {

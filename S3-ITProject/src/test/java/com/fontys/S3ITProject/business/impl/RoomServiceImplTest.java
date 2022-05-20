@@ -34,6 +34,7 @@ class RoomServiceImplTest {
                 .imageUrl("")
                 .roomType("Single")
                 .isFeatured(false)
+                .totalAmountInHotel(10)
                 .build();
         Room saved = Room.builder()
                 .id(1L)
@@ -42,6 +43,7 @@ class RoomServiceImplTest {
                 .imageUrl("")
                 .roomType("Single")
                 .isFeatured(false)
+                .totalAmountInHotel(10)
                 .build();
 
         when(roomRepositoryMock.save(newRoom))
@@ -53,6 +55,7 @@ class RoomServiceImplTest {
                 .imageUrl("")
                 .roomType("Single")
                 .isFeatured(false)
+                .totalAmountInHotel(10)
                 .build();
 
         CreateRoomResponseDTO actualResult = roomService.createRoom(request);
@@ -74,6 +77,7 @@ class RoomServiceImplTest {
                 .imageUrl("")
                 .roomType("Single")
                 .isFeatured(false)
+                .totalAmountInHotel(10)
                 .build();
         Room singleXXL = Room.builder()
                 .id(2L)
@@ -82,6 +86,7 @@ class RoomServiceImplTest {
                 .imageUrl("")
                 .roomType("Single XXL")
                 .isFeatured(true)
+                .totalAmountInHotel(5)
                 .build();
 
         when(roomRepositoryMock.findAll())
@@ -96,6 +101,7 @@ class RoomServiceImplTest {
                 .imageUrl("")
                 .roomType("Single")
                 .isFeatured(false)
+                .totalAmountInHotel(10)
                 .build();
         RoomDTO singleXXLDTO = RoomDTO.builder()
                 .id(2L)
@@ -104,6 +110,7 @@ class RoomServiceImplTest {
                 .imageUrl("")
                 .roomType("Single XXL")
                 .isFeatured(true)
+                .totalAmountInHotel(5)
                 .build();
 
         GetRoomsResponseDTO expectedResult = GetRoomsResponseDTO.builder()
@@ -123,6 +130,7 @@ class RoomServiceImplTest {
                 .imageUrl("")
                 .roomType("Single XXL")
                 .isFeatured(true)
+                .totalAmountInHotel(10)
                 .build();
 
         when(roomRepositoryMock.findAll())
@@ -137,6 +145,7 @@ class RoomServiceImplTest {
                 .imageUrl("")
                 .roomType("Single XXL")
                 .isFeatured(true)
+                .totalAmountInHotel(10)
                 .build();
 
         GetRoomsResponseDTO expectedResult = GetRoomsResponseDTO.builder()

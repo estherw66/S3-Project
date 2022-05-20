@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "guest")
@@ -35,4 +36,8 @@ public class Guest {
     @Length(min = 2, max = 50)
     @Column(name = "email")
     private String email;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id")
+    private List<Reservation> reservations;
 }

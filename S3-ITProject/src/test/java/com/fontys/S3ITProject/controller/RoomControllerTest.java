@@ -41,12 +41,15 @@ class RoomControllerTest {
                 .rooms(List.of(
                         RoomDTO.builder().id(1L).capacity(1).pricePerNight(50)
                                 .imageUrl("").roomType("Single").isFeatured(true)
+                                .totalAmountInHotel(10)
                                 .build(),
                         RoomDTO.builder().id(2L).capacity(2).pricePerNight(75)
                                 .imageUrl("").roomType("Double").isFeatured(false)
+                                .totalAmountInHotel(15)
                                 .build(),
                         RoomDTO.builder().id(3L).capacity(4).pricePerNight(100)
                                 .imageUrl("").roomType("Family").isFeatured(true)
+                                .totalAmountInHotel(20)
                                 .build()
                 ))
                 .build();
@@ -58,9 +61,9 @@ class RoomControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(header().string("Content-Type", APPLICATION_JSON_VALUE))
                 .andExpect(content().json("""
-                    {"rooms":  [{"id": 1, "capacity": 1, "pricePerNight": 50, "imageUrl": "", "roomType": "Single", "featured": true },
-                    {"id": 2, "capacity": 2, "pricePerNight": 75, "imageUrl": "", "roomType": "Double", "featured": false },
-                    {"id": 3, "capacity": 4, "pricePerNight": 100, "imageUrl": "", "roomType": "Family", "featured": true }]}
+                    {"rooms":  [{"id": 1, "capacity": 1, "pricePerNight": 50, "imageUrl": "", "roomType": "Single", "featured": true, "totalAmountInHotel": 10 },
+                    {"id": 2, "capacity": 2, "pricePerNight": 75, "imageUrl": "", "roomType": "Double", "featured": false, "totalAmountInHotel": 15 },
+                    {"id": 3, "capacity": 4, "pricePerNight": 100, "imageUrl": "", "roomType": "Family", "featured": true, "totalAmountInHotel": 20 }]}
                 """));
     }
 
@@ -70,9 +73,11 @@ class RoomControllerTest {
                 .rooms(List.of(
                         RoomDTO.builder().id(1L).capacity(1).pricePerNight(50)
                                 .imageUrl("").roomType("Single").isFeatured(true)
+                                .totalAmountInHotel(10)
                                 .build(),
                         RoomDTO.builder().id(3L).capacity(4).pricePerNight(100)
                                 .imageUrl("").roomType("Family").isFeatured(true)
+                                .totalAmountInHotel(15)
                                 .build()
                 ))
                 .build();
@@ -84,8 +89,8 @@ class RoomControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(header().string("Content-Type", APPLICATION_JSON_VALUE))
                 .andExpect(content().json("""
-                    {"rooms":  [{"id": 1, "capacity": 1, "pricePerNight": 50, "imageUrl": "", "roomType": "Single", "featured": true },
-                    {"id": 3, "capacity": 4, "pricePerNight": 100, "imageUrl": "", "roomType": "Family", "featured": true }]}
+                    {"rooms":  [{"id": 1, "capacity": 1, "pricePerNight": 50, "imageUrl": "", "roomType": "Single", "featured": true, "totalAmountInHotel": 10 },
+                    {"id": 3, "capacity": 4, "pricePerNight": 100, "imageUrl": "", "roomType": "Family", "featured": true, "totalAmountInHotel": 15 }]}
                 """));
     }
 
@@ -94,6 +99,7 @@ class RoomControllerTest {
     void createRoom_shouldCreateRoomAndReturn201_whenRequestValid() throws Exception{
         CreateRoomRequestDTO requestDTO = CreateRoomRequestDTO.builder()
                 .capacity(1).pricePerNight(50).imageUrl("").roomType("Single").isFeatured(false)
+                .totalAmountInHotel(10)
                 .build();
         when(roomServiceMock.createRoom(requestDTO))
                 .thenReturn(CreateRoomResponseDTO.builder().roomID(1L).build());
@@ -106,7 +112,8 @@ class RoomControllerTest {
                                 "pricePerNight": 50,
                                 "imageUrl": "",
                                 "roomType": "Single",
-                                "featured": 0
+                                "featured": 0,
+                                "totalAmountInHotel": 10
                             }
                         """))
                 .andDo(print())
@@ -129,7 +136,8 @@ class RoomControllerTest {
                                 "pricePerNight": 0,
                                 "imageUrl": "",
                                 "roomType": "",
-                                "featured": 0
+                                "featured": 0,
+                                "totalAmountInHotel": 0
                             }
                         """))
                 .andDo(print())
@@ -140,7 +148,8 @@ class RoomControllerTest {
                                                             {"field": "pricePerNight", "error":  "must be greater than or equal to 45"},
                                                             {"field": "roomType", "error":  "must not be blank"},
                                                             {"field": "capacity", "error":  "must be greater than or equal to 1"},
-                                                            {"field": "roomType", "error":  "length must be between 1 and 25"}
+                                                            {"field": "roomType", "error":  "length must be between 1 and 25"},
+                                                            {"field": "totalAmountInHotel", "error":  "must be greater than or equal to 1"}
                                                         ]
                                                     """));
         verifyNoInteractions(roomServiceMock);

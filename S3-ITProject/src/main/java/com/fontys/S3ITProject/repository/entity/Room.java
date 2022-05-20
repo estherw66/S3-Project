@@ -41,4 +41,8 @@ public class Room {
     @NotNull
     @Column(name = "is_featured")
     private boolean isFeatured;
+
+    @NotNull
+    @Column(name = "total_amount_in_hotel")
+    private int totalAmountInHotel;
 }

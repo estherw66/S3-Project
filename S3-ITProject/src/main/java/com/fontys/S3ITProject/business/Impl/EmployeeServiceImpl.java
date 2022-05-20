@@ -1,6 +1,7 @@
 package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.EmployeeService;
+import com.fontys.s3itproject.business.exception.EmailAlreadyExistsException;
 import com.fontys.s3itproject.business.exception.InvalidEmployeeException;
 import com.fontys.s3itproject.business.exception.UnauthorisedDataAccessException;
 import com.fontys.s3itproject.dto.*;
@@ -31,7 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public CreateEmployeeResponseDTO createEmployee(CreateEmployeeRequestDTO request) {
         if (existsByEmail(request.getEmail())){
-            throw new InvalidEmployeeException("EMAIL_DUPLICATED");
+            throw new EmailAlreadyExistsException();
         }
 
         if (existsByPhoneNumber(request.getPhoneNumber())){

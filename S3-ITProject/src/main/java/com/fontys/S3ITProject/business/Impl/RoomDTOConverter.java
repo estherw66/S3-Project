@@ -15,6 +15,7 @@ public class RoomDTOConverter {
                 .imageUrl(room.getImageUrl())
                 .roomType(room.getRoomType())
                 .isFeatured(room.isFeatured())
+                .totalAmountInHotel(room.getTotalAmountInHotel())
                 .build();
     }
 }

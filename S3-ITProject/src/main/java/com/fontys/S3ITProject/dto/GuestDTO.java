@@ -5,16 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoomDTO {
+public class GuestDTO {
     private Long id;
-    private int capacity;
-    private double pricePerNight;
-    private String imageUrl;
-    private String roomType;
-    private boolean isFeatured;
-    private int totalAmountInHotel;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private List<ReservationDTO> reservations;
 }
