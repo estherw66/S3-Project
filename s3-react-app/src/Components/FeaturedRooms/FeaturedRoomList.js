@@ -4,7 +4,7 @@ import RoomService from '../../Services/RoomService'
 import RoomCard from './RoomCard'
 
 const FeaturedRoomList = () => {
-  const [rooms, setRooms] = useState([]);
+  const [roomsArray, setRoomsArray] = useState([]);
 
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const FeaturedRoomList = () => {
   const getRooms = () => {
     axios.get(`http://localhost:8080/api/rooms/featured`)
     .then(res => {
-      setRooms(res.data);
+      setRoomsArray(res.data);
       console.log(res.data);
     })
     .catch(err => {
@@ -24,10 +24,9 @@ const FeaturedRoomList = () => {
 
   return (
     <>
-      {rooms.rooms ? (
+      {roomsArray.rooms ? (
         <>
-          {rooms.rooms && rooms.rooms.map((room) => (
-            // <RoomCard key={room.id} type={room.roomType} price={room.pricePerNight} imgUrl={room.imageUrl} />
+          {roomsArray.rooms && roomsArray.rooms.map((room) => (
             <RoomCard key={room.id} room={room} />
           ))}
         </>

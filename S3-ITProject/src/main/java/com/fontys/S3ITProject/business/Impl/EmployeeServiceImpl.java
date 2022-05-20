@@ -135,7 +135,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .dateOfBirth(request.getDateOfBirth())
                 .build();
 
-
         return employeeRepository.save(newEmployee);
     }
 

@@ -1,6 +1,5 @@
 package com.fontys.s3itproject.dto;
 
-import com.fontys.s3itproject.repository.entity.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +18,5 @@ public class EmployeeDTO {
     private String email;
     private String phoneNumber;
     private LocalDate dateOfBirth;
-    private Address address;
+    private AddressDTO address;
 }

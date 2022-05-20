@@ -1,14 +1,13 @@
 package com.fontys.s3itproject.business.impl;
 
+import com.fontys.s3itproject.business.exception.InvalidCredentialsException;
 import com.fontys.s3itproject.business.exception.InvalidEmployeeException;
 import com.fontys.s3itproject.business.exception.UnauthorisedDataAccessException;
 import com.fontys.s3itproject.dto.*;
 import com.fontys.s3itproject.repository.AddressRepository;
 import com.fontys.s3itproject.repository.EmployeeRepository;
 import com.fontys.s3itproject.repository.UserRepository;
-import com.fontys.s3itproject.repository.entity.Address;
-import com.fontys.s3itproject.repository.entity.Employee;
-import com.fontys.s3itproject.repository.entity.RoleEnum;
+import com.fontys.s3itproject.repository.entity.*;
 import lombok.AllArgsConstructor;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,6 +26,7 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -230,11 +230,36 @@ class EmployeeServiceImplTest {
         verify(employeeRepositoryMock).findById(0L);
     }
 
+    @Test
+    void getEmployee_shouldReturn_shouldReturnUnauthorisedDataAccessException_whenEmployeeIDNotFromLoggedInUser() {
+        User testUser = User.builder()
+                .id(1L)
+                .username("username")
+                .password("hashed-password")
+                .build();
+        testUser.setUserRoles(Set.of(
+                UserRole.builder()
+                        .user(testUser)
+                        .role(RoleEnum.EMPLOYEE)
+                        .build()));
+
+        AccessTokenDTO accessTokenDTO = AccessTokenDTO.builder()
+                .subject("User")
+                .roles(List.of("Employee"))
+                .employeeId(2L)
+                .build();
+
+        UnauthorisedDataAccessException exception = assertThrows(UnauthorisedDataAccessException.class,
+                () -> employeeService.getEmployee(1L));
+
+        assertEquals("EMPLOYEE_ID_NOT_FROM_LOGGED_IN_USER", exception.getReason());
+        verifyNoInteractions(employeeRepositoryMock);
+    }
 
     @Test
     void updateEmployee_shouldUpdateEmployeePhoneNumber(){
         Employee updated = Employee.builder()
-                .id(0L)
+                .id(1L)
                 .firstName("Esther")
                 .lastName("Wolfs")
                 .email("EstherWolfs@goldskye.com")
@@ -242,11 +267,11 @@ class EmployeeServiceImplTest {
                 .phoneNumber("+31612901749")
                 .build();
 
-        when(employeeRepositoryMock.findById(0L))
+        when(employeeRepositoryMock.findById(1L))
                 .thenReturn(Optional.of(updated));
 
         UpdateEmployeeRequestDTO requestDTO = UpdateEmployeeRequestDTO.builder()
-                .id(0L)
+                .id(1L)
                 .firstName("Esther")
                 .lastName("Wolfs")
                 .phoneNumber("+31617491290")
@@ -255,6 +280,8 @@ class EmployeeServiceImplTest {
         employeeService.updateEmployee(requestDTO);
         verify(employeeRepositoryMock).save(updated);
     }
+
+
 
     @Test
     void deleteEmployee_shouldDeleteEmployee(){

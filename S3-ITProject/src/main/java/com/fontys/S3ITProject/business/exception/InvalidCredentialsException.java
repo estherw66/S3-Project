@@ -7,4 +7,8 @@ public class InvalidCredentialsException extends ResponseStatusException {
     public InvalidCredentialsException() {
         super(HttpStatus.BAD_REQUEST, "INVALID_CREDENTIALS");
     }
+
+    public InvalidCredentialsException(String errCode) {
+        super(HttpStatus.BAD_REQUEST, errCode);
+    }
 }

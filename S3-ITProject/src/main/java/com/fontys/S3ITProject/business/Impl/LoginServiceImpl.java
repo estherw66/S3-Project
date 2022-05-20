@@ -25,7 +25,7 @@ public class LoginServiceImpl implements LoginService {
     public LoginResponseDTO login(LoginRequestDTO loginRequest) {
         User user = userRepository.findByUsername(loginRequest.getUsername());
         if (user == null){
-            throw new InvalidCredentialsException();
+            throw new InvalidCredentialsException("USERNAME_DOESNT_EXIST");
         }
 
         if (!matchesPassword(loginRequest.getPassword(), user.getPassword())){
@@ -40,7 +40,7 @@ public class LoginServiceImpl implements LoginService {
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
-    private String generateAccessToken(User user){
+    public String generateAccessToken(User user){
         Long employeeID = user.getEmployee() != null ? user.getEmployee().getId() : null;
         List<String> roles = user.getUserRoles().stream()
                 .map(userRole -> userRole.getRole().toString())
