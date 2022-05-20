@@ -2,7 +2,6 @@ package com.fontys.s3itproject.controller;
 
 import com.fontys.s3itproject.business.EmployeeService;
 import com.fontys.s3itproject.dto.*;
-import com.fontys.s3itproject.repository.entity.Address;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +43,7 @@ class EmployeeControllerTest {
                 .email("EstherWolfs@goldskye.com")
                 .dateOfBirth(LocalDate.of(1998,01,01))
                 .phoneNumber("+31612901749")
-                .address(Address.builder().streetName("Mozartlaan 41").zipCode("5151KA").city("Drunen").build())
+                .address(AddressDTO.builder().streetName("Mozartlaan 41").zipCode("5151KA").city("Drunen").build())
                 .build();
 
         when(employeeServiceMock.getEmployee(1L))

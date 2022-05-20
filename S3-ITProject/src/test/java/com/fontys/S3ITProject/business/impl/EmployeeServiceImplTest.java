@@ -153,6 +153,9 @@ class EmployeeServiceImplTest {
                 .email("estherwolfs@goldskye.com")
                 .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
+                .address(Address.builder().id(1L)
+                        .streetName("Mozartlaan 41").zipCode("5151KA")
+                        .city("Drunen").build())
                 .build();
         Employee john = Employee.builder()
                 .id(2L)
@@ -161,6 +164,9 @@ class EmployeeServiceImplTest {
                 .email("johnfloreani@goldskye.com")
                 .dateOfBirth(LocalDate.of(1995,10,13))
                 .phoneNumber("+31645887651")
+                .address(Address.builder().id(2L)
+                        .streetName("Rachelsmolen 1").zipCode("5151KA")
+                        .city("Eindhoven").build())
                 .build();
 
         // call mocked method and configure the return
@@ -178,6 +184,8 @@ class EmployeeServiceImplTest {
                 .email("estherwolfs@goldskye.com")
                 .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
+                .address(AddressDTO.builder().id(1L).streetName("Mozartlaan 41")
+                        .zipCode("5151KA").city("Drunen").build())
                 .build();
         EmployeeDTO johnDTO = EmployeeDTO.builder()
                 .id(2L)
@@ -185,6 +193,8 @@ class EmployeeServiceImplTest {
                 .lastName("Floreani")
                 .email("johnfloreani@goldskye.com")
                 .dateOfBirth(LocalDate.of(1995,10,13))
+                .address(AddressDTO.builder().id(2L).streetName("Rachelsmolen 1")
+                        .zipCode("5151KA").city("Eindhoven").build())
                 .phoneNumber("+31645887651")
                 .build();
 
@@ -209,6 +219,9 @@ class EmployeeServiceImplTest {
                 .email("estherwolfs@goldskye.com")
                 .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
+                .address(Address.builder().id(1L)
+                        .streetName("Mozartlaan 41").zipCode("5151KA")
+                        .city("Drunen").build())
                 .build();
 
         when(employeeRepositoryMock.findById(0L))
@@ -223,6 +236,8 @@ class EmployeeServiceImplTest {
                 .email("estherwolfs@goldskye.com")
                 .dateOfBirth(LocalDate.of(1998,01,01))
                 .phoneNumber("+31612901749")
+                .address(AddressDTO.builder().id(1L).streetName("Mozartlaan 41")
+                        .zipCode("5151KA").city("Drunen").build())
                 .build();
 
         assertTrue(actualResult.isPresent());
