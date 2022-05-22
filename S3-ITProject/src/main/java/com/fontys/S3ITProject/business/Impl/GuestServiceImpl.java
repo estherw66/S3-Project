@@ -2,6 +2,7 @@ package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.GuestService;
 import com.fontys.s3itproject.business.exception.EmailAlreadyExistsException;
+import com.fontys.s3itproject.business.exception.InvalidGuestException;
 import com.fontys.s3itproject.business.exception.UnauthorisedDataAccessException;
 import com.fontys.s3itproject.business.exception.UsernameAlreadyExistsException;
 import com.fontys.s3itproject.dto.*;
@@ -55,7 +56,7 @@ public class GuestServiceImpl implements GuestService {
     @Override
     public Optional<GuestDTO> getGuest(Long guestID) {
         if (!requestAccessToken.hasRole(RoleEnum.ADMIN.name()) || !requestAccessToken.hasRole(RoleEnum.EMPLOYEE.name())){
-            if (requestAccessToken.getEmployeeId().equals(guestID)){
+            if (!requestAccessToken.getEmployeeId().equals(guestID)){
                 throw new UnauthorisedDataAccessException("GUEST_ID_IS_NOT_FROM_LOGGED_IN_USER");
             }
         }
@@ -65,7 +66,19 @@ public class GuestServiceImpl implements GuestService {
 
     @Override
     public void updateGuest(UpdateGuestRequestDTO request) {
+        Optional<Guest> guestOptional = guestRepository.findById(request.getId());
+        if(guestOptional.isEmpty()){
+            throw new InvalidGuestException("GUEST_ID_INVALID");
+        }
 
+        if (!requestAccessToken.hasRole(RoleEnum.ADMIN.name()) || !requestAccessToken.hasRole(RoleEnum.EMPLOYEE.name())){
+            if (!requestAccessToken.getEmployeeId().equals(request.getId())){
+                throw new UnauthorisedDataAccessException("GUEST_ID_NOT_FROM_LOGGED_IN_USER");
+            }
+        }
+
+        Guest guest = guestOptional.get();
+        updateFields(request, guest);
     }
 
     private Guest saveNewGuest(CreateGuestRequestDTO request) {
@@ -75,6 +88,14 @@ public class GuestServiceImpl implements GuestService {
                 .email(request.getEmail())
                 .build();
         return guestRepository.save(newGuest);
+    }
+
+    private void updateFields(UpdateGuestRequestDTO request, Guest guest){
+        guest.setFirstName(request.getFirstName());
+        guest.setLastName(request.getLastName());
+        guest.setEmail(request.getEmail());
+
+        guestRepository.save(guest);
     }
 
     private boolean existsByEmail(String email){

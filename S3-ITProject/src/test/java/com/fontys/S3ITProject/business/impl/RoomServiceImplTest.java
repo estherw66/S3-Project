@@ -1,9 +1,8 @@
 package com.fontys.s3itproject.business.impl;
 
-import com.fontys.s3itproject.dto.CreateRoomRequestDTO;
-import com.fontys.s3itproject.dto.CreateRoomResponseDTO;
-import com.fontys.s3itproject.dto.GetRoomsResponseDTO;
-import com.fontys.s3itproject.dto.RoomDTO;
+import com.fontys.s3itproject.business.exception.InvalidRoomException;
+import com.fontys.s3itproject.business.exception.UnauthorisedDataAccessException;
+import com.fontys.s3itproject.dto.*;
 import com.fontys.s3itproject.repository.RoomRepository;
 import com.fontys.s3itproject.repository.entity.Room;
 import org.junit.jupiter.api.Test;
@@ -13,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -22,6 +22,13 @@ class RoomServiceImplTest {
 
     @Mock
     private RoomRepository roomRepositoryMock;
+
+    @Mock
+    private AccessTokenDTO accessTokenMock = AccessTokenDTO.builder()
+        .employeeId(1L)
+        .roles(List.of("EMPLOYEE"))
+        .subject("Esther")
+        .build();
 
     @InjectMocks
     private RoomServiceImpl roomService;
@@ -154,5 +161,74 @@ class RoomServiceImplTest {
 
         assertEquals(expectedResult, actualResult);
         verify(roomRepositoryMock).findAll();
+    }
+
+    @Test
+    void updateRoom_shouldSaveNewPrice(){
+        when(accessTokenMock.hasRole("EMPLOYEE")).thenReturn(true);
+
+        Room oldRoom = Room.builder()
+                .id(1L)
+                .capacity(1)
+                .pricePerNight(50)
+                .imageUrl("")
+                .roomType("Single")
+                .isFeatured(false)
+                .totalAmountInHotel(10)
+                .build();
+
+        when(roomRepositoryMock.findById(1L)).thenReturn(Optional.of(oldRoom));
+
+        UpdateRoomRequestDTO request = UpdateRoomRequestDTO.builder()
+                .id(1L)
+                .pricePerNight(75)
+                .imageUrl("")
+                .isFeatured(false)
+                .totalAmountInHotel(10)
+                .build();
+        roomService.updateRoom(request);
+
+        verify(roomRepositoryMock).findById(1L);
+
+        Room expectedNewRoom = Room.builder()
+                .id(1L)
+                .capacity(1)
+                .pricePerNight(75)
+                .imageUrl("")
+                .roomType("Single")
+                .isFeatured(false)
+                .totalAmountInHotel(10)
+                .build();
+        verify(roomRepositoryMock).save(expectedNewRoom);
+    }
+
+    @Test
+    void updateRoom_shouldThrowUnauthorisedDataAccessException_whenUpdateRoomEmployeeNotLoggedIn(){
+        Room oldRoom = Room.builder()
+                .id(1L)
+                .capacity(1)
+                .pricePerNight(50)
+                .imageUrl("")
+                .roomType("Single")
+                .isFeatured(false)
+                .totalAmountInHotel(10)
+                .build();
+
+        when(roomRepositoryMock.findById(1L)).thenReturn(Optional.of(oldRoom));
+        when(accessTokenMock.hasRole("EMPLOYEE")).thenReturn(false);
+
+        UpdateRoomRequestDTO request = UpdateRoomRequestDTO.builder()
+                .id(1L)
+                .pricePerNight(50)
+                .imageUrl("")
+                .isFeatured(false)
+                .totalAmountInHotel(10)
+                .build();
+
+        UnauthorisedDataAccessException exception = assertThrows(UnauthorisedDataAccessException.class,
+                () -> roomService.updateRoom(request));
+
+        assertEquals("NOT_AN_EMPLOYEE", exception.getReason());
+        verifyNoMoreInteractions(roomRepositoryMock);
     }
 }

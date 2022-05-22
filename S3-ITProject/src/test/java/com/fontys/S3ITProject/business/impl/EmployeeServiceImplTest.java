@@ -1,5 +1,6 @@
 package com.fontys.s3itproject.business.impl;
 
+import com.fontys.s3itproject.business.exception.EmailAlreadyExistsException;
 import com.fontys.s3itproject.business.exception.InvalidCredentialsException;
 import com.fontys.s3itproject.business.exception.InvalidEmployeeException;
 import com.fontys.s3itproject.business.exception.UnauthorisedDataAccessException;
@@ -55,7 +56,7 @@ class EmployeeServiceImplTest {
     private AccessTokenDTO getAccessTokenDTO() {
         return AccessTokenDTO.builder()
                 .subject("Esther")
-                .roles(null)
+                .roles(List.of("ADMIN"))
                 .employeeId(1L)
                 .build();
     }
@@ -122,7 +123,7 @@ class EmployeeServiceImplTest {
                 .phoneNumber("+31612901749")
                 .build();
 
-        assertThrows(InvalidEmployeeException.class,() -> employeeService.createEmployee(request));
+        assertThrows(EmailAlreadyExistsException.class,() -> employeeService.createEmployee(request));
         verify(employeeRepositoryMock).existsByEmail("estherwolfs@goldskye.com");
     }
 
@@ -211,7 +212,6 @@ class EmployeeServiceImplTest {
 
     @Test
     void getEmployee_shouldReturnOptionalEmployeeByIDConvertedToDTO(){
-
         Employee employee = Employee.builder()
                 .id(1L)
                 .firstName("Esther")
@@ -246,32 +246,6 @@ class EmployeeServiceImplTest {
     }
 
     @Test
-    void getEmployee_shouldReturn_shouldReturnUnauthorisedDataAccessException_whenEmployeeIDNotFromLoggedInUser() {
-        User testUser = User.builder()
-                .id(1L)
-                .username("username")
-                .password("hashed-password")
-                .build();
-        testUser.setUserRoles(Set.of(
-                UserRole.builder()
-                        .user(testUser)
-                        .role(RoleEnum.EMPLOYEE)
-                        .build()));
-
-        AccessTokenDTO accessTokenDTO = AccessTokenDTO.builder()
-                .subject("User")
-                .roles(List.of("Employee"))
-                .employeeId(2L)
-                .build();
-
-        UnauthorisedDataAccessException exception = assertThrows(UnauthorisedDataAccessException.class,
-                () -> employeeService.getEmployee(1L));
-
-        assertEquals("EMPLOYEE_ID_NOT_FROM_LOGGED_IN_USER", exception.getReason());
-        verifyNoInteractions(employeeRepositoryMock);
-    }
-
-    @Test
     void updateEmployee_shouldUpdateEmployeePhoneNumber(){
         Employee updated = Employee.builder()
                 .id(1L)
@@ -296,6 +270,31 @@ class EmployeeServiceImplTest {
         verify(employeeRepositoryMock).save(updated);
     }
 
+    @Test
+    void getEmployee_shouldReturn_shouldReturnUnauthorisedDataAccessException_whenEmployeeIDNotFromLoggedInUser() {
+        User testUser = User.builder()
+                .id(1L)
+                .username("username")
+                .password("hashed-password")
+                .build();
+        testUser.setUserRoles(Set.of(
+                UserRole.builder()
+                        .user(testUser)
+                        .role(RoleEnum.EMPLOYEE)
+                        .build()));
+
+        AccessTokenDTO accessTokenDTO = AccessTokenDTO.builder()
+                .subject("User")
+                .roles(List.of("Employee"))
+                .employeeId(2L)
+                .build();
+
+        UnauthorisedDataAccessException exception = assertThrows(UnauthorisedDataAccessException.class,
+                () -> employeeService.getEmployee(1L));
+
+        assertEquals("EMPLOYEE_ID_NOT_FROM_LOGGED_IN_USER", exception.getReason());
+        verifyNoInteractions(employeeRepositoryMock);
+    }
 
 
     @Test

@@ -1,19 +1,25 @@
 package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.RoomService;
+import com.fontys.s3itproject.business.exception.InvalidRoomException;
+import com.fontys.s3itproject.business.exception.UnauthorisedDataAccessException;
 import com.fontys.s3itproject.dto.*;
 import com.fontys.s3itproject.repository.RoomRepository;
+import com.fontys.s3itproject.repository.entity.RoleEnum;
 import com.fontys.s3itproject.repository.entity.Room;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class RoomServiceImpl implements RoomService {
 
     private final RoomRepository roomRepository;
+
+    private AccessTokenDTO requestAccessToken;
 
     @Override
     public CreateRoomResponseDTO createRoom(CreateRoomRequestDTO request) {
@@ -61,7 +67,27 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public void updateRoom(UpdateRoomRequestDTO request) {
-        
+        Optional<Room> roomOptional = roomRepository.findById(request.getId());
+
+        if (roomOptional.isEmpty()){
+            throw new InvalidRoomException("ROOM_NOT_FOUND");
+        }
+
+        if (!requestAccessToken.hasRole(RoleEnum.EMPLOYEE.name())){
+            throw new UnauthorisedDataAccessException("NOT_AN_EMPLOYEE");
+        }
+
+        Room room = roomOptional.get();
+        updateFields(request, room);
+    }
+
+    private void updateFields(UpdateRoomRequestDTO request, Room room){
+        room.setPricePerNight(request.getPricePerNight());
+        room.setImageUrl(request.getImageUrl());
+        room.setFeatured(request.isFeatured());
+        room.setTotalAmountInHotel(request.getTotalAmountInHotel());
+
+        roomRepository.save(room);
     }
 
     private Room save(Room room) {

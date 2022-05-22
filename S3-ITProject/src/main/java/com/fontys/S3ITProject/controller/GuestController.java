@@ -2,10 +2,7 @@ package com.fontys.s3itproject.controller;
 
 import com.fontys.s3itproject.business.GuestService;
 import com.fontys.s3itproject.configuration.security.isauthenticated.IsAuthenticated;
-import com.fontys.s3itproject.dto.CreateGuestRequestDTO;
-import com.fontys.s3itproject.dto.CreateGuestResponseDTO;
-import com.fontys.s3itproject.dto.GetGuestsResponseDTO;
-import com.fontys.s3itproject.dto.GuestDTO;
+import com.fontys.s3itproject.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +28,8 @@ public class GuestController {
         return ResponseEntity.ok().body(guestOptional.get());
     }
 
-//    @IsAuthenticated
-//    @RolesAllowed({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     @GetMapping
     public ResponseEntity<GetGuestsResponseDTO> getAllGuests() {
         return ResponseEntity.ok(guestService.getGuests());
@@ -43,4 +40,15 @@ public class GuestController {
         CreateGuestResponseDTO response = guestService.createGuest(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_EMPLOYEE", "ROLE_GUEST"})
+    @PutMapping("{id}")
+    public ResponseEntity<GuestDTO> updateGuest(@PathVariable("id") long id,
+                                                @RequestBody @Valid UpdateGuestRequestDTO request){
+        request.setId(id);
+        guestService.updateGuest(request);
+        return ResponseEntity.noContent().build();
+    }
+
 }

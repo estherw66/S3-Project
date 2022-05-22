@@ -2,9 +2,7 @@ package com.fontys.s3itproject.controller;
 
 import com.fontys.s3itproject.business.RoomService;
 import com.fontys.s3itproject.configuration.security.isauthenticated.IsAuthenticated;
-import com.fontys.s3itproject.dto.CreateRoomRequestDTO;
-import com.fontys.s3itproject.dto.CreateRoomResponseDTO;
-import com.fontys.s3itproject.dto.GetRoomsResponseDTO;
+import com.fontys.s3itproject.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +33,15 @@ public class RoomController {
             @RequestBody @Valid CreateRoomRequestDTO createRoomRequest){
         CreateRoomResponseDTO response = roomService.createRoom(createRoomRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_EMPLOYEE"})
+    @PutMapping("{id}")
+    public ResponseEntity<RoomDTO> updateRoom(@PathVariable("id") long id,
+            @RequestBody @Valid UpdateRoomRequestDTO request) {
+        request.setId(id);
+        roomService.updateRoom(request);
+        return ResponseEntity.noContent().build();
     }
 }
