@@ -1,10 +1,7 @@
 package com.fontys.s3itproject.controller;
 
 import com.fontys.s3itproject.business.RoomService;
-import com.fontys.s3itproject.dto.CreateRoomRequestDTO;
-import com.fontys.s3itproject.dto.CreateRoomResponseDTO;
-import com.fontys.s3itproject.dto.GetRoomsResponseDTO;
-import com.fontys.s3itproject.dto.RoomDTO;
+import com.fontys.s3itproject.dto.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
@@ -153,5 +149,31 @@ class RoomControllerTest {
                                                         ]
                                                     """));
         verifyNoInteractions(roomServiceMock);
+    }
+
+    @Test
+    @WithMockUser(username = "EstherWolfs", roles = {"EMPLOYEE"})
+    void updateRoom_shouldUpdatePriceAndReturn204() throws Exception{
+
+//        mockMvc.perform(put("/api/rooms/1")
+//                    .contentType(APPLICATION_JSON_VALUE)
+//                    .content("""
+//                                {
+//                                    "pricePerNight": 75,
+//                                    "imageUrl": "",
+//                                    "featured": 0,
+//                                    "totalAmountInHotel": 10
+//                                }
+//                    """))
+//                .andDo(print());
+//
+//        UpdateRoomRequestDTO request = UpdateRoomRequestDTO.builder()
+//                .id(1L)
+//                .pricePerNight(75)
+//                .imageUrl("")
+//                .isFeatured(false)
+//                .totalAmountInHotel(10)
+//                .build();
+//        verify(roomServiceMock).updateRoom(request);
     }
 }

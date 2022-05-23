@@ -9,6 +9,8 @@ final class ReservationDTOConverter {
     }
 
     public static ReservationDTO convertToDTO(Reservation reservation){
-        return null;
+        return ReservationDTO.builder()
+                .id(reservation.getId())
+                .build();
     }
 }

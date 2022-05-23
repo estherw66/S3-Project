@@ -1,6 +1,5 @@
 package com.fontys.s3itproject.business.impl;
 
-import com.fontys.s3itproject.business.exception.InvalidRoomException;
 import com.fontys.s3itproject.business.exception.UnauthorisedDataAccessException;
 import com.fontys.s3itproject.dto.*;
 import com.fontys.s3itproject.repository.RoomRepository;

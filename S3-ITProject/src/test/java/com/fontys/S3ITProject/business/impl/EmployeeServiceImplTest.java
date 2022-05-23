@@ -111,7 +111,7 @@ class EmployeeServiceImplTest {
     }
 
     @Test
-    void createEmployee_shouldThrowInvalidEmployeeException_whenSavingNewEmployeeDuplicatedEmail(){
+    void createEmployee_shouldThrowEmailAlreadyExistsException_whenSavingNewEmployeeDuplicatedEmail(){
         when(employeeRepositoryMock.existsByEmail("estherwolfs@goldskye.com"))
                 .thenReturn(true);
 
@@ -212,6 +212,8 @@ class EmployeeServiceImplTest {
 
     @Test
     void getEmployee_shouldReturnOptionalEmployeeByIDConvertedToDTO(){
+        when(accessTokenDTO.getEmployeeId()).thenReturn(1L);
+
         Employee employee = Employee.builder()
                 .id(1L)
                 .firstName("Esther")
@@ -224,10 +226,10 @@ class EmployeeServiceImplTest {
                         .city("Drunen").build())
                 .build();
 
-        when(employeeRepositoryMock.findById(0L))
+        when(employeeRepositoryMock.findById(1L))
                 .thenReturn(Optional.of(employee));
 
-        Optional<EmployeeDTO> actualResult = employeeService.getEmployee(0L);
+        Optional<EmployeeDTO> actualResult = employeeService.getEmployee(1L);
 
         EmployeeDTO employeeDTO = EmployeeDTO.builder()
                 .id(1L)
@@ -242,7 +244,7 @@ class EmployeeServiceImplTest {
 
         assertTrue(actualResult.isPresent());
         assertEquals(employeeDTO, actualResult.get());
-        verify(employeeRepositoryMock).findById(0L);
+        verify(employeeRepositoryMock).findById(1L);
     }
 
     @Test

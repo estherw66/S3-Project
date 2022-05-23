@@ -61,6 +61,15 @@ jacocoTestReport {
 	reports {
 		xml.enabled true
 	}
+
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: [
+			        "com/fontys/s3itproject/configuration",
+					"com/fontys/s3itproject/business/impl/AccessTokenEncoderDecoderImpl.class"
+			])
+		}))
+	}
 }
 test.finalizedBy jacocoTestReport
 
