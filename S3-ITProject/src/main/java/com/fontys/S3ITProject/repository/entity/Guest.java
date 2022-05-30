@@ -38,6 +38,6 @@ public class Guest {
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "guest_id")
     private List<Reservation> reservations;
 }

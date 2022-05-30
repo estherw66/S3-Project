@@ -11,6 +11,12 @@ final class ReservationDTOConverter {
     public static ReservationDTO convertToDTO(Reservation reservation){
         return ReservationDTO.builder()
                 .id(reservation.getId())
+                .reservationDate(reservation.getReservationDate())
+                .checkInDate(reservation.getCheckInDate())
+                .checkOutDate(reservation.getCheckOutDate())
+                .amountOfGuests(reservation.getAmountOfGuests())
+                .totalPrice(reservation.getTotalPrice())
+                .isCheckedIn(reservation.isCheckedIn())
                 .build();
     }
 }
