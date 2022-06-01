@@ -18,4 +18,16 @@ public class RoomDTOConverter {
                 .totalAmountInHotel(room.getTotalAmountInHotel())
                 .build();
     }
+
+    public static Room convertToEntity(RoomDTO roomDTO){
+        return Room.builder()
+                .id(roomDTO.getId())
+                .capacity(roomDTO.getCapacity())
+                .pricePerNight(roomDTO.getPricePerNight())
+                .imageUrl(roomDTO.getImageUrl())
+                .roomType(roomDTO.getRoomType())
+                .isFeatured(roomDTO.isFeatured())
+                .totalAmountInHotel(roomDTO.getTotalAmountInHotel())
+                .build();
+    }
 }

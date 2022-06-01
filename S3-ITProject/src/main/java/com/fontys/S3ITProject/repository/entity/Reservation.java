@@ -42,9 +42,9 @@ public class Reservation {
     @Column(name = "total_price")
     private double totalPrice;
 
-    @NotNull
-    @Column(name = "reservation_status")
-    private ReservationStatusEnum reservationStatus;
+//    @NotNull
+//    @Column(name = "reservation_status")
+//    private ReservationStatusEnum reservationStatus;
 
     @NotNull
     @Column(name = "is_checked_in")
@@ -58,5 +58,5 @@ public class Reservation {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "reservation_id")
-    private List<Room> reservationRooms;
+    private List<ReservationRoom> reservationRooms;
 }
