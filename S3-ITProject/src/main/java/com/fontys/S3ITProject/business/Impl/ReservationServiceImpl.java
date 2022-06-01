@@ -1,14 +1,13 @@
 package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.ReservationService;
-import com.fontys.s3itproject.business.exception.InvalidGuestException;
 import com.fontys.s3itproject.dto.AccessTokenDTO;
 import com.fontys.s3itproject.dto.CreateReservationRequestDTO;
 import com.fontys.s3itproject.dto.CreateReservationResponseDTO;
+import com.fontys.s3itproject.dto.RoomDTO;
 import com.fontys.s3itproject.repository.GuestRepository;
 import com.fontys.s3itproject.repository.ReservationRepository;
 import com.fontys.s3itproject.repository.ReservationRoomRepository;
-import com.fontys.s3itproject.repository.RoomRepository;
 import com.fontys.s3itproject.repository.entity.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +16,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
 @AllArgsConstructor
@@ -32,7 +33,6 @@ public class ReservationServiceImpl implements ReservationService {
     public CreateReservationResponseDTO createReservation(CreateReservationRequestDTO request) {
 
         Reservation savedReservation = saveNewReservation(request);
-
 
         List<Room> rooms = request.getReservationRooms()
                 .stream()
@@ -50,9 +50,6 @@ public class ReservationServiceImpl implements ReservationService {
         }
 
         savedReservation.setReservationRooms(reservationRooms);
-
-        double totalPrice = calculateTotalPrice(savedReservation);
-        savedReservation.setTotalPrice(totalPrice);
 
         return CreateReservationResponseDTO.builder()
                 .reservationID(savedReservation.getId())
@@ -72,7 +69,7 @@ public class ReservationServiceImpl implements ReservationService {
                 .checkOutDate(request.getCheckOutDate())
                 .amountOfGuests(request.getAmountOfGuests())
                 .isCheckedIn(false)
-                .totalPrice(45)
+                .totalPrice(calculateTotalPrice(request))
                 .guest(Guest.builder().id(1L).build())
                 .build();
 
@@ -82,11 +79,15 @@ public class ReservationServiceImpl implements ReservationService {
     private Optional<Guest> findGuestByID(Long id){
         return guestRepository.findById(id);
     }
-    private double calculateTotalPrice(Reservation reservation){
-        double totalPrice = 45;
-        // get room
-        for (ReservationRoom reservationRoom : reservation.getReservationRooms()) {
-            totalPrice += reservationRoom.getRoom().getPricePerNight();
+    private double calculateTotalPrice(CreateReservationRequestDTO request){
+        double totalPrice = 0;
+
+        // calculate nights for reservation
+        long totalDays = DAYS.between(request.getCheckInDate(), request.getCheckOutDate());
+
+        // calculate total price for every room
+        for (RoomDTO room : request.getReservationRooms()){
+            totalPrice += room.getPricePerNight() * totalDays;
         }
 
         return totalPrice;
