@@ -1,6 +1,7 @@
 package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.ReservationService;
+import com.fontys.s3itproject.business.exception.InvalidReservationException;
 import com.fontys.s3itproject.dto.AccessTokenDTO;
 import com.fontys.s3itproject.dto.CreateReservationRequestDTO;
 import com.fontys.s3itproject.dto.CreateReservationResponseDTO;
@@ -62,6 +63,21 @@ public class ReservationServiceImpl implements ReservationService {
 //        if (guestOptional.isEmpty()){
 //            throw new InvalidGuestException("GUEST_NOT_FOUND");
 //        }
+        if (request.getCheckInDate().isBefore(LocalDate.now())){
+            throw new InvalidReservationException("CHECK_IN_DATE_CANNOT_BE_BEFORE_TODAY");
+        }
+        if (request.getCheckOutDate().isBefore(request.getCheckInDate())){
+            throw new InvalidReservationException("CHECK_OUT_DATE_MUST_BE_AFTER_CHECK_IN_DATE");
+        }
+        if (request.getCheckOutDate().isBefore(LocalDate.now())){
+            throw new InvalidReservationException("CHECK_OUT_DATE_CANNOT_BE_BEFORE_TODAY");
+        }
+        if (request.getAmountOfGuests() > calculateTotalRoomCapacity(request)){
+            throw new InvalidReservationException("AMOUNT_OF_GUESTS_IS_HIGHER_THAN_TOTAL_CAPACITY");
+        }
+        if (request.getCheckOutDate().equals(request.getCheckInDate())){
+            throw new InvalidReservationException("CHECK_OUT_DATE_CANNOT_BE_THE_SAME_AS_CHECK_IN_DATE");
+        }
 
         Reservation reservation = Reservation.builder()
                 .reservationDate(LocalDate.now())
@@ -91,5 +107,14 @@ public class ReservationServiceImpl implements ReservationService {
         }
 
         return totalPrice;
+    }
+    private int calculateTotalRoomCapacity(CreateReservationRequestDTO request){
+        int totalCapacity = 0;
+
+        for (RoomDTO room : request.getReservationRooms()){
+            totalCapacity += room.getCapacity();
+        }
+
+        return totalCapacity;
     }
 }

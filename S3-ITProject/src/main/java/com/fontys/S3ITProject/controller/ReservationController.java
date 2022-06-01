@@ -24,11 +24,4 @@ public class ReservationController {
         CreateReservationResponseDTO response = reservationService.createReservation(createReservationRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-
-//    @PostMapping
-//    public ResponseEntity<CreateEmployeeResponseDTO> createEmployee(
-//            @RequestBody @Valid CreateEmployeeRequestDTO createEmployeeRequest){
-//        CreateEmployeeResponseDTO response = employeeService.createEmployee(createEmployeeRequest);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(response);
-//    }
 }
