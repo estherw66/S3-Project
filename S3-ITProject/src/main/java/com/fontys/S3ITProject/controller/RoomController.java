@@ -26,8 +26,8 @@ public class RoomController {
     @GetMapping(path = "/featured")
     public ResponseEntity<GetRoomsResponseDTO> getFeaturedRooms(){return ResponseEntity.ok(roomService.getFeaturedRooms());}
 
-    @IsAuthenticated
-    @RolesAllowed({"ROLE_EMPLOYEE"})
+//    @IsAuthenticated
+//    @RolesAllowed({"ROLE_EMPLOYEE"})
     @PostMapping
     public ResponseEntity<CreateRoomResponseDTO> createRoom(
             @RequestBody @Valid CreateRoomRequestDTO createRoomRequest){
@@ -35,8 +35,8 @@ public class RoomController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @IsAuthenticated
-    @RolesAllowed({"ROLE_EMPLOYEE"})
+//    @IsAuthenticated
+//    @RolesAllowed({"ROLE_EMPLOYEE"})
     @PutMapping("{id}")
     public ResponseEntity<RoomDTO> updateRoom(@PathVariable("id") long id,
             @RequestBody @Valid UpdateRoomRequestDTO request) {

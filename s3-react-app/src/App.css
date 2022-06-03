@@ -4,3 +4,28 @@
     padding: 0;
     font-family: 'Poppins', sans-serif;
 }
+
+footer {
+    position: absolute relative;
+    display: block;
+    height: 3rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 15px 17%;
+    background-color: #8A897C;
+    align-items: center;
+    transition: 0.3s;
+    margin-top: 35px;
+}
+footer .row {
+    margin: 0 6%;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+    align-items: center;
+}
+
+footer p {
+    color: #fff;
+}

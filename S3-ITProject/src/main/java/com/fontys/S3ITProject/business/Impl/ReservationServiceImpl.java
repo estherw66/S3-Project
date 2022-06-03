@@ -2,10 +2,7 @@ package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.ReservationService;
 import com.fontys.s3itproject.business.exception.InvalidReservationException;
-import com.fontys.s3itproject.dto.AccessTokenDTO;
-import com.fontys.s3itproject.dto.CreateReservationRequestDTO;
-import com.fontys.s3itproject.dto.CreateReservationResponseDTO;
-import com.fontys.s3itproject.dto.RoomDTO;
+import com.fontys.s3itproject.dto.*;
 import com.fontys.s3itproject.repository.GuestRepository;
 import com.fontys.s3itproject.repository.ReservationRepository;
 import com.fontys.s3itproject.repository.ReservationRoomRepository;
@@ -57,6 +54,18 @@ public class ReservationServiceImpl implements ReservationService {
                 .build();
     }
 
+    @Override
+    public GetReservationsResponseDTO getReservations() {
+        List<ReservationDTO> reservations = findAll()
+                .stream()
+                .map(ReservationDTOConverter::convertToDTO)
+                .toList();
+
+        return GetReservationsResponseDTO.builder()
+                .reservations(reservations)
+                .build();
+    }
+
     private Reservation saveNewReservation(CreateReservationRequestDTO request){
         //TODO fix this -> get correct guest
 //        Optional<Guest> guestOptional = findGuestByID(1L);
@@ -89,7 +98,6 @@ public class ReservationServiceImpl implements ReservationService {
                 .guest(Guest.builder().id(1L).build())
                 .build();
 
-
         return reservationRepository.save(reservation);
     }
     private Optional<Guest> findGuestByID(Long id){
@@ -116,5 +124,11 @@ public class ReservationServiceImpl implements ReservationService {
         }
 
         return totalCapacity;
+    }
+    private List<Reservation> findAll(){
+        return reservationRepository.findAll();
+    }
+    private List<ReservationRoom> findAllRoomsByReservationID(Reservation reservation){
+        return reservationRoomRepository.findAllByReservation(reservation.getId());
     }
 }

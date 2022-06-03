@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 
@@ -31,17 +32,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public CreateEmployeeResponseDTO createEmployee(CreateEmployeeRequestDTO request) {
-        if (existsByEmail(request.getEmail())){
-            throw new EmailAlreadyExistsException();
-        }
-
         if (existsByPhoneNumber(request.getPhoneNumber())){
             throw new InvalidEmployeeException("PHONE_NUMBER_DUPLICATED");
         }
 
         Employee savedEmployee = saveNewEmployee(request);
 
-        saveNewUser(savedEmployee, request.getPassword());
+        saveNewUser(savedEmployee, "password123");
         saveNewAddress(savedEmployee, request.getStreetName(), request.getZipCode(), request.getCity());
 
         return CreateEmployeeResponseDTO.builder()
@@ -102,7 +99,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         String encodedPassword = passwordEncoder.encode(password);
 
         User newUser = User.builder()
-                .username(employee.getFirstName() + employee.getLastName())
+                .username(employee.getFirstName().toLowerCase() + employee.getLastName().toLowerCase())
                 .password(encodedPassword)
                 .employee(employee)
                 .build();
@@ -131,7 +128,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee newEmployee = Employee.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
-                .email(request.getFirstName() + request.getLastName() + EMAIL_SUFFIX)
+                .email(request.getFirstName().toLowerCase() + request.getLastName().toLowerCase() + EMAIL_SUFFIX)
                 .phoneNumber(request.getPhoneNumber())
                 .dateOfBirth(request.getDateOfBirth())
                 .build();

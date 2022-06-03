@@ -9,6 +9,11 @@ import Navbar from "./Components/Navbar";
 import Sidebar from "./Components/Sidebar";
 import Footer from "./Components/Footer";
 import AllRoomsPage from "./Pages/allrooms";
+import EmployeesPage from "./Pages/employees";
+import AddEmployee from "./Components/Employees/AddEmployee";
+import ViewEmployeeDetails from "./Components/Employees/ViewEmployeeDetails";
+import UpdateEmployee from "./Components/Employees/UpdateEmployee";
+import AddRoom from "./Components/Employee-Rooms/AddRoom";
 
 function App() {
 
@@ -29,6 +34,13 @@ function App() {
             <Route path="/rooms" element={<RoomsPage />} />
             <Route path="/all-rooms" element={<AllRoomsPage />} />
             <Route path="/*" element={<Error />} />
+
+            <Route path="/employees" element={<EmployeesPage />} />
+            <Route path="/employees/add" element={<AddEmployee />} />
+            <Route path="/employees/:id" element={<ViewEmployeeDetails />} />
+            <Route path="/employees/update/:id" element={<UpdateEmployee />} />
+
+            <Route path="/employee/rooms" element={<AddRoom />} />
         </Routes>
         <Footer />
        </> 

@@ -3,6 +3,7 @@ package com.fontys.s3itproject.controller;
 import com.fontys.s3itproject.business.ReservationService;
 import com.fontys.s3itproject.dto.CreateReservationRequestDTO;
 import com.fontys.s3itproject.dto.CreateReservationResponseDTO;
+import com.fontys.s3itproject.dto.GetReservationsResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,5 +24,10 @@ public class ReservationController {
             @RequestBody @Valid CreateReservationRequestDTO createReservationRequest){
         CreateReservationResponseDTO response = reservationService.createReservation(createReservationRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<GetReservationsResponseDTO> getReservations(){
+       return ResponseEntity.ok(reservationService.getReservations());
     }
 }

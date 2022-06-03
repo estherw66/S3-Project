@@ -70,7 +70,6 @@ const Login = () => {
         ) : (
           <Container>
             <FormWrap>
-              <Icon to='/'>LOGO</Icon>
               <FormContent>
                 <Form onSubmit={handleSubmit}>
                   <FormH1>Login To Your Account:</FormH1>
