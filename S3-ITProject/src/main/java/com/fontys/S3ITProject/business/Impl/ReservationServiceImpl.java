@@ -1,6 +1,7 @@
 package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.ReservationService;
+import com.fontys.s3itproject.business.exception.InvalidGuestException;
 import com.fontys.s3itproject.business.exception.InvalidReservationException;
 import com.fontys.s3itproject.dto.*;
 import com.fontys.s3itproject.repository.GuestRepository;
@@ -21,7 +22,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 @AllArgsConstructor
 public class ReservationServiceImpl implements ReservationService {
 
-    private AccessTokenDTO requestAccessToken;
+    private final AccessTokenDTO requestAccessToken;
 
     private final ReservationRepository reservationRepository;
     private final ReservationRoomRepository reservationRoomRepository;
@@ -68,10 +69,10 @@ public class ReservationServiceImpl implements ReservationService {
 
     private Reservation saveNewReservation(CreateReservationRequestDTO request){
         //TODO fix this -> get correct guest
-//        Optional<Guest> guestOptional = findGuestByID(1L);
-//        if (guestOptional.isEmpty()){
-//            throw new InvalidGuestException("GUEST_NOT_FOUND");
-//        }
+        Optional<Guest> guestOptional = findGuestByID(request.getGuestID());
+        if (guestOptional.isEmpty()){
+            throw new InvalidGuestException("GUEST_NOT_FOUND");
+        }
         if (request.getCheckInDate().isBefore(LocalDate.now())){
             throw new InvalidReservationException("CHECK_IN_DATE_CANNOT_BE_BEFORE_TODAY");
         }
@@ -95,7 +96,7 @@ public class ReservationServiceImpl implements ReservationService {
                 .amountOfGuests(request.getAmountOfGuests())
                 .isCheckedIn(false)
                 .totalPrice(calculateTotalPrice(request))
-                .guest(Guest.builder().id(1L).build())
+                .guest(guestOptional.get())
                 .build();
 
         return reservationRepository.save(reservation);

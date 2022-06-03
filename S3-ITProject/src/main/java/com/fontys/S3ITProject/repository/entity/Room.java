@@ -27,6 +27,7 @@ public class Room {
     private int capacity;
 
     @NotNull
+    @Min(45)
     @Column(name = "price_per_night")
     private double pricePerNight;
 
@@ -43,6 +44,7 @@ public class Room {
     private boolean isFeatured;
 
     @NotNull
+    @Min(1)
     @Column(name = "total_amount_in_hotel")
     private int totalAmountInHotel;
 }

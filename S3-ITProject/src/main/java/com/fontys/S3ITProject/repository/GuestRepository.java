@@ -7,5 +7,4 @@ import java.util.Optional;
 
 public interface GuestRepository extends JpaRepository<Guest, Long> {
     boolean existsByEmail(String email);
-    Optional<Guest> findById(Long id);
 }

@@ -3,7 +3,7 @@ import { FaBars } from 'react-icons/fa'
 import axios from '../../api/axios';
 import { Nav, NavbarContainer, NavLogo, HamburgerMenu, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink } from './NavbarStyled';
 
-const Navbar = ({ toggleMenu }) => {
+const Navbar = ({ toggleMenu, currentUser }) => {
 
   const [authorisation, setAuthorisation] = useState('');
   
@@ -44,6 +44,12 @@ const Navbar = ({ toggleMenu }) => {
             <NavItem>
               <NavLinks to='/'>About Us</NavLinks>
             </NavItem>
+            { currentUser && (
+              <NavItem>
+                <NavLinks to='/profile'>Profile</NavLinks>
+              </NavItem>
+            )} 
+            
           </NavMenu>
           <NavBtn>
             <NavBtnLink to='/login'>Login</NavBtnLink>

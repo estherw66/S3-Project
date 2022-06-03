@@ -63,12 +63,12 @@ const AddEmployee = () => {
   const saveEmployee = () => {
     let errorMsg = validateInput();
 
-    if (errorMsg != ''){
+    if (errorMsg !== ''){
       alert(errorMsg)
     } else {
       sendRequest();
-      let path = '/employees'
-      navigate(path)
+      navigate('/employees')
+      window.location.reload()
     }
   }
 

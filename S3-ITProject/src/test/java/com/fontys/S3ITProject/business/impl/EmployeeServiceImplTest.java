@@ -89,10 +89,8 @@ class EmployeeServiceImplTest {
         CreateEmployeeRequestDTO requestDTO = CreateEmployeeRequestDTO.builder()
                 .firstName("Esther")
                 .lastName("Wolfs")
-                .email("estherwolfs@goldskye.com")
                 .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
-                .password("password")
                 .streetName("Mozartlaan 41")
                 .zipCode("5151KA")
                 .city("Drunen")
@@ -118,7 +116,6 @@ class EmployeeServiceImplTest {
         CreateEmployeeRequestDTO request = CreateEmployeeRequestDTO.builder()
                 .firstName("Esther")
                 .lastName("Wolfs")
-                .email("estherwolfs@goldskye.com")
                 .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
                 .build();
@@ -135,7 +132,6 @@ class EmployeeServiceImplTest {
         CreateEmployeeRequestDTO request = CreateEmployeeRequestDTO.builder()
                 .firstName("Esther")
                 .lastName("Wolfs")
-                .email("estherwolfs@goldskye.com")
                 .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
                 .build();

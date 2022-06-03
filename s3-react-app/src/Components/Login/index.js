@@ -4,6 +4,7 @@ import AuthContext from '../../context/AuthProvider';
 import { Container, FormWrap, Icon, FormContent, Form, FormH1, FormLabel, FormInput, FormButton } from './LoginStyled'
 
 import axios from '../../api/axios';
+import authService from '../../Services/auth/auth.service';
 const LOGIN_URL = '/login';
 
 const Login = () => {
@@ -58,6 +59,22 @@ const Login = () => {
     }
   }
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await authService.login(username, password)
+      .then(() => {
+        navigate('/profile');
+        window.location.reload();
+      },
+      (error) => {
+        console.log(error)
+      });
+    } catch (err) {
+      console.log(err);
+    }
+
+  }
 
   return (
     <>
@@ -71,7 +88,7 @@ const Login = () => {
           <Container>
             <FormWrap>
               <FormContent>
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleLogin}>
                   <FormH1>Login To Your Account:</FormH1>
                   <FormLabel htmlFor='username'>Username:</FormLabel>
                   <FormInput type='text' id='username' value={username} ref={usernameRef} autoComplete='off' onChange={(e) => setUsername(e.target.value)} required/>

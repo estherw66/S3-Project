@@ -8,7 +8,7 @@ const RoomCard = ({ room }) => {
         <Card>
             <Heading3>{room.roomType} Room</Heading3>
             <Image src={room.imageUrl} />
-            <SubTitle>From ${room.pricePerNight} per night</SubTitle>
+            <SubTitle>From £{room.pricePerNight} per night</SubTitle>
         </Card>
       </RoomCol>
     </>
