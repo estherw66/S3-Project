@@ -4,7 +4,7 @@ import EmployeesList from '../Components/Employees/EmployeesList'
 const EmployeesPage = () => {
   return (
     <div>
-      <EmployeesList />
+      
     </div>
   )
 }

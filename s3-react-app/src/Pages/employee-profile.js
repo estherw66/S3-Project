@@ -1,11 +1,9 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router';
-// import authHeader from '../services/auth/auth-header'
+import useAuth from '../hooks/useAuth';
 
+import axios from '../api/axios';
 
 const EmployeeProfilePage = () => {
-  let navigate = useNavigate();
 
   const [employee, setEmployee] = useState({});
 
@@ -25,7 +23,7 @@ const EmployeeProfilePage = () => {
   return (
     <div>
       <h2>employee profile page</h2>
-      <button onClick={getEmployeeById}> set employee</button>
+      
     </div>
   )
 }

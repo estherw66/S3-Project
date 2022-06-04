@@ -13,10 +13,10 @@ import ViewEmployeeDetails from "./Components/Employees/ViewEmployeeDetails";
 import UpdateEmployee from "./Components/Employees/UpdateEmployee";
 import AddRoom from "./Components/Employee-Rooms/AddRoom";
 import RoomsListEmployee from "./Components/Employee-Rooms/RoomsListEmployee";
-import EmployeeProfilePage from "./pages/employee-profile";
 import UnauthorisedPage from "./pages/unauthorised";
 import RequireAuth from "./Components/RequireAuth";
 import Navbar from "./Components/navbar";
+import ProfilePage from "./pages/profile";
 
 function App() {
 
@@ -43,7 +43,7 @@ function App() {
 
             {/* prive routes only for employees */}
             <Route element={<RequireAuth allowedRoles={["EMPLOYEE", "ADMIN"]}/>}>
-                <Route path="/profile" element={<EmployeeProfilePage />} />
+                <Route path="/profile" element={<ProfilePage />} />
 
                 <Route path="/employees" element={<EmployeesPage />} />
                 <Route path="/employees/add" element={<AddEmployee />} />
