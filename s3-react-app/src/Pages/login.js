@@ -1,10 +1,14 @@
 import React from 'react'
-import Login from '../Components/Login'
+
+import axios from '../api/axios'
+const URL = '/login'
 
 const LoginPage = () => {
+
+  
   return (
     <div>
-      <Login />
+      
     </div>
   )
 }

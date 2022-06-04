@@ -1,16 +1,17 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router';
-import AuthContext from '../../context/AuthProvider';
+// import AuthContext from '../../context/AuthProvider';
 import { Container, FormWrap, Icon, FormContent, Form, FormH1, FormLabel, FormInput, FormButton } from './LoginStyled'
 
 import axios from '../../api/axios';
-import authService from '../../Services/auth/auth.service';
+// import authService from '../../services/auth/auth.service';
 const LOGIN_URL = '/login';
 
 const Login = () => {
   let navigate = useNavigate();
 
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
   const usernameRef = useRef();
   const errRef = useRef();
 
@@ -59,23 +60,6 @@ const Login = () => {
     }
   }
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      await authService.login(username, password)
-      .then(() => {
-        navigate('/profile');
-        window.location.reload();
-      },
-      (error) => {
-        console.log(error)
-      });
-    } catch (err) {
-      console.log(err);
-    }
-
-  }
-
   return (
     <>
         {success ? (
@@ -88,7 +72,7 @@ const Login = () => {
           <Container>
             <FormWrap>
               <FormContent>
-                <Form onSubmit={handleLogin}>
+                <Form onSubmit={handleSubmit}>
                   <FormH1>Login To Your Account:</FormH1>
                   <FormLabel htmlFor='username'>Username:</FormLabel>
                   <FormInput type='text' id='username' value={username} ref={usernameRef} autoComplete='off' onChange={(e) => setUsername(e.target.value)} required/>

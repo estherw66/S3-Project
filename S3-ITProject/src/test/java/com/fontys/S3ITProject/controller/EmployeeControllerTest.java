@@ -124,10 +124,8 @@ class EmployeeControllerTest {
         CreateEmployeeRequestDTO requestDTO = CreateEmployeeRequestDTO.builder()
                 .firstName("Esther")
                 .lastName("Wolfs")
-                .email("estherwolfs@goldskye.com")
                 .phoneNumber("+31612901749")
                 .dateOfBirth(LocalDate.of(1998,1,1))
-                .password("password1")
                 .streetName("Mozartlaan 41")
                 .zipCode("5151KA")
                 .city("Drunen")
@@ -185,18 +183,14 @@ class EmployeeControllerTest {
                             [
                                 {"field": "firstName", "error":  "must not be blank"},
                                 {"field": "lastName", "error":  "must not be blank"},
-                                {"field": "email", "error":  "must not be blank"},
                                 {"field": "phoneNumber", "error":  "must not be blank"},
                                 {"field": "dateOfBirth", "error":  "must not be null"},
                                 {"field": "firstName", "error":  "length must be between 2 and 25"},
                                 {"field": "lastName", "error":  "length must be between 2 and 50"},
-                                {"field": "email", "error":  "length must be between 2 and 50"},
-                                {"field": "password", "error":  "must not be blank"},
                                 {"field": "streetName", "error":  "must not be blank"},
                                 {"field": "zipCode", "error":  "must not be blank"},
                                 {"field": "city", "error":  "must not be blank"},
                                 {"field": "zipCode", "error": "length must be between 6 and 6"},
-                                {"field": "password", "error":  "length must be between 8 and 50"},
                                 {"field": "city", "error":  "length must be between 2 and 50"},
                                 {"field": "streetName", "error": "length must be between 2 and 50"}
                             ]

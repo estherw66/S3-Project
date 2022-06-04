@@ -19,15 +19,15 @@ import java.util.Optional;
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-//    @IsAuthenticated
-//    @RolesAllowed({"ROLE_EMPLOYEE", "ROLE_ADMIN"})
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_EMPLOYEE", "ROLE_ADMIN"})
     @GetMapping
     public ResponseEntity<GetEmployeesResponseDTO> getEmployees(){
         return ResponseEntity.ok(employeeService.getEmployees());
     }
 
-//    @IsAuthenticated
-//    @RolesAllowed({"ROLE_EMPLOYEE", "ROLE_ADMIN"})
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_EMPLOYEE", "ROLE_ADMIN"})
     @GetMapping(path = "{id}")
     public ResponseEntity<EmployeeDTO> getEmployee(@PathVariable(value = "id") final long id){
         final Optional<EmployeeDTO> employeeOptional = employeeService.getEmployee(id);

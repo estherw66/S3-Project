@@ -3,7 +3,7 @@ import FeaturedRooms from '../Components/FeaturedRooms'
 import ReservationForm from '../Components/ReservationForm'
 import About from '../Components/About'
 
-const Home = () => {
+const HomePage = () => {
 
   return (
     <>
@@ -14,4 +14,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default HomePage

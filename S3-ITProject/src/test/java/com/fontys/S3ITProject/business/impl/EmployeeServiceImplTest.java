@@ -63,13 +63,12 @@ class EmployeeServiceImplTest {
 
     @Test
     void createEmployee_shouldSaveNewEmployee() {
-        when(employeeRepositoryMock.existsByEmail("estherwolfs@goldskye.com")).thenReturn(false);
         when(employeeRepositoryMock.existsByPhoneNumber("+31612901749")).thenReturn(false);
 
         Employee esther = Employee.builder()
                 .firstName("Esther")
                 .lastName("Wolfs")
-                .email("EstherWolfs@goldskye.com")
+                .email("estherwolfs@goldskye.com")
                 .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
                 .build();
@@ -78,7 +77,7 @@ class EmployeeServiceImplTest {
                 .id(1L)
                 .firstName("Esther")
                 .lastName("Wolfs")
-                .email("EstherWolfs@goldskye.com")
+                .email("estherwolfs@goldskye.com")
                 .dateOfBirth(LocalDate.of(1998,1,1))
                 .phoneNumber("+31612901749")
                 .build();
@@ -103,25 +102,8 @@ class EmployeeServiceImplTest {
                 .build();
 
         assertEquals(expectedResult, actualResult);
-        verify(employeeRepositoryMock).existsByEmail("estherwolfs@goldskye.com");
         verify(employeeRepositoryMock).existsByPhoneNumber("+31612901749");
         verify(employeeRepositoryMock).save(esther);
-    }
-
-    @Test
-    void createEmployee_shouldThrowEmailAlreadyExistsException_whenSavingNewEmployeeDuplicatedEmail(){
-        when(employeeRepositoryMock.existsByEmail("estherwolfs@goldskye.com"))
-                .thenReturn(true);
-
-        CreateEmployeeRequestDTO request = CreateEmployeeRequestDTO.builder()
-                .firstName("Esther")
-                .lastName("Wolfs")
-                .dateOfBirth(LocalDate.of(1998,1,1))
-                .phoneNumber("+31612901749")
-                .build();
-
-        assertThrows(EmailAlreadyExistsException.class,() -> employeeService.createEmployee(request));
-        verify(employeeRepositoryMock).existsByEmail("estherwolfs@goldskye.com");
     }
 
     @Test

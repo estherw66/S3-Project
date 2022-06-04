@@ -33,7 +33,10 @@ public class LoginServiceImpl implements LoginService {
         }
 
         String accessToken = generateAccessToken(user);
-        return LoginResponseDTO.builder().accessToken(accessToken).build();
+        return LoginResponseDTO.builder()
+                .accessToken(accessToken)
+                
+                .build();
     }
 
     private boolean matchesPassword(String rawPassword, String encodedPassword){

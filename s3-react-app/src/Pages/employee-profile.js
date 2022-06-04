@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
-import authHeader from '../Services/auth/auth-header'
+// import authHeader from '../services/auth/auth-header'
 
 
 const EmployeeProfilePage = () => {
@@ -15,11 +15,11 @@ const EmployeeProfilePage = () => {
   
 
   const getEmployeeById = () => {
-    return axios.get("http://localhost:8080/api/employees/7", { headers: authHeader() })
-    .then((res) => {
-      setEmployee(res.data);
-      console.log(employee)
-    })
+    // return axios.get("http://localhost:8080/api/employees/7", { headers: authHeader() })
+    // .then((res) => {
+    //   setEmployee(res.data);
+    //   console.log(employee)
+    // })
   }
 
   return (
