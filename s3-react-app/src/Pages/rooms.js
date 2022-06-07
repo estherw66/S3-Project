@@ -1,11 +1,18 @@
 import React from 'react'
-import SearchResultsRoom from '../Components/SearchResultsRoom'
+import Sidebar from '../Components/sidebar'
 
 const RoomsPage = () => {
   return (
-    <>
-      <SearchResultsRoom />
-    </>
+    <div className='main'>
+      <div className='row'>
+        <div className='left'>
+          <Sidebar />
+        </div>
+        <div className='right'>
+          
+        </div>
+      </div>
+    </div>
   )
 }
 

@@ -5,6 +5,17 @@
     font-family: 'Poppins', sans-serif;
 }
 
+Link {
+    text-decoration: none;
+    color: #fff;
+
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 /* navbar */
 nav {
     background: #8A897C;
@@ -65,7 +76,7 @@ nav .nav-btn{
 }
 nav .nav-btn .nav-btn-link {
     border-radius: 50px;
-    background: #ded7df;
+    background: #d2d7df;
     white-space: nowrap;
     padding: 10px 22px;
     color: #8A897C;
@@ -105,4 +116,116 @@ footer .row {
 
 footer p {
     color: #fff;
+}
+
+/* sidebar */
+.sidebar{
+    height: 100%;
+    background-color: #bdbbb0;
+    width: 250px;
+}
+.sidebar-list{
+    height: auto;
+    width: 100%;
+    padding: 0;
+}
+.sidebar-row {
+    width: 100%;
+}
+
+.sidebar-list .sidebar-row{
+    width: 100%;
+    height: 60px;
+    list-style-type: none;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.sidebar-list .sidebar-row:hover{
+    cursor: pointer;
+    background-color: #353535;
+    color: #fff;
+}
+.side-link{
+    color: #353535;
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+}
+.sidebar-row:hover .side-link{
+    color: #fff;
+}
+
+/* employee pages */
+.main{
+    height: 80vh;
+    background-color: #d2d7df;
+}
+.left{
+    width: 20%;
+    height: 80vh;
+}
+.right{
+    width: 80%;
+    height: auto;
+}
+.body{
+    padding: 1.5rem;
+    flex: 1 1 auto;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    margin: 25px;
+}
+/* profile page */
+
+
+.profile-form{
+    position: relative;
+}
+.form-input{
+    position: relative;
+    width: 30%;
+    margin-right: 25px;
+    margin-top: 15px;
+}
+.form-input input{
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #353535;
+    outline: none;
+    background-color: transparent;
+    color: #353535;
+}
+.form-input label{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 0.8rem;
+    transform: translateY(-18px);
+    color: #353535;
+}
+.update-profile{
+    margin: 10px 50px 25px 0;
+}
+.profile-btn{
+    background-color: #bdbbb0;
+    margin: 25px;
+    padding: 10px 15px;
+    border-radius: 50px;
+    color: #353535;
+    text-decoration: none;
+}
+.profile-btn:hover{
+    background-color: #353535;
+    color: #bdbbb0;
+    transition: 0.3s ease-in-out;
 }

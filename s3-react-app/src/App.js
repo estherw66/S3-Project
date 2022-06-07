@@ -17,6 +17,8 @@ import UnauthorisedPage from "./pages/unauthorised";
 import RequireAuth from "./Components/RequireAuth";
 import Navbar from "./Components/navbar";
 import ProfilePage from "./pages/profile";
+import Logout from "./pages/logout";
+import ReservationsPage from "./pages/all-reservations";
 
 function App() {
 
@@ -50,8 +52,12 @@ function App() {
                 <Route path="/employees/:id" element={<ViewEmployeeDetails />} />
                 <Route path="/employees/update/:id" element={<UpdateEmployee />} />
 
-                <Route path="/employee/rooms" element={<RoomsListEmployee />} />
+                <Route path="/employee/rooms" element={<RoomsPage />} />
                 <Route path="/employee/rooms/add" element={<AddRoom />} />
+
+                <Route path="/employee/reservations" element={<ReservationsPage />} />
+
+                <Route path="/logout" element={<Logout />} />
             </Route>
 
             {/* private routs only for guests */}

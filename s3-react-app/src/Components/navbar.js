@@ -12,9 +12,9 @@ const Navbar = () => {
         <div className='container'>
           <Link to={'/'} className='nav-logo'>GOLD SKYE</Link>
           <ul className='nav-menu'>
-            {!auth?.decoded && <li className='nav-item'>
+            <li className='nav-item'>
               <Link to={'/all-rooms'} className='nav-link'>All Rooms</Link>
-            </li>}
+            </li>
           </ul>
           <nav className='nav-btn'>
             {!auth?.decoded && <Link to={'/login'} className='nav-btn-link'>Login</Link>}

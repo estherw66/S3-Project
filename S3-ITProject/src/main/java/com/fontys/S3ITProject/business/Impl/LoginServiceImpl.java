@@ -35,7 +35,7 @@ public class LoginServiceImpl implements LoginService {
         String accessToken = generateAccessToken(user);
         return LoginResponseDTO.builder()
                 .accessToken(accessToken)
-                
+
                 .build();
     }
 

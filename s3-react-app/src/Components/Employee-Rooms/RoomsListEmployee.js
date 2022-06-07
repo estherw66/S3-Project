@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import axios from '../../api/axios';
+import Sidebar from '../sidebar';
 
 const RoomsListEmployee = () => {
 
@@ -24,7 +25,9 @@ const RoomsListEmployee = () => {
 
   return (
     <div>
+        <Sidebar />
         <h2>All Rooms:</h2>
+
         <Link to={'/employee/rooms/add'}>Add New Room</Link>
         <div>
             <table>
@@ -48,7 +51,7 @@ const RoomsListEmployee = () => {
                                     <td>{room.totalAmountInHotel}</td>
                                     <td>
                                         {room.featured ? 'Yes' : 'No'}
-                                        <button style={{marginLeft: "15px"}}>{room.featured ? 'Feature' : 'Remove'}</button>
+                                        <button style={{marginLeft: "15px"}}>{room.featured ? 'Feature' : 'Un-Feature'}</button>
                                     </td>
                                     <td>
                                         
