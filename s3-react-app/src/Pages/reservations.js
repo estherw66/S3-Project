@@ -12,7 +12,6 @@ const ReservationsPage = () => {
         axios.get(URL, {headers: { Authorization: 'Bearer ' + auth.accessToken } })
         .then(res => {
             setReservations(res.data.reservations)
-            console.log(res.data.reservations)
         })
         .catch(err => {
             console.log(err)
@@ -31,7 +30,7 @@ const ReservationsPage = () => {
               <div className='right'>
                   <div className='header'>
                       <h3>Reservations:</h3>
-                      <input type={'text'} placeholder='Search...' />
+                      <input type={'text'} placeholder='Search...' className='search-bar' />
                   </div>
                   <div className='body'>
                       <div className='row'>

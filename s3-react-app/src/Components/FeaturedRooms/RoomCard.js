@@ -15,4 +15,4 @@ const RoomCard = ({ room }) => {
   )
 }
 
-export default RoomCard
+export default RoomCard 

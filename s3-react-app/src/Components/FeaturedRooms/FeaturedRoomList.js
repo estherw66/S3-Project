@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import RoomService from '../../services/RoomService'
 import RoomCard from './RoomCard'
 
 const FeaturedRoomList = () => {

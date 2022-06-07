@@ -1,24 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+
+// styles
 import './App.css';
+
+// pages
 import HomePage from "./pages";
 import LoginPage from "./pages/login";
 import RoomsPage from "./pages/rooms";
 import Error from "./pages/error";
-import Sidebar from "./Components/Sidebar";
-import AllRoomsPage from "./pages/allrooms";
+import AllRoomsPage from "./pages/all-rooms";
 import EmployeesPage from "./pages/employees";
+import UnauthorisedPage from "./pages/unauthorised";
+import ProfilePage from "./pages/profile";
+import Logout from "./pages/logout";
+import ReservationsPage from "./pages/reservations";
+
+// components
+import RequireAuth from "./Components/RequireAuth";
+import Navbar from "./Components/navbar";
+import Footer from "./Components/footer";
+
 import AddEmployee from "./Components/Employees/AddEmployee";
 import ViewEmployeeDetails from "./Components/Employees/ViewEmployeeDetails";
 import UpdateEmployee from "./Components/Employees/UpdateEmployee";
 import AddRoom from "./Components/Employee-Rooms/AddRoom";
-import RoomsListEmployee from "./Components/Employee-Rooms/RoomsListEmployee";
-import UnauthorisedPage from "./pages/unauthorised";
-import RequireAuth from "./Components/RequireAuth";
-import Navbar from "./Components/navbar";
-import ProfilePage from "./pages/profile";
-import Logout from "./pages/logout";
-import ReservationsPage from "./pages/all-reservations";
+
 
 function App() {
 
@@ -30,7 +37,6 @@ function App() {
 
     return (
        <>
-        <Sidebar isOpen={isOpen} toggleMenu={toggleMenu} />
         {/* <Navbar toggleMenu={toggleMenu} /> */}
         <Navbar />
         
@@ -52,7 +58,6 @@ function App() {
                 <Route path="/employees/:id" element={<ViewEmployeeDetails />} />
                 <Route path="/employees/update/:id" element={<UpdateEmployee />} />
 
-                <Route path="/employee/rooms" element={<RoomsPage />} />
                 <Route path="/employee/rooms/add" element={<AddRoom />} />
 
                 <Route path="/employee/reservations" element={<ReservationsPage />} />
@@ -61,14 +66,17 @@ function App() {
             </Route>
 
             {/* private routs only for guests */}
-            <Route element={<RequireAuth allowedRoles={["GUEST"]} />}>
+            <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
                 {/* TODO... */}
+                <Route path="/employee/rooms" element={<RoomsPage />} />
+
             </Route>
 
             {/* error */}
             <Route path="/*" element={<Error />} />
         </Routes>
         {/* <Footer /> */}
+        <Footer />
        </> 
     );
 }

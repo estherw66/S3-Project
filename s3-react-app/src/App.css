@@ -94,17 +94,15 @@ nav .nav-btn .nav-btn-link:hover{
 }
 
 footer {
-    position: absolute relative;
+    position: relative;
     display: block;
-    height: 3rem;
+    height: 6vh;
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 15px 17%;
     background-color: #8A897C;
     align-items: center;
     transition: 0.3s;
-    margin-top: 35px;
 }
 footer .row {
     margin: 0 6%;
@@ -160,16 +158,16 @@ footer p {
 
 /* employee pages */
 .main{
-    height: 80vh;
+    height: 85vh;
     background-color: #d2d7df;
 }
 .left{
     width: 20%;
-    height: 80vh;
+    height: 85vh;
 }
 .right{
     width: 80%;
-    height: auto;
+    height: 85vh;
 }
 .body{
     padding: 1.5rem;

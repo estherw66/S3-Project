@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import EmployeesList from '../Components/Employees/EmployeesList'
 
+import {AiOutlineUserAdd} from 'react-icons/ai'
+
 import axios from '../api/axios'
 import useAuth from '../hooks/useAuth'
 import Sidebar from '../Components/sidebar'
+import { Link } from 'react-router-dom'
 const URL = '/employees'
 
 const EmployeesPage = () => {
@@ -35,7 +38,8 @@ const EmployeesPage = () => {
         <div className='right'>
           <div className='header'>
             <h3>All Employees:</h3>
-            <input type={'text'} placeholder={'Search...'} />
+            <input type={'text'} placeholder={'Search...'} className='search-bar' />
+            <Link to={'/'}><AiOutlineUserAdd /></Link>
           </div>
           <div className='body'>
             <div className='row'>
