@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import axios from '../api/axios'
 import Sidebar from '../Components/sidebar'
@@ -8,8 +9,12 @@ const URL = '/reservations'
 const ReservationsPage = () => {
     const { auth } = useAuth();
     const [reservations, setReservations] = useState([]);
+    const authorisation = {
+        headers: { Authorization: 'Bearer ' + auth?.accessToken}
+    }
+
     const getAllReservations = () => {
-        axios.get(URL, {headers: { Authorization: 'Bearer ' + auth.accessToken } })
+        axios.get(URL, authorisation)
         .then(res => {
             setReservations(res.data.reservations)
         })
@@ -21,6 +26,34 @@ const ReservationsPage = () => {
     useEffect(() => {
         getAllReservations()
     }, [])
+
+
+
+    // const updateUser = (e) => {
+    //     e.preventDefault(); 
+    //     console.log("hello" + firstName, lastName, phoneNumber)
+
+    //     let updateRequest = {
+    //         'firstName': firstName,
+    //         'lastName': lastName,
+    //         'phoneNumber': phoneNumber
+    //     }
+    //     axios.put(URL, updateRequest, authorisation)
+    //     .then(function(){})
+    //     .catch(err => {
+    //         console.log(err)
+    //     })
+    // }
+
+    const checkIn = (e) => {
+        e.preventDefault();
+        axios.put('http://localhost:8080/reservations/1', authorisation)
+        .then(function(){})
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
   return (
       <div className='main'>
           <div className='row'>
@@ -57,8 +90,9 @@ const ReservationsPage = () => {
                                         <td>{reservation.checkOutDate}</td>
                                         <td>{reservation.amountOfGuests}</td>
                                         <td>£{reservation.totalPrice}</td>
-                                        <td>{reservation.isCheckedIn ? 'Checked In' : 'Not Checked In'}</td>
-                                        <td><button>{reservation.isCheckedIn ? 'Check Out' : 'Check In'}</button></td>
+                                        <td>{reservation.checkedIn ? 'Checked In' : 'Not Checked In'}</td>
+                                        <td><button>{reservation.checkedIn ? 'Check Out' : 'Check In'}</button></td>
+                                        <td><button><Link to={`/employee/reservation/checkin/${reservation.id}`}>{reservation.checkedIn ? 'Check Out' : 'Check In'}</Link></button></td>
                                     </tr>
                                 )}
                             </tbody>

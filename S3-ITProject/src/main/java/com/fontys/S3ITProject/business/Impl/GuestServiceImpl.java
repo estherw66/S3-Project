@@ -10,11 +10,15 @@ import com.fontys.s3itproject.repository.GuestRepository;
 import com.fontys.s3itproject.repository.UserRepository;
 import com.fontys.s3itproject.repository.entity.Guest;
 import com.fontys.s3itproject.repository.entity.RoleEnum;
+import com.fontys.s3itproject.repository.entity.User;
+import com.fontys.s3itproject.repository.entity.UserRole;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -24,6 +28,7 @@ public class GuestServiceImpl implements GuestService {
     private final UserRepository userRepository;
 
     private AccessTokenDTO requestAccessToken;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public CreateGuestResponseDTO createGuest(CreateGuestRequestDTO request) {
@@ -35,6 +40,8 @@ public class GuestServiceImpl implements GuestService {
         }
 
         Guest savedGuest = saveNewGuest(request);
+
+        saveNewUser(request, savedGuest);
 
         return CreateGuestResponseDTO.builder()
                 .guestID(savedGuest.getId())
@@ -88,6 +95,24 @@ public class GuestServiceImpl implements GuestService {
                 .email(request.getEmail())
                 .build();
         return guestRepository.save(newGuest);
+    }
+    private void saveNewUser(CreateGuestRequestDTO request, Guest guest){
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
+
+        User newUser = User.builder()
+                .username(request.getUsername())
+                .password(encodedPassword)
+                .employee(null)
+                .guest(guest)
+                .build();
+
+        newUser.setUserRoles(Set.of(
+                UserRole.builder()
+                        .user(newUser)
+                        .role(RoleEnum.GUEST)
+                        .build()));
+
+        userRepository.save(newUser);
     }
 
     private void updateFields(UpdateGuestRequestDTO request, Guest guest){

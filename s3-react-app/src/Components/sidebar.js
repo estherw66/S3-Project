@@ -1,39 +1,91 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth'
 import { SidebarLinks } from './SidebarLinks';
 
+import {HiOutlineTicket} from 'react-icons/hi'
+import {FaUserAlt} from 'react-icons/fa'
+import {FaHotel} from 'react-icons/fa'
+import {FaUsers} from 'react-icons/fa'
+import {MdLogout} from 'react-icons/md'
+
+
 const Sidebar = () => {
     const { auth } = useAuth();
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isEmployee, setIsEmployee] = useState(false);
+
+    const checkStatus = () => {
+      auth?.roles?.map((role) => {
+        if (role === 'ADMIN'){
+          setIsAdmin(true)
+        }
+        if (role === 'EMPLOYEE'){
+          setIsEmployee(true)
+        }
+      })
+    }
+
+    useEffect(() => {
+      checkStatus()
+    }, [])
+
   return (
-    // <div>
-    //     <ul>
-    //     {auth?.roles?.find(role => "EMPLOYEE") && <li>
-    //         <Link to={'/employees'}>Employees</Link>
-    //       </li>}
-    //       {auth?.roles?.find(role => "EMPLOYEE") && <li>
-    //         <Link to={'/employee/rooms'}>Rooms</Link>
-    //       </li>}
-    //       <li>
-    //         <Link to={'/employee/reservations'}>Reservations</Link>
-    //       </li>
-    //   </ul>
-    // </div>
-    <div className='sidebar'>
-      <ul className='sidebar-list'>
-        {SidebarLinks.map((link, key) => {
-          return (
-            <li key={key} className='sidebar-row'>
-              <Link to={link.url} className='side-link'>
-                <div className='link'>
-                  {link.icon} {link.title}
-                </div>
+    <>
+    {isEmployee ? (
+      <div className='sidebar'>
+        <ul className='sidebar-list'>
+          <li className='sidebar-row'>
+            <Link to={'/profile'} className='side-link'>
+              <div className='link'><FaUserAlt /> Account</div>
+            </Link>
+          </li>
+          <li className='sidebar-row'>
+            <Link to={'/employee/reservations'} className='side-link'>
+              <div className='link'><HiOutlineTicket /> Reservations</div>
+            </Link>
+          </li>
+          <li className='sidebar-row'>
+            <Link to={'/employee/rooms'} className='side-link'>
+              <div className='link'><FaHotel /> Rooms</div>
+            </Link>
+          </li>
+          {isAdmin ? (
+            <li className='sidebar-row'>
+              <Link to={'/employees'} className='side-link'>
+                <div className='link'><FaUsers /> Employees</div>
               </Link>
             </li>
-          )
-        })}
-      </ul>
-    </div>
+          ) : (
+            null
+          )}
+          <li className='sidebar-row'>
+            <Link to={'/logout'} className='side-link'>
+              <div className='link'><MdLogout /> Logout</div>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    ) : (
+      <div className='sidebar'>
+        <ul className='sidebar-list'>
+          <li className='sidebar-row'>
+            <Link to={'/profile'} className='side-link'><FaUserAlt /> Account</Link>
+          </li>
+          <li className='sidebar-row'>
+            <Link to={'/'} className='side-link'>
+              <div className='link'><HiOutlineTicket /> Reservations</div>
+            </Link>
+          </li>
+          <li className='sidebar-row'>
+            <Link to={'/logout'} className='side-link'>
+              <div className='link'><MdLogout /> Logout</div>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    )}
+    </>
   )
 }
 

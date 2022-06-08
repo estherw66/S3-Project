@@ -3,6 +3,7 @@ package com.fontys.s3itproject.business.impl;
 import com.fontys.s3itproject.business.ReservationService;
 import com.fontys.s3itproject.business.exception.InvalidGuestException;
 import com.fontys.s3itproject.business.exception.InvalidReservationException;
+import com.fontys.s3itproject.business.exception.UnauthorisedDataAccessException;
 import com.fontys.s3itproject.dto.*;
 import com.fontys.s3itproject.repository.GuestRepository;
 import com.fontys.s3itproject.repository.ReservationRepository;
@@ -65,6 +66,27 @@ public class ReservationServiceImpl implements ReservationService {
         return GetReservationsResponseDTO.builder()
                 .reservations(reservations)
                 .build();
+    }
+
+    @Override
+    public void reservationCheckIn(ReservationCheckInRequestDTO request) {
+        Optional<Reservation> reservationOptional = reservationRepository.findById(request.getId());
+        if (reservationOptional.isEmpty()){
+            throw new InvalidReservationException("RESERVATION_NOT_FOUND");
+        }
+
+        if (!requestAccessToken.hasRole(RoleEnum.EMPLOYEE.name())){
+            throw new UnauthorisedDataAccessException("UNAUTHORISED_TO_PERFOM_ACTION");
+        }
+
+        Reservation reservation = reservationOptional.get();
+
+//        commented for testing reasons
+//        if (reservation.getCheckInDate().isAfter(LocalDate.now())){
+//            throw new InvalidReservationException("CAN_NO_LONGER_CHECK_IN");
+//        }
+
+        updateFields(reservation);
     }
 
     private Reservation saveNewReservation(CreateReservationRequestDTO request){
@@ -131,5 +153,10 @@ public class ReservationServiceImpl implements ReservationService {
     }
     private List<ReservationRoom> findAllRoomsByReservationID(Reservation reservation){
         return reservationRoomRepository.findAllByReservation(reservation.getId());
+    }
+    private void updateFields(Reservation reservation){
+        reservation.setCheckedIn(!reservation.isCheckedIn());
+
+        reservationRepository.save(reservation);
     }
 }

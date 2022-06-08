@@ -32,6 +32,10 @@ public class User{
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
+    @OneToOne(optional = true)
+    @JoinColumn(name = "guest_id")
+    private Guest guest;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private Set<UserRole> userRoles;

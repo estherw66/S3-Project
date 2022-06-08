@@ -10,9 +10,24 @@ const ProfilePage = () => {
 
   const [user, setUser] = useState({});
 
+  const [isEmployee, setIsEmployee] = useState(false);
 
-  const URL = `/employees/${auth?.decoded?.employeeID}`
+    const checkStatus = () => {
+      auth?.roles?.map((role) => {
+        if (role === 'EMPLOYEE'){
+          setIsEmployee(true)
+        }
+      })
+    }
+
+    useEffect(() => {
+      checkStatus()
+    }, [])
+
+
+  
   const getUser = () => {
+    const URL = `/employees/${auth?.decoded?.employeeID}`
     axios.get(URL, { headers: {Authorization: 'Bearer ' + auth.accessToken }})
     .then(res => {
       setUser(res.data);
@@ -38,7 +53,7 @@ const ProfilePage = () => {
               <h3>My Account</h3>
             </div>
             <div className='update-profile'>
-              <Link to={'/'} className={'profile-btn'}>Update Info</Link>
+              <Link to={`/employees/update/${auth?.decoded?.employeeID}`} className={'profile-btn'}>Update Info</Link>
             </div>
           </div>
           <div className='body'>
@@ -46,47 +61,54 @@ const ProfilePage = () => {
               <h4>User Information:</h4>
               <div className='row'>
                 <div className='form-input'>
-                  <input type={'text'} value={user?.firstName} />
+                  <input type={'text'} value={user?.firstName} readOnly/>
                   <label>First Name:</label>
                 </div>
                 <div className='form-input'>
-                  <input type={'text'} value={user?.lastName} />
+                  <input type={'text'} value={user?.lastName} readOnly/>
                   <label>Last Name:</label>
                 </div>
                 <div className='form-input'>
-                  <input type={'text'} value={auth?.decoded?.sub} />
-                  <label>Username:</label>
+                  <input type={'text'} value={user?.email} readOnly/>
+                  <label>Email:</label>
                 </div>
               </div>
               <div className='row'>
                 <div className='form-input'>
-                  <input type={'text'} value={user?.email} />
-                  <label>Email:</label>
-                </div>
-                <div className='form-input'>
-                  <input type={'text'} value={user?.phoneNumber} />
+                  <input type={'text'} value={user?.phoneNumber} readOnly/>
                   <label>Phone Number:</label>
                 </div>
                 <div className='form-input'>
-                  <input type={'text'} value={user?.dateOfBirth} />
+                  <input type={'text'} value={user?.dateOfBirth} readOnly/>
                   <label>Date of Birth:</label>
                 </div>
               </div>
-              <h4>Address Information:</h4>
+              <h4>Account Information:</h4>
               <div className='row'>
                 <div className='form-input'>
-                  <input type={'text'} value={user?.address?.streetName} />
-                  <label>Street Name:</label>
-                </div>
-                <div className='form-input'>
-                  <input type={'text'} value={user?.address?.zipCode} />
-                  <label>Zip Code:</label>
-                </div>
-                <div className='form-input'>
-                  <input type={'text'} value={user?.address?.city} />
-                  <label>City:</label>
+                  <input type={'text'} value={auth?.decoded?.sub} readOnly/>
+                  <label>Username:</label>
                 </div>
               </div>
+              {isEmployee ? (
+                <>
+                <h4>Address Information:</h4>
+                <div className='row'>
+                  <div className='form-input'>
+                    <input type={'text'} value={user?.address?.streetName} readOnly/>
+                    <label>Street Name:</label>
+                  </div>
+                  <div className='form-input'>
+                    <input type={'text'} value={user?.address?.zipCode} readOnly/>
+                    <label>Zip Code:</label>
+                  </div>
+                  <div className='form-input'>
+                    <input type={'text'} value={user?.address?.city} readOnly/>
+                    <label>City:</label>
+                  </div>
+                </div>
+                </>
+              ) : (null)}
             </form>
           </div>
         </div>

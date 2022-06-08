@@ -22,9 +22,9 @@ public class UpdateRoomRequestDTO {
 
     private String imageUrl;
 
-    private boolean isFeatured;
+//    private boolean isFeatured;
 
-    @NotBlank
+    @NotNull
     @Min(1)
     private int totalAmountInHotel;
 }

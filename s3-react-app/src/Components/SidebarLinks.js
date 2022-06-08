@@ -8,26 +8,41 @@ export const SidebarLinks = [
     {
         title: 'Account',
         icon: <FaUserAlt />,
-        url: '/profile'
+        url: '/profile',
+        roles: [
+            'ADMIN', 'EMPLOYEE'
+        ]
     },
     {
         title: 'Reservations',
         icon: <HiOutlineTicket />,
-        url: '/employee/reservations'
+        url: '/employee/reservations',
+        roles: [
+            'ADMIN', 'EMPLOYEE'
+        ]
     },
     {
         title: 'Rooms',
         icon: <FaHotel />,
-        url: '/employee/rooms'
+        url: '/employee/rooms',
+        roles: [
+            'ADMIN', 'EMPLOYEE'
+        ]
     },
     {
         title: 'Employees',
         icon: <FaUsers />,
-        url: '/employees'
+        url: '/employees',
+        roles: [
+            'ADMIN'
+        ]
     },
     {
         title: 'Logout',
         icon: <MdLogout />,
-        url: '/logout'
+        url: '/logout',
+        roles: [
+            'ADMIN', 'EMPLOYEE'
+        ]
     }
 ]

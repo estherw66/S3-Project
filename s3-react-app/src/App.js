@@ -16,15 +16,20 @@ import ProfilePage from "./pages/profile";
 import Logout from "./pages/logout";
 import ReservationsPage from "./pages/reservations";
 
+import AddEmployeePage from "./pages/actions/employees/add-employee";
+import UpdateEmployeePage from "./pages/actions/employees/update-employee";
+import ReservationCheckInPage from "./pages/actions/reservations/reservation-checkin";
+import UpdateRoomPage from "./pages/actions/rooms/update-room";
+import AddRoomPage from "./pages/actions/rooms/add-room";
+
+
 // components
 import RequireAuth from "./Components/RequireAuth";
 import Navbar from "./Components/navbar";
 import Footer from "./Components/footer";
 
-import AddEmployee from "./Components/Employees/AddEmployee";
 import ViewEmployeeDetails from "./Components/Employees/ViewEmployeeDetails";
-import UpdateEmployee from "./Components/Employees/UpdateEmployee";
-import AddRoom from "./Components/Employee-Rooms/AddRoom";
+
 
 
 function App() {
@@ -37,9 +42,8 @@ function App() {
 
     return (
        <>
-        {/* <Navbar toggleMenu={toggleMenu} /> */}
         <Navbar />
-        
+
         <Routes>
             <Route path="/" element={<HomePage />} />
 
@@ -49,33 +53,39 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/unauthorised" element={<UnauthorisedPage />} />
 
-            {/* prive routes only for employees */}
-            <Route element={<RequireAuth allowedRoles={["EMPLOYEE", "ADMIN"]}/>}>
+            <Route element={<RequireAuth allowedRoles={["EMPLOYEE", "ADMIN", "GUEST"]}/>}>
                 <Route path="/profile" element={<ProfilePage />} />
-
-                <Route path="/employees" element={<EmployeesPage />} />
-                <Route path="/employees/add" element={<AddEmployee />} />
-                <Route path="/employees/:id" element={<ViewEmployeeDetails />} />
-                <Route path="/employees/update/:id" element={<UpdateEmployee />} />
-
-                <Route path="/employee/rooms/add" element={<AddRoom />} />
-
-                <Route path="/employee/reservations" element={<ReservationsPage />} />
-
                 <Route path="/logout" element={<Logout />} />
             </Route>
 
-            {/* private routs only for guests */}
-            <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
-                {/* TODO... */}
-                <Route path="/employee/rooms" element={<RoomsPage />} />
+            {/* prive routes only for employees */}
+            <Route element={<RequireAuth allowedRoles={["EMPLOYEE", "ADMIN"]}/>}>
 
+                <Route path="/employees/update/:id" element={<UpdateEmployeePage />} />
+
+                <Route path="/employee/rooms" element={<RoomsPage />} />
+                <Route path="/employee/rooms/add" element={<AddRoomPage />} />
+                <Route path="/employee/rooms/update/:id" element={<UpdateRoomPage />} />
+
+                <Route path="/employee/reservations" element={<ReservationsPage />} />
+                <Route path="/employee/reservation/checkin/:id" element={<ReservationCheckInPage />} />
+            </Route>
+
+            {/* private routes only for admin */}
+            <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
+                <Route path="/employees" element={<EmployeesPage />} />
+                <Route path="/employees/add" element={<AddEmployeePage />} />
+            </Route>
+
+            {/* private routes only for guests */}
+            <Route element={<RequireAuth allowedRoles={["GUEST"]} />}>
+                {/* TODO... */}
             </Route>
 
             {/* error */}
             <Route path="/*" element={<Error />} />
         </Routes>
-        {/* <Footer /> */}
+
         <Footer />
        </> 
     );

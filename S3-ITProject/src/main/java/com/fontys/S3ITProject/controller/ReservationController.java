@@ -1,14 +1,14 @@
 package com.fontys.s3itproject.controller;
 
 import com.fontys.s3itproject.business.ReservationService;
-import com.fontys.s3itproject.dto.CreateReservationRequestDTO;
-import com.fontys.s3itproject.dto.CreateReservationResponseDTO;
-import com.fontys.s3itproject.dto.GetReservationsResponseDTO;
+import com.fontys.s3itproject.configuration.security.isauthenticated.IsAuthenticated;
+import com.fontys.s3itproject.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
@@ -29,5 +29,17 @@ public class ReservationController {
     @GetMapping
     public ResponseEntity<GetReservationsResponseDTO> getReservations(){
        return ResponseEntity.ok(reservationService.getReservations());
+    }
+
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_EMPLOYEE"})
+    @PutMapping("{id}")
+    public ResponseEntity<ReservationDTO> reservationCheckIn(@PathVariable(value = "id") long id,
+                                                             @RequestBody @Valid ReservationCheckInRequestDTO requestDTO){
+        ReservationCheckInRequestDTO request = ReservationCheckInRequestDTO.builder()
+                        .id(id).build();
+        
+        reservationService.reservationCheckIn(request);
+        return ResponseEntity.noContent().build();
     }
 }

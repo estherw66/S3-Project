@@ -81,10 +81,18 @@ public class RoomServiceImpl implements RoomService {
         updateFields(request, room);
     }
 
+    @Override
+    public Optional<RoomDTO> getRoom(Long id) {
+        if (!requestAccessToken.hasRole(RoleEnum.EMPLOYEE.name())){
+            throw new UnauthorisedDataAccessException("UNAUTHORISED_TO_PERFORM_ACTION");
+        }
+
+        return roomRepository.findById(id).map(RoomDTOConverter::convertToDTO);
+    }
+
     private void updateFields(UpdateRoomRequestDTO request, Room room){
         room.setPricePerNight(request.getPricePerNight());
         room.setImageUrl(request.getImageUrl());
-        room.setFeatured(request.isFeatured());
         room.setTotalAmountInHotel(request.getTotalAmountInHotel());
 
         roomRepository.save(room);

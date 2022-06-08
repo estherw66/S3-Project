@@ -24,7 +24,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private static final String EMAIL_SUFFIX = "@goldskye.com";
 
     private final PasswordEncoder passwordEncoder;
-    private AccessTokenDTO requestAccessToken;
+    private final AccessTokenDTO requestAccessToken;
 
     private final EmployeeRepository employeeRepository;
     private final UserRepository userRepository;
@@ -102,6 +102,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .username(employee.getFirstName().toLowerCase() + employee.getLastName().toLowerCase())
                 .password(encodedPassword)
                 .employee(employee)
+                .guest(null)
                 .build();
 
         newUser.setUserRoles(Set.of(

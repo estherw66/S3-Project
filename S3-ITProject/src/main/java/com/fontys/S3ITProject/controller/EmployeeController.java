@@ -20,7 +20,7 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @IsAuthenticated
-    @RolesAllowed({"ROLE_EMPLOYEE", "ROLE_ADMIN"})
+    @RolesAllowed({"ROLE_ADMIN"})
     @GetMapping
     public ResponseEntity<GetEmployeesResponseDTO> getEmployees(){
         return ResponseEntity.ok(employeeService.getEmployees());
@@ -37,8 +37,8 @@ public class EmployeeController {
         return ResponseEntity.ok().body(employeeOptional.get());
     }
 
-//    @IsAuthenticated
-//    @RolesAllowed({"ROLE_ADMIN"})
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_ADMIN"})
     @PostMapping
     public ResponseEntity<CreateEmployeeResponseDTO> createEmployee(
             @RequestBody @Valid CreateEmployeeRequestDTO createEmployeeRequest){
@@ -46,8 +46,8 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-//    @IsAuthenticated
-//    @RolesAllowed({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     @PutMapping("{id}")
     public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable(value = "id") long id,
                                                       @RequestBody @Valid UpdateEmployeeRequestDTO requestDTO){
@@ -56,8 +56,8 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 
-//    @IsAuthenticated
-//    @RolesAllowed({"ROLE_ADMIN"})
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_ADMIN"})
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable long id){
         employeeService.deleteEmployee(id);

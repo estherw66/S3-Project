@@ -19,6 +19,10 @@ const Navbar = () => {
           <nav className='nav-btn'>
             {!auth?.decoded && <Link to={'/login'} className='nav-btn-link'>Login</Link>}
             {auth?.decoded && <Link to={'/profile'} className='nav-btn-link'>{auth?.decoded.sub}</Link>}
+            {auth?.decoded && 
+              <div className='nav-drop-down'>
+                
+              </div>}
           </nav>
         </div>
       </nav>

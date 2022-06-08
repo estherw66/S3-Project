@@ -42,7 +42,9 @@ const LoginPage = () => {
         const accessToken = response?.data?.accessToken;
         const decoded = jwt_decode(accessToken);
         const roles = decoded?.roles;
-        setAuth({ accessToken, decoded, roles });
+        setAuth({ accessToken, decoded, roles, password });
+
+        console.log(roles)
 
         setUsername('');
         setPassword('');

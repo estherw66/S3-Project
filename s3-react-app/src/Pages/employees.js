@@ -39,7 +39,7 @@ const EmployeesPage = () => {
           <div className='header'>
             <h3>All Employees:</h3>
             <input type={'text'} placeholder={'Search...'} className='search-bar' />
-            <Link to={'/'}><AiOutlineUserAdd /></Link>
+            <Link to={'/employees/add'}>Add New<AiOutlineUserAdd /></Link>
           </div>
           <div className='body'>
             <div className='row'>
@@ -52,6 +52,9 @@ const EmployeesPage = () => {
                     <th>Email</th>
                     <th>Phone Number</th>
                     <th>Date of Birth</th>
+                    <th>Street Name</th>
+                    <th>Zip Code</th>
+                    <th>City</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -64,6 +67,9 @@ const EmployeesPage = () => {
                       <td>{employee.email}</td>
                       <td>{employee.phoneNumber}</td>
                       <td>{employee.dateOfBirth}</td>
+                      <td>{employee.address.streetName}</td>
+                      <td>{employee.address.zipCode}</td>
+                      <td>{employee.address.city}</td>
                     </tr>
                   )}
                 </tbody>

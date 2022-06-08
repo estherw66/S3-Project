@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Sidebar from '../Components/sidebar'
 import useAuth from '../hooks/useAuth'
 import axios from '../api/axios'
+import { Link } from 'react-router-dom'
 const URL = '/rooms'
 
 const RoomsPage = () => {
@@ -12,7 +13,6 @@ const RoomsPage = () => {
     axios.get(URL)
     .then(res => {
       setRooms(res.data.rooms)
-      console.log(res.data.rooms)
     })
     .catch(err => {
       console.log(err)
@@ -33,6 +33,7 @@ const RoomsPage = () => {
           <div className='header'>
             <h3>All Rooms:</h3>
             <input type={'text'} className='search-bar' placeholder='Search...'/>
+            <Link to={`/employee/rooms/add`}>Add New Room</Link>
           </div>
           <div className='body'>
             <div className='row'>
@@ -59,6 +60,7 @@ const RoomsPage = () => {
                       <td>{room.totalAmountInHotel}</td>
                       <td>{room.featured ? 'Yes' : 'No'}</td>
                       <td>{room.imageUrl === '' ? 'No' : 'Yes'}</td>
+                      <td><Link to={`/employee/rooms/update/${room.id}`}>Update</Link></td>
                     </tr>
                   )}
                 </tbody>
