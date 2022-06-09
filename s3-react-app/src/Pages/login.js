@@ -4,6 +4,7 @@ import useAuth from '../hooks/useAuth'
 import jwt_decode from "jwt-decode"
 
 import axios from '../api/axios'
+import { Link } from 'react-router-dom'
 const URL = '/login'
 
 const LoginPage = () => {
@@ -44,8 +45,6 @@ const LoginPage = () => {
         const roles = decoded?.roles;
         setAuth({ accessToken, decoded, roles, password });
 
-        console.log(roles)
-
         setUsername('');
         setPassword('');
 
@@ -64,7 +63,7 @@ const LoginPage = () => {
     }
   }
   return (
-    <div className='container-login'>
+    <div className='main'>
       <div>
         <div>
           <form onSubmit={handleSubmit}>
@@ -76,7 +75,7 @@ const LoginPage = () => {
             <input type={'password'} value={password} onChange={(e) => setPassword(e.target.value)} required />
             <button>Login</button>
           </form>
-          <p>Create account</p>
+          <Link to={'/signup'}>Create Account</Link>
         </div>
       </div>
     </div>

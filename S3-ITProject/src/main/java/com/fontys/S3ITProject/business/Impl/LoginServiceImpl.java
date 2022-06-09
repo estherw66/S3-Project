@@ -44,7 +44,8 @@ public class LoginServiceImpl implements LoginService {
     }
 
     public String generateAccessToken(User user){
-        Long employeeID = user.getEmployee() != null ? user.getEmployee().getId() : null;
+        Long employeeID = user.getEmployee() != null ? user.getEmployee().getId() : user.getGuest() != null ? user.getGuest().getId() : null;
+
         List<String> roles = user.getUserRoles().stream()
                 .map(userRole -> userRole.getRole().toString())
                 .toList();

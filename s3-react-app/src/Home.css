@@ -1,0 +1,84 @@
+/* CSS FOR HOMEPAGE */
+.home-container{
+    width: 80%;
+    text-align: center;
+    margin: auto;
+}
+
+.title {
+    color: #8A897C;
+}
+
+.home-row{
+    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+/* room card */
+.card-col{
+    flex-basis: 33%;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    text-align: center;
+}
+.card {
+    width: 100%;
+}
+.card img{
+    width: 100%;
+    border-radius: 10px;
+}
+.card p {
+    padding: 0;
+    color: #353535;
+}
+
+/* banner */
+.home-container img{
+    width: 100%;
+    border-radius: 10px;
+    margin: 25px;
+}
+.banner-text{
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    color: #353535;
+    border: 1px solid white;
+    padding: 25px;
+    background-color: rgba(255,255,255,0.4);
+    border-radius: 10px;
+}
+.banner-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: #353535;
+    padding: 12px 34px;
+    font-size: 17;
+    background: #d2d7df;
+    position: relative;
+    cursor: pointer;
+    border-radius: 50px;
+}
+.banner-btn:hover{
+    background-color: #353535;
+    color: #d2d7df;
+    transition: 0.7s ease-in-out;
+}
+
+@media screen and (max-width: 992px) {
+    .home-row{
+        display: grid;
+        grid-template-columns: 45% 45%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .home-row{
+        display: grid;
+        grid-template-columns: 100%;
+    }
+}

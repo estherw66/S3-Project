@@ -29,6 +29,8 @@ import Navbar from "./Components/navbar";
 import Footer from "./Components/footer";
 
 import ViewEmployeeDetails from "./Components/Employees/ViewEmployeeDetails";
+import SingupPage from "./pages/signup";
+import GuestReservationsPage from "./pages/guest/guest-reservation";
 
 
 
@@ -52,6 +54,7 @@ function App() {
             <Route path="/all-rooms" element={<AllRoomsPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/unauthorised" element={<UnauthorisedPage />} />
+            <Route path="/signup" element={<SingupPage />} />
 
             <Route element={<RequireAuth allowedRoles={["EMPLOYEE", "ADMIN", "GUEST"]}/>}>
                 <Route path="/profile" element={<ProfilePage />} />
@@ -79,7 +82,7 @@ function App() {
 
             {/* private routes only for guests */}
             <Route element={<RequireAuth allowedRoles={["GUEST"]} />}>
-                {/* TODO... */}
+                <Route path="/guest/reservations/:id" element={<GuestReservationsPage />} />
             </Route>
 
             {/* error */}

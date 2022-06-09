@@ -69,6 +69,24 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    public GetReservationsByGuestResponseDTO getReservationsByGuest(Long id) {
+        Optional<Guest> guestOptional = guestRepository.findById(id);
+
+        if (guestOptional.isEmpty()){
+            throw new InvalidGuestException("GUEST_NOT_FOUND");
+        }
+
+        List<ReservationDTO> reservations = findAllByGuest(guestOptional.get())
+                .stream()
+                .map(ReservationDTOConverter::convertToDTO)
+                .toList();
+
+        return GetReservationsByGuestResponseDTO.builder()
+                .reservations(reservations)
+                .build();
+    }
+
+    @Override
     public void reservationCheckIn(ReservationCheckInRequestDTO request) {
         Optional<Reservation> reservationOptional = reservationRepository.findById(request.getId());
         if (reservationOptional.isEmpty()){
@@ -76,7 +94,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
 
         if (!requestAccessToken.hasRole(RoleEnum.EMPLOYEE.name())){
-            throw new UnauthorisedDataAccessException("UNAUTHORISED_TO_PERFOM_ACTION");
+            throw new UnauthorisedDataAccessException("UNAUTHORISED_TO_PERFORM_ACTION");
         }
 
         Reservation reservation = reservationOptional.get();
@@ -151,11 +169,17 @@ public class ReservationServiceImpl implements ReservationService {
     private List<Reservation> findAll(){
         return reservationRepository.findAll();
     }
+    private List<Reservation> findAllByGuest(Guest guest) { return reservationRepository.findAllByGuest(guest); }
     private List<ReservationRoom> findAllRoomsByReservationID(Reservation reservation){
         return reservationRoomRepository.findAllByReservation(reservation.getId());
     }
     private void updateFields(Reservation reservation){
-        reservation.setCheckedIn(!reservation.isCheckedIn());
+        if (reservation.isCheckedIn()){
+            reservation.setCheckedIn(false);
+        } else {
+            reservation.setCheckedIn(true);
+        }
+//        reservation.setCheckedIn(!reservation.isCheckedIn());
 
         reservationRepository.save(reservation);
     }

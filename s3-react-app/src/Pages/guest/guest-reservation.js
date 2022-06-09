@@ -1,41 +1,43 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import Sidebar from '../../Components/sidebar'
+import useAuth from '../../hooks/useAuth'
+import axios from '../../api/axios'
 
-import axios from '../api/axios'
-import Sidebar from '../Components/sidebar'
-import useAuth from '../hooks/useAuth'
-const URL = '/reservations'
+const GuestReservationsPage = () => {
 
-const ReservationsPage = () => {
-    const { auth } = useAuth();
-    const [reservations, setReservations] = useState([]);
+    const { auth } = useAuth()
+    const { id } = useParams()
+    const [reservations, setReservations] = useState([])
     const authorisation = {
         headers: { Authorization: 'Bearer ' + auth?.accessToken}
     }
 
-    const getAllReservations = () => {
-        axios.get(URL, authorisation)
-        .then(res => {
-            setReservations(res.data.reservations)
-        })
-        .catch(err => {
+    const getReservationsByUser = () => {
+        const URL = `/reservations/${auth?.decoded?.employeeID}`
+          axios.get(URL, authorisation)
+          .then(res => {
+            setReservations(res.data.reservations);
+          })
+          .catch(err => {
             console.log(err)
-        })
+          })
     }
     
-    useEffect(() => {
-        getAllReservations()
-    }, [])
+      useEffect(() => {
+        getReservationsByUser()
+      }, [])
+
 
   return (
-      <div className='main'>
+    <div className='main'>
           <div className='row'>
               <div className='left'>
                   <Sidebar />
               </div>
               <div className='right'>
                   <div className='header'>
-                      <h3>Reservations:</h3>
+                      <h3>My Reservations:</h3>
                       <input type={'text'} placeholder='Search...' className='search-bar' />
                   </div>
                   <div className='body'>
@@ -50,7 +52,6 @@ const ReservationsPage = () => {
                                     <th>Amount Of Guests</th>
                                     <th>Total Price</th>
                                     <th>Check In Status</th>
-                                    <th>Check In</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,8 +65,6 @@ const ReservationsPage = () => {
                                         <td>{reservation.amountOfGuests}</td>
                                         <td>£{reservation.totalPrice}</td>
                                         <td>{reservation.checkedIn ? 'Checked In' : 'Not Checked In'}</td>
-                                        <td><button>{reservation.checkedIn ? 'Check Out' : 'Check In'}</button></td>
-                                        <td><button><Link to={`/employee/reservation/checkin/${reservation.id}`}>{reservation.checkedIn ? 'Check Out' : 'Check In'}</Link></button></td>
                                     </tr>
                                 )}
                             </tbody>
@@ -78,4 +77,4 @@ const ReservationsPage = () => {
   )
 }
 
-export default ReservationsPage
+export default GuestReservationsPage

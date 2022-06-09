@@ -159,6 +159,8 @@ footer p {
 /* employee pages */
 .main{
     height: 85vh;
+    /* flex-grow: 1;
+    overflow-y: auto; */
     background-color: #d2d7df;
 }
 .left{

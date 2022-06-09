@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth'
-import { SidebarLinks } from './SidebarLinks';
 
 import {HiOutlineTicket} from 'react-icons/hi'
 import {FaUserAlt} from 'react-icons/fa'
@@ -73,7 +72,7 @@ const Sidebar = () => {
             <Link to={'/profile'} className='side-link'><FaUserAlt /> Account</Link>
           </li>
           <li className='sidebar-row'>
-            <Link to={'/'} className='side-link'>
+            <Link to={`/guest/reservations/${auth?.decoded?.employeeID}`} className='side-link'>
               <div className='link'><HiOutlineTicket /> Reservations</div>
             </Link>
           </li>

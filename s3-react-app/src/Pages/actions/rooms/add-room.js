@@ -100,7 +100,7 @@ const AddRoomPage = () => {
                                 <label>Capacity:</label>
                             </div>
                             <div className='form-input'>
-                                <input type={'text'} value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} required />
+                                <input type={'text'} value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
                                 <label>Image Url:</label>
                             </div>
                         </div>

@@ -62,7 +62,7 @@ public class GuestServiceImpl implements GuestService {
 
     @Override
     public Optional<GuestDTO> getGuest(Long guestID) {
-        if (!requestAccessToken.hasRole(RoleEnum.EMPLOYEE.name())){
+        if (!requestAccessToken.hasRole(RoleEnum.GUEST.name())){
             if (!requestAccessToken.getEmployeeId().equals(guestID)){
                 throw new UnauthorisedDataAccessException("GUEST_ID_NOT_FROM_LOGGED_IN_USER");
             }

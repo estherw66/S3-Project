@@ -1,15 +1,14 @@
 import React from 'react'
-import { RoomContainer, Heading, Row } from '../FeaturedRooms/FeaturedRoomStyled'
 import AllRoomsList from './AllRoomsList'
 
 
 const AllRooms = () => {
   return (
       <>
-        <Heading>All Rooms</Heading>
-        <Row>
-            <AllRoomsList />
-        </Row>
+        <h1>All Rooms</h1>
+        <div className='row'>
+          <AllRoomsList/>
+        </div>
       </>
   )
 }

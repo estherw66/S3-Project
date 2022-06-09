@@ -10,19 +10,14 @@ const ReservationCheckInPage = () => {
   const navigate = useNavigate();
   const {id} = useParams();
 
-  const URL = `/${id}`
+  const URL = `reservations/${id}`
 
   const authorisation = {
     headers: { Authorization: 'Bearer ' + auth?.accessToken}
   }
 
   const checkIn = () => {
-    let updateRequest = {
-      'isCheckedIn': true
-    }
-
-
-    axios.put(URL, updateRequest, authorisation)
+    axios.put(URL, null, authorisation)
         .then(function(){})
         .catch(err => {
             console.log(err)

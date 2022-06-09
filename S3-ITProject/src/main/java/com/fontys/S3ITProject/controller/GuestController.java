@@ -19,6 +19,8 @@ import java.util.Optional;
 public class GuestController {
     private final GuestService guestService;
 
+    @IsAuthenticated
+    @RolesAllowed({ "ROLE_GUEST"})
     @GetMapping("{id}")
     public ResponseEntity<GuestDTO> getGuest(@PathVariable(value = "id") final long id){
         final Optional<GuestDTO> guestOptional = guestService.getGuest(id);

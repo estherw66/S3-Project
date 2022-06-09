@@ -32,10 +32,16 @@ public class ReservationController {
     }
 
     @IsAuthenticated
+    @RolesAllowed({"ROLE_GUEST"})
+    @GetMapping(path = "{id}")
+    public ResponseEntity<GetReservationsByGuestResponseDTO> getReservationsByGuest(@PathVariable(value = "id") long id){
+        return ResponseEntity.ok(reservationService.getReservationsByGuest(id));
+    }
+
+    @IsAuthenticated
     @RolesAllowed({"ROLE_EMPLOYEE"})
     @PutMapping("{id}")
-    public ResponseEntity<ReservationDTO> reservationCheckIn(@PathVariable(value = "id") long id,
-                                                             @RequestBody @Valid ReservationCheckInRequestDTO requestDTO){
+    public ResponseEntity<ReservationDTO> reservationCheckIn(@PathVariable(value = "id") long id){
         ReservationCheckInRequestDTO request = ReservationCheckInRequestDTO.builder()
                         .id(id).build();
         

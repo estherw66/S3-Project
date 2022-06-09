@@ -27,14 +27,25 @@ const ProfilePage = () => {
 
   
   const getUser = () => {
-    const URL = `/employees/${auth?.decoded?.employeeID}`
-    axios.get(URL, { headers: {Authorization: 'Bearer ' + auth.accessToken }})
-    .then(res => {
-      setUser(res.data);
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    if (!isEmployee){
+      const URL = `/guests/${auth?.decoded?.employeeID}`
+      axios.get(URL, { headers: {Authorization: 'Bearer ' + auth.accessToken }})
+      .then(res => {
+        setUser(res.data);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    } 
+
+      const URL = `/employees/${auth?.decoded?.employeeID}`
+      axios.get(URL, { headers: {Authorization: 'Bearer ' + auth.accessToken }})
+      .then(res => {
+        setUser(res.data);
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   useEffect(() => {
@@ -74,14 +85,18 @@ const ProfilePage = () => {
                 </div>
               </div>
               <div className='row'>
-                <div className='form-input'>
-                  <input type={'text'} value={user?.phoneNumber} readOnly/>
-                  <label>Phone Number:</label>
-                </div>
-                <div className='form-input'>
-                  <input type={'text'} value={user?.dateOfBirth} readOnly/>
-                  <label>Date of Birth:</label>
-                </div>
+                  { isEmployee ? (
+                    <>
+                      <div className='form-input'>
+                        <input type={'text'} value={user?.phoneNumber} readOnly/>
+                        <label>Phone Number:</label>
+                      </div>
+                      <div className='form-input'>
+                        <input type={'text'} value={user?.dateOfBirth} readOnly/>
+                        <label>Date of Birth:</label>
+                      </div>
+                    </>
+                  ) : (null)}
               </div>
               <h4>Account Information:</h4>
               <div className='row'>

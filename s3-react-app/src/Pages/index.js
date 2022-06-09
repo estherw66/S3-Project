@@ -1,13 +1,21 @@
 import React, { useState } from 'react'
-import FeaturedRooms from '../Components/FeaturedRooms'
-import ReservationForm from '../Components/ReservationForm'
-import About from '../Components/About'
+import useAuth from '../hooks/useAuth'
+import FeaturedRooms from '../Components/HomePage/featuredRooms'
+import About from '../Components/HomePage/about'
+import '../Home.css'
+import ReservationForm from '../Components/HomePage/reservationForm'
+import Banner from '../Components/HomePage/banner'
 
+// import 
 const HomePage = () => {
+
+  const { auth } = useAuth()
 
   return (
     <>
-        <ReservationForm />
+        {auth?.decoded ? (
+          <ReservationForm />
+        ) : ( <Banner />)}
         <FeaturedRooms />
         <About />
     </>
