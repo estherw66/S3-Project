@@ -24,6 +24,10 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public CreateRoomResponseDTO createRoom(CreateRoomRequestDTO request) {
 
+        if (request.getImageUrl().equals("")){
+            request.setImageUrl("https://drive.google.com/uc?export=view?&id=1xbCub9QX4q6Dcw3Y8-KI2_qOJP9LRx51");
+        }
+
         Room newRoom = Room.builder()
                 .capacity(request.getCapacity())
                 .pricePerNight(request.getPricePerNight())

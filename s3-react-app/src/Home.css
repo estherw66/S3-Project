@@ -3,6 +3,7 @@
     width: 80%;
     text-align: center;
     margin: auto;
+    align-items: center;
 }
 
 .title {
@@ -69,6 +70,35 @@
     transition: 0.7s ease-in-out;
 }
 
+/* reservation form */
+.reservation-form {
+    border: 1px solid #353535;
+    width: 50%;
+    margin: 10px;
+    align-items: center;
+    align-self: center;
+}
+div .input {
+    margin: 20px 0;
+}
+div .input, .inlined{
+    width: 49%;
+    display: inline-block;
+    margin: 1%;
+}
+.input label {
+    display: block;
+    padding-bottom: 10px;
+    font-size: 1em;
+}
+.input input, select {
+    border-radius: 2px;
+    border: 1px solid #353535;
+    font-size: 1em;
+    width: 100%;
+    padding: 5px;
+}
+
 @media screen and (max-width: 992px) {
     .home-row{
         display: grid;
@@ -82,3 +112,4 @@
         grid-template-columns: 100%;
     }
 }
+
