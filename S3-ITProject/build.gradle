@@ -84,3 +84,10 @@ tasks.named('sonarqube').configure {
 //		property "sonar.qualitygate.wait", true
 //	}
 //}
+
+sonarqube {
+	properties {
+		property "sonar.projectKey", "S3-IndividualProject"
+		property "sonar.qualitygate.wait", true
+	}
+}

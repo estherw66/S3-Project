@@ -31,8 +31,24 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public CreateReservationResponseDTO createReservation(CreateReservationRequestDTO request) {
+        Optional<Guest> guestOptional = findGuestByID(request.getGuestID());
+        if (guestOptional.isEmpty()){
+            throw new InvalidGuestException("GUEST_NOT_FOUND");
+        }
+        if (request.getCheckInDate().isBefore(LocalDate.now())){
+            throw new InvalidReservationException("CHECK_IN_DATE_CANNOT_BE_BEFORE_TODAY");
+        }
+        if (request.getCheckOutDate().isBefore(request.getCheckInDate())){
+            throw new InvalidReservationException("CHECK_OUT_DATE_MUST_BE_AFTER_CHECK_IN_DATE");
+        }
+        if (request.getAmountOfGuests() > calculateTotalRoomCapacity(request)){
+            throw new InvalidReservationException("AMOUNT_OF_GUESTS_IS_HIGHER_THAN_TOTAL_CAPACITY");
+        }
+        if (request.getCheckOutDate().equals(request.getCheckInDate())){
+            throw new InvalidReservationException("CHECK_OUT_DATE_CANNOT_BE_THE_SAME_AS_CHECK_IN_DATE");
+        }
 
-        Reservation savedReservation = saveNewReservation(request);
+        Reservation savedReservation = saveNewReservation(request, guestOptional.get());
 
         List<Room> rooms = request.getReservationRooms()
                 .stream()
@@ -69,7 +85,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public GetReservationsByGuestResponseDTO getReservationsByGuest(Long id) {
+    public GetReservationsResponseDTO getReservationsByGuest(Long id) {
         Optional<Guest> guestOptional = guestRepository.findById(id);
 
         if (guestOptional.isEmpty()){
@@ -81,7 +97,7 @@ public class ReservationServiceImpl implements ReservationService {
                 .map(ReservationDTOConverter::convertToDTO)
                 .toList();
 
-        return GetReservationsByGuestResponseDTO.builder()
+        return GetReservationsResponseDTO.builder()
                 .reservations(reservations)
                 .build();
     }
@@ -107,27 +123,8 @@ public class ReservationServiceImpl implements ReservationService {
         updateFields(reservation);
     }
 
-    private Reservation saveNewReservation(CreateReservationRequestDTO request){
-        //TODO fix this -> get correct guest
-        Optional<Guest> guestOptional = findGuestByID(request.getGuestID());
-        if (guestOptional.isEmpty()){
-            throw new InvalidGuestException("GUEST_NOT_FOUND");
-        }
-        if (request.getCheckInDate().isBefore(LocalDate.now())){
-            throw new InvalidReservationException("CHECK_IN_DATE_CANNOT_BE_BEFORE_TODAY");
-        }
-        if (request.getCheckOutDate().isBefore(request.getCheckInDate())){
-            throw new InvalidReservationException("CHECK_OUT_DATE_MUST_BE_AFTER_CHECK_IN_DATE");
-        }
-        if (request.getCheckOutDate().isBefore(LocalDate.now())){
-            throw new InvalidReservationException("CHECK_OUT_DATE_CANNOT_BE_BEFORE_TODAY");
-        }
-        if (request.getAmountOfGuests() > calculateTotalRoomCapacity(request)){
-            throw new InvalidReservationException("AMOUNT_OF_GUESTS_IS_HIGHER_THAN_TOTAL_CAPACITY");
-        }
-        if (request.getCheckOutDate().equals(request.getCheckInDate())){
-            throw new InvalidReservationException("CHECK_OUT_DATE_CANNOT_BE_THE_SAME_AS_CHECK_IN_DATE");
-        }
+    private Reservation saveNewReservation(CreateReservationRequestDTO request, Guest guest){
+
 
         Reservation reservation = Reservation.builder()
                 .reservationDate(LocalDate.now())
@@ -136,7 +133,7 @@ public class ReservationServiceImpl implements ReservationService {
                 .amountOfGuests(request.getAmountOfGuests())
                 .isCheckedIn(false)
                 .totalPrice(calculateTotalPrice(request))
-                .guest(guestOptional.get())
+                .guest(guest)
                 .build();
 
         return reservationRepository.save(reservation);
@@ -174,12 +171,12 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRoomRepository.findAllByReservation(reservation.getId());
     }
     private void updateFields(Reservation reservation){
-        if (reservation.isCheckedIn()){
-            reservation.setCheckedIn(false);
-        } else {
-            reservation.setCheckedIn(true);
-        }
-//        reservation.setCheckedIn(!reservation.isCheckedIn());
+//        if (reservation.isCheckedIn()){
+//            reservation.setCheckedIn(false);
+//        } else {
+//            reservation.setCheckedIn(true);
+//        }
+        reservation.setCheckedIn(!reservation.isCheckedIn());
 
         reservationRepository.save(reservation);
     }

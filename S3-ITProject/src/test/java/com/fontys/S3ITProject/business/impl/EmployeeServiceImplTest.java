@@ -1,9 +1,6 @@
 package com.fontys.s3itproject.business.impl;
 
-import com.fontys.s3itproject.business.exception.EmailAlreadyExistsException;
-import com.fontys.s3itproject.business.exception.InvalidCredentialsException;
-import com.fontys.s3itproject.business.exception.InvalidEmployeeException;
-import com.fontys.s3itproject.business.exception.UnauthorisedDataAccessException;
+import com.fontys.s3itproject.business.exception.*;
 import com.fontys.s3itproject.dto.*;
 import com.fontys.s3itproject.repository.AddressRepository;
 import com.fontys.s3itproject.repository.EmployeeRepository;
@@ -52,14 +49,6 @@ class EmployeeServiceImplTest {
 
     @InjectMocks
     private EmployeeServiceImpl employeeService;
-
-    private AccessTokenDTO getAccessTokenDTO() {
-        return AccessTokenDTO.builder()
-                .subject("Esther")
-                .roles(List.of("ADMIN"))
-                .employeeId(1L)
-                .build();
-    }
 
     @Test
     void createEmployee_shouldSaveNewEmployee() {
@@ -226,32 +215,7 @@ class EmployeeServiceImplTest {
     }
 
     @Test
-    void updateEmployee_shouldUpdateEmployeePhoneNumber(){
-        Employee updated = Employee.builder()
-                .id(1L)
-                .firstName("Esther")
-                .lastName("Wolfs")
-                .email("EstherWolfs@goldskye.com")
-                .dateOfBirth(LocalDate.of(1998,1,1))
-                .phoneNumber("+31612901749")
-                .build();
-
-        when(employeeRepositoryMock.findById(1L))
-                .thenReturn(Optional.of(updated));
-
-        UpdateEmployeeRequestDTO requestDTO = UpdateEmployeeRequestDTO.builder()
-                .id(1L)
-                .firstName("Esther")
-                .lastName("Wolfs")
-                .phoneNumber("+31617491290")
-                .build();
-
-        employeeService.updateEmployee(requestDTO);
-        verify(employeeRepositoryMock).save(updated);
-    }
-
-    @Test
-    void getEmployee_shouldReturn_shouldReturnUnauthorisedDataAccessException_whenEmployeeIDNotFromLoggedInUser() {
+    void getEmployee_shouldReturnUnauthorisedDataAccessException_whenEmployeeIDNotFromLoggedInUser() {
         User testUser = User.builder()
                 .id(1L)
                 .username("username")
@@ -276,6 +240,68 @@ class EmployeeServiceImplTest {
         verifyNoInteractions(employeeRepositoryMock);
     }
 
+    @Test
+    void updateEmployee_shouldUpdateEmployeePhoneNumber(){
+        when(accessTokenDTO.getEmployeeId()).thenReturn(1L);
+
+        Employee updated = Employee.builder()
+                .id(1L)
+                .firstName("Esther")
+                .lastName("Wolfs")
+                .email("EstherWolfs@goldskye.com")
+                .dateOfBirth(LocalDate.of(1998,1,1))
+                .phoneNumber("+31612901749")
+                .build();
+
+        when(employeeRepositoryMock.findById(1L))
+                .thenReturn(Optional.of(updated));
+
+        UpdateEmployeeRequestDTO requestDTO = UpdateEmployeeRequestDTO.builder()
+                .id(1L)
+                .firstName("Esther")
+                .lastName("Wolfs")
+                .phoneNumber("+31617491290")
+                .build();
+
+
+        employeeService.updateEmployee(requestDTO);
+        verify(employeeRepositoryMock).save(updated);
+    }
+
+    @Test
+    void updateEmployee_shouldThrowInvalidEmployeeException_whenEmployeeNotFound(){
+        InvalidEmployeeException exception = assertThrows(InvalidEmployeeException.class,
+                () -> employeeService.updateEmployee(UpdateEmployeeRequestDTO.builder().id(1L).build()));
+
+        assertEquals(("EMPLOYEE_NOT_FOUND"), exception.getReason());
+    }
+
+    @Test
+    void updateEmployee_shouldThrowUnauthorisedDataException_whenEmployeeIDNotFromLoggedInUser(){
+        when(employeeRepositoryMock.findById(1L)).thenReturn(Optional.of(Employee.builder().id(1L).build()));
+
+        User testUser = User.builder()
+                .id(1L)
+                .username("username")
+                .password("hashed-password")
+                .build();
+        testUser.setUserRoles(Set.of(
+                UserRole.builder()
+                        .user(testUser)
+                        .role(RoleEnum.EMPLOYEE)
+                        .build()));
+
+        AccessTokenDTO accessTokenDTO = AccessTokenDTO.builder()
+                .subject("User")
+                .roles(List.of("Employee"))
+                .employeeId(2L)
+                .build();
+
+        UnauthorisedDataAccessException exception = assertThrows(UnauthorisedDataAccessException.class,
+                () -> employeeService.updateEmployee(UpdateEmployeeRequestDTO.builder().id(1L).build()));
+
+        assertEquals("EMPLOYEE_ID_NOT_FROM_LOGGED_IN_USER", exception.getReason());
+    }
 
     @Test
     void deleteEmployee_shouldDeleteEmployee(){

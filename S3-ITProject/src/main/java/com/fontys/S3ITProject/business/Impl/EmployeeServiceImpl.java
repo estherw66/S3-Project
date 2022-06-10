@@ -71,10 +71,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void updateEmployee(UpdateEmployeeRequestDTO request) {
         Optional<Employee> employeeOptional = employeeRepository.findById(request.getId());
         if (employeeOptional.isEmpty()){
-            throw new InvalidEmployeeException("EMPLOYEE_ID_INVALID");
+            throw new InvalidEmployeeException("EMPLOYEE_NOT_FOUND");
         }
 
-        if (!requestAccessToken.hasRole(RoleEnum.ADMIN.name()) && requestAccessToken.getEmployeeId().equals(request.getId())){
+        if (!requestAccessToken.hasRole(RoleEnum.ADMIN.name()) && !requestAccessToken.getEmployeeId().equals(request.getId())){
             throw new UnauthorisedDataAccessException("EMPLOYEE_ID_NOT_FROM_LOGGED_IN_USER");
         }
 
@@ -137,9 +137,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.save(newEmployee);
     }
 
-    private boolean existsByEmail(String email){
-        return employeeRepository.existsByEmail(email);
-    }
     private boolean existsByPhoneNumber(String phoneNumber) { return employeeRepository.existsByPhoneNumber(phoneNumber); }
 
     private List<Employee> findAll(){

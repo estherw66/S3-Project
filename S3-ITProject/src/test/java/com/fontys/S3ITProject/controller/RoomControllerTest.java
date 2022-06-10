@@ -13,6 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -153,27 +154,70 @@ class RoomControllerTest {
 
     @Test
     @WithMockUser(username = "EstherWolfs", roles = {"EMPLOYEE"})
-    void updateRoom_shouldUpdatePriceAndReturn204() throws Exception{
+    void getRoom_shouldReturn200WithRoom() throws Exception {
+        RoomDTO roomDTO = RoomDTO.builder()
+                .id(1L)
+                .roomType("Single")
+                .build();
 
-//        mockMvc.perform(put("/api/rooms/1")
-//                    .contentType(APPLICATION_JSON_VALUE)
-//                    .content("""
-//                                {
-//                                    "pricePerNight": 75,
-//                                    "imageUrl": "",
-//                                    "featured": 0,
-//                                    "totalAmountInHotel": 10
-//                                }
-//                    """))
-//                .andDo(print());
-//
-//        UpdateRoomRequestDTO request = UpdateRoomRequestDTO.builder()
-//                .id(1L)
-//                .pricePerNight(75)
-//                .imageUrl("")
-//                .isFeatured(false)
-//                .totalAmountInHotel(10)
-//                .build();
-//        verify(roomServiceMock).updateRoom(request);
+        when(roomServiceMock.getRoom(1L)).thenReturn(Optional.of(roomDTO));
+
+        mockMvc.perform(get("/api/rooms/1"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(header().string("Content-Type", APPLICATION_JSON_VALUE))
+                .andExpect(content().json("""
+                            {
+                                "id": 1,
+                                "roomType": "Single"
+                            }
+                    """));
+
+        verify(roomServiceMock).getRoom(1L);
+    }
+
+    @Test
+    @WithMockUser(username = "EstherWolfs", roles = {"EMPLOYEE"})
+    void getRoom_shouldReturn404NotFoundError_whenEmployeeNotFound() throws Exception{
+        when(roomServiceMock.getRoom(1L)).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/api/rooms/1"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+
+        verify(roomServiceMock).getRoom(1L);
+    }
+
+    @Test
+    @WithMockUser(username = "EstherWolfs", roles = {"GUEST"})
+    void getRoom_shouldReturn500InternalServerError_whenLoggedInUserIsNotEmployee() throws Exception{
+        mockMvc.perform(get("/api/rooms/1"))
+                .andDo(print())
+                .andExpect(status().isInternalServerError());
+    }
+
+
+    @Test
+    @WithMockUser(username = "EstherWolfs", roles = {"EMPLOYEE"})
+    void updateRoom_shouldUpdatePriceAndReturn204_whenUpdatingRoom() throws Exception{
+        mockMvc.perform(put("/api/rooms/1")
+                .contentType(APPLICATION_JSON_VALUE)
+                .content("""
+                            {
+                                "pricePerNight": 75,
+                                "imageUrl": "not null",
+                                "totalAmountInHotel": 10
+                            }
+                        """))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+                UpdateRoomRequestDTO expectedRequest = UpdateRoomRequestDTO.builder()
+                        .id(1L)
+                        .pricePerNight(75)
+                        .imageUrl("not null")
+                        .totalAmountInHotel(10)
+                        .build();
+                verify(roomServiceMock).updateRoom(expectedRequest);
     }
 }

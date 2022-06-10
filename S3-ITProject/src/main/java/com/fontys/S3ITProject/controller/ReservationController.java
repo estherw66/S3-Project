@@ -34,7 +34,7 @@ public class ReservationController {
     @IsAuthenticated
     @RolesAllowed({"ROLE_GUEST"})
     @GetMapping(path = "{id}")
-    public ResponseEntity<GetReservationsByGuestResponseDTO> getReservationsByGuest(@PathVariable(value = "id") long id){
+    public ResponseEntity<GetReservationsResponseDTO> getReservationsByGuest(@PathVariable(value = "id") long id){
         return ResponseEntity.ok(reservationService.getReservationsByGuest(id));
     }
 

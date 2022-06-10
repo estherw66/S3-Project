@@ -2,13 +2,14 @@ package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.GuestService;
 import com.fontys.s3itproject.business.exception.EmailAlreadyExistsException;
+import com.fontys.s3itproject.business.exception.InvalidGuestException;
 import com.fontys.s3itproject.business.exception.UnauthorisedDataAccessException;
 import com.fontys.s3itproject.business.exception.UsernameAlreadyExistsException;
 import com.fontys.s3itproject.dto.*;
 import com.fontys.s3itproject.repository.GuestRepository;
 import com.fontys.s3itproject.repository.UserRepository;
-import com.fontys.s3itproject.repository.entity.Guest;
-import com.fontys.s3itproject.repository.entity.Reservation;
+import com.fontys.s3itproject.repository.entity.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -204,17 +206,6 @@ class GuestServiceImplTest {
     }
 
     @Test
-    void getGuest_shouldThrowUnauthorisedDataAccessException_whenGuestIDIsNotFromLoggedInUser(){
-        when(accessTokenDTO.getEmployeeId()).thenReturn(1L);
-
-        UnauthorisedDataAccessException exception = assertThrows(UnauthorisedDataAccessException.class,
-                () -> guestServiceMock.getGuest(2L));
-
-        assertEquals("GUEST_ID_NOT_FROM_LOGGED_IN_USER", exception.getReason());
-        verifyNoInteractions(guestRepositoryMock);
-    }
-
-    @Test
     void getGuest_shouldReturnOptionalGuestConvertedToDTO_whenEmployeeLoggedIn(){
         when(accessTokenDTO.hasRole("EMPLOYEE")).thenReturn(true);
 
@@ -249,6 +240,17 @@ class GuestServiceImplTest {
         assertTrue(actualResult.isPresent());
         assertEquals(expectedResult, actualResult.get());
         verify(guestRepositoryMock).findById(1L);
+    }
+
+    @Test
+    void getGuest_shouldThrowUnauthorisedDataAccessException_whenGuestIDIsNotFromLoggedInUser(){
+        when(accessTokenDTO.getEmployeeId()).thenReturn(1L);
+
+        UnauthorisedDataAccessException exception = assertThrows(UnauthorisedDataAccessException.class,
+                () -> guestServiceMock.getGuest(2L));
+
+        assertEquals("GUEST_ID_NOT_FROM_LOGGED_IN_USER", exception.getReason());
+        verifyNoInteractions(guestRepositoryMock);
     }
 
     @Test
@@ -287,5 +289,40 @@ class GuestServiceImplTest {
                 .reservations(List.of(reservation))
                 .build();
         verify(guestRepositoryMock).save(oldGuest);
+    }
+
+    @Test
+    void updateGuest_shouldThrowInvalidGuestException_whenGuestNotFound(){
+        InvalidGuestException exception = assertThrows(InvalidGuestException.class,
+                () -> guestServiceMock.updateGuest(UpdateGuestRequestDTO.builder().id(1L).build()));
+
+        assertEquals("GUEST_NOT_FOUND", exception.getReason());
+    }
+
+    @Test
+    void updateGuest_shouldThrowUnauthorisedDataAccessException_whenGuestIDIsNotFromLoggedInUser(){
+        when(guestRepositoryMock.findById(1L)).thenReturn(Optional.of(Guest.builder().id(1L).build()));
+
+        User testUser = User.builder()
+                .id(1L)
+                .username("username")
+                .password("hashed-password")
+                .build();
+        testUser.setUserRoles(Set.of(
+                UserRole.builder()
+                        .user(testUser)
+                        .role(RoleEnum.GUEST)
+                        .build()));
+
+        AccessTokenDTO accessTokenDTO = AccessTokenDTO.builder()
+                .subject("User")
+                .roles(List.of("Guest"))
+                .employeeId(2L)
+                .build();
+
+        UnauthorisedDataAccessException exception = assertThrows(UnauthorisedDataAccessException.class,
+                () -> guestServiceMock.updateGuest(UpdateGuestRequestDTO.builder().id(1L).build()));
+
+        assertEquals("GUEST_ID_NOT_FROM_LOGGED_IN_USER", exception.getReason());
     }
 }

@@ -75,13 +75,11 @@ public class GuestServiceImpl implements GuestService {
     public void updateGuest(UpdateGuestRequestDTO request) {
         Optional<Guest> guestOptional = guestRepository.findById(request.getId());
         if(guestOptional.isEmpty()){
-            throw new InvalidGuestException("GUEST_ID_INVALID");
+            throw new InvalidGuestException("GUEST_NOT_FOUND");
         }
 
-        if (!requestAccessToken.hasRole(RoleEnum.ADMIN.name()) || !requestAccessToken.hasRole(RoleEnum.EMPLOYEE.name())){
-            if (!requestAccessToken.getEmployeeId().equals(request.getId())){
-                throw new UnauthorisedDataAccessException("GUEST_ID_NOT_FROM_LOGGED_IN_USER");
-            }
+        if (!requestAccessToken.hasRole(RoleEnum.ADMIN.name()) && !requestAccessToken.hasRole(RoleEnum.EMPLOYEE.name()) && !requestAccessToken.getEmployeeId().equals(request.getId())){
+            throw new UnauthorisedDataAccessException("GUEST_ID_NOT_FROM_LOGGED_IN_USER");
         }
 
         Guest guest = guestOptional.get();
