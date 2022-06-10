@@ -37,7 +37,7 @@ class RoomServiceImplTest {
         Room newRoom = Room.builder()
                 .capacity(1)
                 .pricePerNight(50)
-                .imageUrl("")
+                .imageUrl("https://drive.google.com/uc?export=view?&id=1xbCub9QX4q6Dcw3Y8-KI2_qOJP9LRx51")
                 .roomType("Single")
                 .isFeatured(false)
                 .totalAmountInHotel(10)
@@ -46,7 +46,7 @@ class RoomServiceImplTest {
                 .id(1L)
                 .capacity(1)
                 .pricePerNight(50)
-                .imageUrl("")
+                .imageUrl("https://drive.google.com/uc?export=view?&id=1xbCub9QX4q6Dcw3Y8-KI2_qOJP9LRx51")
                 .roomType("Single")
                 .isFeatured(false)
                 .totalAmountInHotel(10)
@@ -182,7 +182,6 @@ class RoomServiceImplTest {
                 .id(1L)
                 .pricePerNight(75)
                 .imageUrl("")
-                .isFeatured(false)
                 .totalAmountInHotel(10)
                 .build();
         roomService.updateRoom(request);
@@ -220,7 +219,6 @@ class RoomServiceImplTest {
                 .id(1L)
                 .pricePerNight(50)
                 .imageUrl("")
-                .isFeatured(false)
                 .totalAmountInHotel(10)
                 .build();
 

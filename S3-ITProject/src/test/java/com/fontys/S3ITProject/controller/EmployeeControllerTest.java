@@ -86,7 +86,7 @@ class EmployeeControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "EstherWolfs", roles = {"EMPLOYEE"})
+    @WithMockUser(username = "EstherWolfs", roles = {"ADMIN"})
     void getEmployees_shouldReturn200ResponseWithEmployeesArray() throws Exception {
         // create the list of employees that we want to be returned
         GetEmployeesResponseDTO responseDTO = GetEmployeesResponseDTO
