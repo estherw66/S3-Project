@@ -4,6 +4,7 @@ CREATE TABLE user
     username varchar(20) NOT NULL,
     password varchar(100) NOT NULL,
     employee_id int NULL,
+    guest_id int NULL,
     PRIMARY KEY (id),
     UNIQUE (username),
     FOREIGN KEY (employee_id) REFERENCES employee (id)

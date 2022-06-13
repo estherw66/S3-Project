@@ -111,7 +111,7 @@ const ReservationForm = () => {
             </div>
             <div className='input inlined'>
                 <label>Guests:</label>
-                <input type={'number'} value={amountOfGuests} min={1} onChange={(e) => setAmountOfGuests(e.target.value)} required />
+                <input type={'number'} value={amountOfGuests} min={1} max={6} onChange={(e) => setAmountOfGuests(e.target.value)} required />
             </div>
             <div className='input inlined'>
                 <label>Room:</label>

@@ -28,5 +28,6 @@ CREATE TABLE room (
     image_url varchar(100),
     room_type varchar(25) NOT NULL,
     is_featured boolean NOT NULL,
+    total_amount_in_hotel int NOT NULL,
     PRIMARY KEY (id)
 );

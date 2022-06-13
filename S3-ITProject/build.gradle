@@ -21,12 +21,6 @@ repositories {
 }
 
 dependencies {
-//	implementation 'org.springframework.boot:spring-boot-starter'
-//    implementation 'org.springframework.boot:spring-boot-starter-web'
-//    compileOnly 'org.projectlombok:lombok
-//	annotationProcessor 'org.projectlombok:lombok'
-//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'mysql:mysql-connector-java:8.0.28'
@@ -39,7 +33,6 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.projectlombok:lombok:1.18.20'
-
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -78,16 +71,9 @@ tasks.named('sonarqube').configure {
 	dependsOn test
 }
 
-//sonarqube {
-//	properties {
-//		property "sonar.projectKey", "S3-IndividualProject"
-//		property "sonar.qualitygate.wait", true
-//	}
-//}
-
 sonarqube {
 	properties {
 		property "sonar.projectKey", "S3-IndividualProject"
-		property "sonar.qualitygate.wait", true
+		property "sonar.qualitygate.wait", false
 	}
 }

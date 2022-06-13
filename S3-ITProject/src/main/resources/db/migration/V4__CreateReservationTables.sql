@@ -1,7 +1,7 @@
 CREATE TABLE reservation (
     id int NOT NULL AUTO_INCREMENT,
     reservation_date date NOT NULL,
-    heck_in date NOT NULL,
+    check_in date NOT NULL,
     check_out date NOT NULL,
     amount_of_guests int NOT NULL,
     total_price double NOT NULL,
