@@ -71,6 +71,9 @@ const AddRoomPage = () => {
         if (errorMsg !== ''){
         alert(errorMsg)
         } else {
+            if(imageUrl === ''){
+                alert("Default Image will be added")
+            }
         sendRequest();
         alert("Room Added")
         navigate('/employee/rooms')
@@ -93,11 +96,11 @@ const AddRoomPage = () => {
                         <div className='row'>
                             <div className='form-input'>
                                 <input type={'text'} value={roomType} onChange={(e) => setRoomType(e.target.value)} required/>
-                                <label>Room Type:</label>
+                                <label>Room Type*:</label>
                             </div>
                             <div className='form-input'>
                                 <input type={'number'} value={capacity} onChange={(e) => setCapacity(e.target.value)} required/>
-                                <label>Capacity:</label>
+                                <label>Capacity*:</label>
                             </div>
                             <div className='form-input'>
                                 <input type={'text'} value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
@@ -107,11 +110,11 @@ const AddRoomPage = () => {
                         <div className='row'>
                             <div className='form-input'>
                                 <input type={'number'} value={pricePerNight} onChange={(e) => setPricePerNight(e.target.value)} required />
-                                <label>Price Per Night:</label>
+                                <label>Price Per Night*:</label>
                             </div>
                             <div className='form-input'>
                                 <input type={'number'} value={totalAmountInHotel} onChange={(e) => setTotalAmountInHotel(e.target.value)} required />
-                                <label>Total Amount In Hotel:</label>
+                                <label>Total Amount In Hotel*:</label>
                             </div>
                         </div>
                         <button>Save Room</button>
