@@ -1,4 +1,4 @@
 FROM openjdk:19-jdk-alpine
-ARG JAR_FILE=build/libs/
+ARG JAR_FILE=build/libs/s3-ITProject-0.0.1-plain.jar
 COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
