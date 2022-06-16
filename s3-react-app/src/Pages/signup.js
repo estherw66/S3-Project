@@ -11,29 +11,44 @@ const SingupPage = () => {
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [errorMsg, setErrorMsg] = useState('');
 
-    const sendRequest = () => {
-        let requestData = {
-            'firstName': firstName,
-            'lastName': lastName,
-            'email': email,
-            'username': username,
-            'password': password
-        }
+    const handleSubmit = async (e) => {
+      let requestData = {
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+        'username': username,
+        'password': password
+    }
 
-        axios.post(URL, requestData)
-        .then(function(){})
-          .catch(err => {
-            console.log(err);
-          })    
-          
+      e.preventDefault();
+
+      try {
+        const response = await axios.post(URL,
+        requestData,
+          {
+            headers: {'Content-Type': 'application/json'}
+          }  
+        );
+
         navigate('/login')
+      } catch(err) {
+        if (err.response?.status === 400){
+          setErrorMsg('Username or email already exists')
+        } else if (err.response?.status === 500){
+          setErrorMsg('No Server Response')
+        } else {
+          setErrorMsg('Create Account Failed')
+        }
+      }
     }
 
   return (
     <div className='main'>
         <h3>Sign Up:</h3>
-        <form onSubmit={sendRequest}>
+        <p className={errorMsg ? "errormsg" : "offscreen"}>{errorMsg}</p>
+        <form onSubmit={handleSubmit}>
             <label>First Name:</label>
             <input type={'text'} value={firstName} onChange={(e) => setFirstName(e.target.value)} required autoComplete='off' />
             <label>Last Name:</label>

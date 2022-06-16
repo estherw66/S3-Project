@@ -63,11 +63,8 @@ const UpdateRoomPage = () => {
             errorMsg += 'Please enter a price per night. \n'
         } else if (pricePerNight < 45){
             errorMsg += 'Price per night cannot be less than £45. \n'
-        }
-        if (totalAmount === 0){
-            errorMsg += 'Please enter a total amount. \n'
-        }else if (totalAmount < 1){
-            errorMsg += 'Total amount cannot be less than 1. \n'
+        }else if (totalAmount < 0){
+            errorMsg += 'Total amount cannot be negative. \n'
         }
 
         return errorMsg
@@ -102,23 +99,16 @@ const UpdateRoomPage = () => {
                         <h4>Room</h4>
                         <div className='row'>
                             <div className='form-input'>
-                                <input type={'number'} value={pricePerNight} onChange={(e) => setPricePerNight(e.target.value)} required />
-                                <label>Price Per Nigth:</label>
+                                <input type={'number'} min={45} value={pricePerNight} onChange={(e) => setPricePerNight(e.target.value)} required />
+                                <label>Price Per Night:</label>
                             </div>
                             <div className='form-input'>
                                 <input type={'text'} value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
                                 <label>Image URL:</label>
                             </div>
                             <div className='form-input'>
-                                <input type={'number'} value={totalAmount} onChange={(e) => setTotalAmount(e.target.value)} required />
+                                <input type={'number'} min={0} value={totalAmount} onChange={(e) => setTotalAmount(e.target.value)} required />
                                 <label>Total Amount In Hotel:</label>
-                            </div>
-                        </div>
-                        <h4>Status</h4>
-                        <div className='row'>
-                            <div className='form-input'>
-                                <input type={'text'} value={isFeatured} onChange={(e) => setIsFeatured(e.target.value)} />
-                                <label>Featured</label>
                             </div>
                         </div>
                         <button>Save Changes</button>

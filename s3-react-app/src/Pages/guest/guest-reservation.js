@@ -38,7 +38,6 @@ const GuestReservationsPage = () => {
               <div className='right'>
                   <div className='header'>
                       <h3>My Reservations:</h3>
-                      <input type={'text'} placeholder='Search...' className='search-bar' />
                   </div>
                   <div className='body'>
                       <div className='row'>

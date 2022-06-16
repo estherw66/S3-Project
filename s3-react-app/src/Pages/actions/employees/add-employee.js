@@ -18,6 +18,7 @@ const AddEmployeePage = () => {
     const [zipCode, setZipCode] = useState('');
     const [city, setCity] = useState('');
 
+
     const sendRequest = () => {
         let requestData = {
             'firstName': firstName,

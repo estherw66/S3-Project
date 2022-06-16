@@ -44,7 +44,7 @@ public class Room {
     private boolean isFeatured;
 
     @NotNull
-    @Min(1)
+    @Min(0)
     @Column(name = "total_amount_in_hotel")
     private int totalAmountInHotel;
 }

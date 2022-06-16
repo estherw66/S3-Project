@@ -120,6 +120,7 @@ class GuestServiceImplTest {
     void getGuests_shouldReturnAllGuestsConvertedToDTO() {
         Reservation reservation = Reservation.builder()
                 .id(1L)
+                .guest(Guest.builder().id(1L).build())
                 .build();
 
         Guest esther = Guest.builder()
@@ -143,6 +144,7 @@ class GuestServiceImplTest {
 
         ReservationDTO reservationDTO = ReservationDTO.builder()
                 .id(1L)
+                .guest(GuestReservationDTO.builder().guestID(1L).build())
                 .build();
 
         GuestDTO estherDTO = GuestDTO.builder()
@@ -174,6 +176,7 @@ class GuestServiceImplTest {
 
         Reservation reservation = Reservation.builder()
                 .id(1L)
+                .guest(Guest.builder().id(1L).build())
                 .build();
 
         Guest guest = Guest.builder()
@@ -190,6 +193,7 @@ class GuestServiceImplTest {
 
         ReservationDTO reservationDTO = ReservationDTO.builder()
                 .id(1L)
+                .guest(GuestReservationDTO.builder().guestID(1L).build())
                 .build();
 
         GuestDTO expectedResult = GuestDTO.builder()
@@ -211,6 +215,7 @@ class GuestServiceImplTest {
 
         Reservation reservation = Reservation.builder()
                 .id(1L)
+                .guest(Guest.builder().id(1L).build())
                 .build();
 
         Guest guest = Guest.builder()
@@ -227,6 +232,7 @@ class GuestServiceImplTest {
 
         ReservationDTO reservationDTO = ReservationDTO.builder()
                 .id(1L)
+                .guest(GuestReservationDTO.builder().guestID(1L).build())
                 .build();
 
         GuestDTO expectedResult = GuestDTO.builder()

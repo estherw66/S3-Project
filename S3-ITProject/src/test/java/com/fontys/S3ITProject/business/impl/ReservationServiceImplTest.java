@@ -172,6 +172,7 @@ class ReservationServiceImplTest {
                 .reservationDate(LocalDate.now())
                 .checkInDate(LocalDate.now().plusDays(10))
                 .checkOutDate(LocalDate.now().plusDays(11))
+                .guest(Guest.builder().id(1L).build())
                 .amountOfGuests(1)
                 .totalPrice(45)
                 .isCheckedIn(false)
@@ -184,6 +185,7 @@ class ReservationServiceImplTest {
                 .reservationDate(LocalDate.now())
                 .checkInDate(LocalDate.now().plusDays(10))
                 .checkOutDate(LocalDate.now().plusDays(11))
+                .guest(Guest.builder().id(1L).build())
                 .amountOfGuests(1)
                 .totalPrice(100)
                 .isCheckedIn(false)
@@ -201,6 +203,7 @@ class ReservationServiceImplTest {
                 .checkInDate(LocalDate.now().plusDays(10))
                 .checkOutDate(LocalDate.now().plusDays(11))
                 .amountOfGuests(1)
+                .guest(GuestReservationDTO.builder().guestID(1L).build())
                 .totalPrice(45)
                 .isCheckedIn(false)
                 .rooms(null)
@@ -212,6 +215,7 @@ class ReservationServiceImplTest {
                 .checkInDate(LocalDate.now().plusDays(10))
                 .checkOutDate(LocalDate.now().plusDays(11))
                 .amountOfGuests(1)
+                .guest(GuestReservationDTO.builder().guestID(2L).build())
                 .totalPrice(100)
                 .isCheckedIn(false)
                 .rooms(null)
@@ -229,10 +233,12 @@ class ReservationServiceImplTest {
         when(guestRepository.findById(1L)).thenReturn(Optional.of(Guest.builder().id(1L).build()));
         Reservation reservation1 = Reservation.builder()
                 .id(1L)
+                .guest(Guest.builder().id(1L).build())
                 .build();
 
         Reservation reservation2 = Reservation.builder()
                 .id(2L)
+                .guest(Guest.builder().id(1L).build())
                 .build();
 
         when(reservationRepositoryMock.findAllByGuest(Guest.builder().id(1L).build())).thenReturn(List.of(reservation1, reservation2));
@@ -241,10 +247,12 @@ class ReservationServiceImplTest {
 
         ReservationDTO reservation1DTO = ReservationDTO.builder()
                 .id(1L)
+                .guest(GuestReservationDTO.builder().guestID(1L).build())
                 .build();
 
         ReservationDTO reservation2DTO = ReservationDTO.builder()
                 .id(2L)
+                .guest(GuestReservationDTO.builder().guestID(1L).build())
                 .build();
 
         GetReservationsResponseDTO expectedResult = GetReservationsResponseDTO.builder()

@@ -18,6 +18,7 @@ public class ReservationDTO {
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private int amountOfGuests;
+    private GuestReservationDTO guest;
     private double totalPrice;
     private boolean isCheckedIn;
     private List<RoomDTO> rooms;

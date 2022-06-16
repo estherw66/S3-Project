@@ -145,8 +145,7 @@ class RoomControllerTest {
                                                             {"field": "pricePerNight", "error":  "must be greater than or equal to 45"},
                                                             {"field": "roomType", "error":  "must not be blank"},
                                                             {"field": "capacity", "error":  "must be greater than or equal to 1"},
-                                                            {"field": "roomType", "error":  "length must be between 1 and 25"},
-                                                            {"field": "totalAmountInHotel", "error":  "must be greater than or equal to 1"}
+                                                            {"field": "roomType", "error":  "length must be between 1 and 25"}
                                                         ]
                                                     """));
         verifyNoInteractions(roomServiceMock);

@@ -209,9 +209,9 @@ class EmployeeServiceImplTest {
                         .zipCode("5151KA").city("Drunen").build())
                 .build();
 
-        assertTrue(actualResult.isPresent());
-        assertEquals(employeeDTO, actualResult.get());
-        verify(employeeRepositoryMock).findById(1L);
+            assertTrue(actualResult.isPresent());
+            assertEquals(employeeDTO, actualResult.get());
+            verify(employeeRepositoryMock).findById(1L);
     }
 
     @Test

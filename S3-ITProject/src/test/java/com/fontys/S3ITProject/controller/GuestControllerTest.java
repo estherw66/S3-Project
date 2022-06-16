@@ -152,8 +152,7 @@ class GuestControllerTest {
                                 {"field": "firstName", "error":  "length must be between 2 and 25"},
                                 {"field": "lastName", "error":  "length must be between 2 and 50"},
                                 {"field": "email", "error":  "length must be between 2 and 50"},
-                                {"field": "username", "error":  "length must be between 2 and 20"},
-                                {"field": "password", "error":  "length must be between 8 and 50"}
+                                {"field": "username", "error":  "length must be between 2 and 20"}
                             ]
                         """));
 

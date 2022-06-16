@@ -53,11 +53,8 @@ const AddRoomPage = () => {
             errorMsg += 'Please enter a price per night. \n'
         } else if (pricePerNight < 45){
             errorMsg += 'Price per night cannot be less than £45. \n'
-        }
-        if (totalAmountInHotel === 0){
-            errorMsg += 'Please enter a total amount. \n'
-        }else if (totalAmountInHotel < 1){
-            errorMsg += 'Total amount cannot be less than 1. \n'
+        }else if (totalAmountInHotel < 0){
+            errorMsg += 'Total amount cannot be negative. \n'
         }
 
         return errorMsg
@@ -99,7 +96,7 @@ const AddRoomPage = () => {
                                 <label>Room Type*:</label>
                             </div>
                             <div className='form-input'>
-                                <input type={'number'} value={capacity} onChange={(e) => setCapacity(e.target.value)} required/>
+                                <input type={'number'} min={1} max={10} value={capacity} onChange={(e) => setCapacity(e.target.value)} required/>
                                 <label>Capacity*:</label>
                             </div>
                             <div className='form-input'>
@@ -109,11 +106,11 @@ const AddRoomPage = () => {
                         </div>
                         <div className='row'>
                             <div className='form-input'>
-                                <input type={'number'} value={pricePerNight} onChange={(e) => setPricePerNight(e.target.value)} required />
+                                <input type={'number'} min={45} value={pricePerNight} onChange={(e) => setPricePerNight(e.target.value)} required />
                                 <label>Price Per Night*:</label>
                             </div>
                             <div className='form-input'>
-                                <input type={'number'} value={totalAmountInHotel} onChange={(e) => setTotalAmountInHotel(e.target.value)} required />
+                                <input type={'number'} min={0} value={totalAmountInHotel} onChange={(e) => setTotalAmountInHotel(e.target.value)} required />
                                 <label>Total Amount In Hotel*:</label>
                             </div>
                         </div>

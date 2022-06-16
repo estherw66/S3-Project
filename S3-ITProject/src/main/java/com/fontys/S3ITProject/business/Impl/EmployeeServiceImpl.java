@@ -1,7 +1,6 @@
 package com.fontys.s3itproject.business.impl;
 
 import com.fontys.s3itproject.business.EmployeeService;
-import com.fontys.s3itproject.business.exception.EmailAlreadyExistsException;
 import com.fontys.s3itproject.business.exception.InvalidEmployeeException;
 import com.fontys.s3itproject.business.exception.UnauthorisedDataAccessException;
 import com.fontys.s3itproject.dto.*;
@@ -13,8 +12,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 
@@ -34,6 +33,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public CreateEmployeeResponseDTO createEmployee(CreateEmployeeRequestDTO request) {
         if (existsByPhoneNumber(request.getPhoneNumber())){
             throw new InvalidEmployeeException("PHONE_NUMBER_DUPLICATED");
+        }
+
+        if (request.getDateOfBirth().isAfter(LocalDate.now().minusYears(16))){
+            throw new InvalidEmployeeException("EMPLOYEE_SHOULD_BE_AT_LEAST_16_YEARS_OLD");
         }
 
         Employee savedEmployee = saveNewEmployee(request);

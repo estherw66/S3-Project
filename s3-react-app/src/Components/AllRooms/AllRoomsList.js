@@ -13,8 +13,7 @@ const AllRoomsList = () => {
   const getRooms = () => {
     axios.get(`http://localhost:8080/api/rooms`)
     .then(res => {
-      setRooms(res.data);
-      console.log(res.data);
+      setRooms(res.data.rooms);
     })
     .catch(err => {
       console.log(err);
@@ -23,10 +22,14 @@ const AllRoomsList = () => {
 
   return (
     <>
-      {rooms.rooms ? (
+      {rooms ? (
         <>
-          {rooms.rooms && rooms.rooms.map((room) => (
-            <RoomCard key={room.id} room={room} />
+          {rooms?.map((room) => (
+            room.totalAmountInHotel !== 0 ? (
+              <>
+                <RoomCard key={room.id} room={room} />
+              </>
+            ) : (null)
           ))}
         </>
       ) : (

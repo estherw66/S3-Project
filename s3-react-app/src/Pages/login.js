@@ -43,7 +43,7 @@ const LoginPage = () => {
         const accessToken = response?.data?.accessToken;
         const decoded = jwt_decode(accessToken);
         const roles = decoded?.roles;
-        setAuth({ accessToken, decoded, roles, password });
+        setAuth({ accessToken, decoded, roles });
 
         setUsername('');
         setPassword('');
@@ -53,7 +53,7 @@ const LoginPage = () => {
       if (!err?.response){
         setErrorMsg('No server response')
       } else if (err.response?.status === 400){
-        setErrorMsg('Missing Username or Password')
+        setErrorMsg('Wrong credentials')
       } else if (err.response?.status === 401){
         setErrorMsg('Unauthorised')
       } else {

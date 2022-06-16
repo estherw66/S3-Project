@@ -115,11 +115,6 @@ public class ReservationServiceImpl implements ReservationService {
 
         Reservation reservation = reservationOptional.get();
 
-//        commented for testing reasons
-//        if (reservation.getCheckInDate().isAfter(LocalDate.now())){
-//            throw new InvalidReservationException("CAN_NO_LONGER_CHECK_IN");
-//        }
-
         updateFields(reservation);
     }
 
@@ -171,11 +166,6 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRoomRepository.findAllByReservation(reservation.getId());
     }
     private void updateFields(Reservation reservation){
-//        if (reservation.isCheckedIn()){
-//            reservation.setCheckedIn(false);
-//        } else {
-//            reservation.setCheckedIn(true);
-//        }
         reservation.setCheckedIn(!reservation.isCheckedIn());
 
         reservationRepository.save(reservation);

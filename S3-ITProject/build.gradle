@@ -7,8 +7,8 @@ plugins {
 }
 
 group = 'com.fontys'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+version = '0.0.1'
+//sourceCompatibility = '17'
 
 configurations {
 	compileOnly {
@@ -33,6 +33,8 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.projectlombok:lombok:1.18.20'
+	implementation 'org.springframework:spring-web:5.3.19'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'

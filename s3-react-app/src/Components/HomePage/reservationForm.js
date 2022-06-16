@@ -24,7 +24,6 @@ const ReservationForm = () => {
     const [amountOfGuests, setAmountOfGuests] = useState(2)
     const [room, setRoom] = useState({})
     const [guestID, setGuestID] = useState(0)
-    const [reservation, setReservation] = useState({})
 
     const getAllRooms = () => {
         const URL = '/rooms'
@@ -77,7 +76,7 @@ const ReservationForm = () => {
             errorMsg += 'Check in date cannot be before today. \n'
         }
         if (amountOfGuests > room.capacity) {
-            errorMsg += 'Amount of guests cannot be more higher than room capacity'
+            errorMsg += 'Amount of guests cannot be higher than room capacity'
         }
 
         return errorMsg
@@ -121,6 +120,19 @@ const ReservationForm = () => {
                         roomType =>
                         <option key={roomType?.id} value={roomType.id}>{roomType?.roomType}</option>
                     )}
+                    {/* {rooms ? (
+                        <>
+                        {rooms?.map((roomType) => (
+                            room.totalAmountInHotel !== 0 ? (
+                            <>
+                                <option key={roomType?.id} value={roomType.id}>{roomType?.roomType}</option>
+                            </>
+                            ) : (null)
+                        ))}
+                        </>
+                    ) : (
+                        <p>Loading rooms...</p>
+                    )} */}
                 </select>
             </div>
             <div className='input'>

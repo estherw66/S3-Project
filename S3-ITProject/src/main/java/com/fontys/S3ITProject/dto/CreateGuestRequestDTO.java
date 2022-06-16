@@ -30,6 +30,6 @@ public class CreateGuestRequestDTO {
     private String username;
 
     @NotBlank
-    @Length(min=8, max = 50)
+    @Length(max = 100)
     private String password;
 }
