@@ -3,6 +3,7 @@ stages:
 - test 
 - sonarqube
 
+
 build:
   stage: build
   script:
@@ -22,11 +23,10 @@ sonarqube:
     gradle:jre11-slim  
   variables:    
     SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"
-    GIT_DEPTH: "0"    
   cache:    
     key: "${CI_JOB_NAME}"
     paths:
-      - .sonar/cache  
+      - .sonar/cache 
   script:    
     - cd S3-ITProject     
     - ./gradlew sonarqube    
