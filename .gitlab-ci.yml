@@ -29,7 +29,7 @@ sonarqube:
       - .sonar/cache  
   script:    
     - cd S3-ITProject     
-    - gradle sonarqube    
+    - ./gradlew sonarqube    
     - ./gradlew.bat --stop  
   allow_failure: true  
   only:
