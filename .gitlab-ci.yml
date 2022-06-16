@@ -19,8 +19,6 @@ test:
 
 sonarqube:
   stage: sonarqube
-  image: 
-    gradle:jre11-slim  
   script:    
     - cd S3-ITProject    
     - ./gradlew sonarqube    
