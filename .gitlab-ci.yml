@@ -29,7 +29,8 @@ sonarqube:
     paths:
       - .sonar/cache 
   script:    
-    - cd S3-ITProject     
+    - cd S3-ITProject  
+    - cat .git/shallow   
     - ./gradlew sonarqube    
     - ./gradlew.bat --stop  
   allow_failure: true  
