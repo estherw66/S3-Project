@@ -1,5 +1,15 @@
 version: '3.8'
 services:
+  database:
+    container_name: database
+    image: mysql
+    ports:
+      - '3308:3306'
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'xuszec-7Jenri-godtem'
+      MYSQL_DATABASE: 'goldskye_hotel'
+
   backend:
     container_name: backend
     image: s3it-api
@@ -9,15 +19,10 @@ services:
      - '8080:8080'
     depends_on:
       - database
-  
-  database:
-    image: mysql
-    ports:
-      - '3306:3306'
-    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 'xuszec-7Jenri-godtem'
-      MYSQL_DATABASE: 'goldskye_hotel'
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/goldskye_hotel
+      SPRING_DATASOURCE_PASSWORD: xuszec-7Jenri-godtem
+      SPRING_DATASOURCE_USERNAME: root
   
   frontend:
     container_name: frontend
