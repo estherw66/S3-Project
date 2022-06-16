@@ -11,6 +11,7 @@ CREATE TABLE reservation (
     FOREIGN KEY (guest_id) REFERENCES guest (id)
 );
 
+
 CREATE TABLE reservation_room (
     id int NOT NULL AUTO_INCREMENT,
     reservation_id int NOT NULL,
@@ -19,4 +20,3 @@ CREATE TABLE reservation_room (
     FOREIGN KEY (reservation_id) REFERENCES reservation (id),
     FOREIGN KEY (room_id) REFERENCES room (id)
 );
-
