@@ -108,8 +108,6 @@ const UpdateEmployeePage = () => {
                                 <label>Phone Number:</label>
                             </div>
                         </div>
-                        <h4>Account</h4>
-                        <h4>Address</h4>
                         <button>Save Changes</button>
                     </form>
                 </div>

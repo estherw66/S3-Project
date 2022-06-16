@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  backend:
+    container_name: backend
+    image: s3it-api
+    restart: always
+    build: S3-ITProject\.
+    ports:
+     - '8080:8080'
+    depends_on:
+      - database
+  
+  database:
+    image: mysql
+    ports:
+      - '3306:3306'
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'xuszec-7Jenri-godtem'
+      MYSQL_DATABASE: 'goldskye_hotel'
+  
+  frontend:
+    container_name: frontend
+    image: s3it-react
+    ports :
+      - '3000:3000'
+    build: s3-react-app\.
+    depends_on:
+      - backend

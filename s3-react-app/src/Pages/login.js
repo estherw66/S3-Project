@@ -3,9 +3,15 @@ import { useLocation, useNavigate } from 'react-router'
 import useAuth from '../hooks/useAuth'
 import jwt_decode from "jwt-decode"
 
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
+
 import axios from '../api/axios'
 import { Link } from 'react-router-dom'
 const URL = '/login'
+
+
+const ENDPOINT = "http://localhost:8080/ws";
 
 const LoginPage = () => {
 
@@ -20,6 +26,8 @@ const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  
+  const [stompClient, setStompClient] = useState(null)
 
   useEffect(() => {
     usernameRef.current.focus();
@@ -28,6 +36,17 @@ const LoginPage = () => {
   useEffect(() => {
     setErrorMsg('');
   }, [username, password]);
+
+  const onMessageReceived = (data) => {
+    const result = JSON.parse(data.body)
+    alert(
+        "A new Reservation has been made! \n" +
+        `The check in date is:  ${result.checkInDate}` +
+        `\n The check out date is: ${result.checkOutDate}` +
+        `\n The reservation is made for room ${result.roomType}`
+      )
+    console.log(data)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,6 +63,15 @@ const LoginPage = () => {
         const decoded = jwt_decode(accessToken);
         const roles = decoded?.roles;
         setAuth({ accessToken, decoded, roles });
+
+        const socket = SockJS(ENDPOINT);
+        const stompClient = Stomp.over(socket);
+        stompClient.connect({}, () => {
+            stompClient.subscribe('/topic/messages', (data) => {
+                onMessageReceived(data);
+            });
+        });
+        setStompClient(stompClient);
 
         setUsername('');
         setPassword('');

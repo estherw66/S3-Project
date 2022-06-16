@@ -22,7 +22,7 @@ const AllRoomsList = () => {
 
   return (
     <>
-      {rooms ? (
+      {rooms.length > 0 ? (
         <>
           {rooms?.map((room) => (
             room.totalAmountInHotel !== 0 ? (

@@ -33,14 +33,11 @@ import SingupPage from "./pages/signup";
 import GuestReservationsPage from "./pages/guest/guest-reservation";
 
 
+const ENDPOINT = "http://localhost:8080/ws"
 
 function App() {
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggleMenu = () => {
-        setIsOpen(!isOpen)
-    }
+    
 
     return (
        <>

@@ -4,6 +4,11 @@ import { useNavigate } from 'react-router'
 import axios from '../../api/axios'
 import useAuth from '../../hooks/useAuth'
 
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
+
+const ENDPOINT = "http://localhost:8080/ws";
+
 const ReservationForm = () => {
     const navigate = useNavigate()
     const { auth } = useAuth()
@@ -25,6 +30,8 @@ const ReservationForm = () => {
     const [room, setRoom] = useState({})
     const [guestID, setGuestID] = useState(0)
 
+    const [stompClient, setStompClient] = useState(null)
+
     const getAllRooms = () => {
         const URL = '/rooms'
 
@@ -40,6 +47,10 @@ const ReservationForm = () => {
     useEffect(() => {
         setGuestID(auth?.decoded?.employeeID)
         getAllRooms()
+
+        const socket = SockJS(ENDPOINT);
+        const stompClient = Stomp.over(socket);
+        setStompClient(stompClient);
     }, [])
 
     const changeSelectRoom = (e) => {
@@ -91,6 +102,11 @@ const ReservationForm = () => {
             alert(errorMsg)
         } else {
             sendRequest()
+            stompClient.send("/app/message", {}, JSON.stringify({
+                'checkInDate': checkInDate,
+                'checkOutDate': checkOutDate,
+                'roomType': room.roomType
+            }))
             alert("Reservation Made!")
             navigate(`/guest/reservations/${auth?.decoded?.employeeID}`)
         }
