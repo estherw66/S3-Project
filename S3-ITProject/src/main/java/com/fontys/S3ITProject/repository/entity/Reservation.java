@@ -42,10 +42,6 @@ public class Reservation {
     @Column(name = "total_price")
     private double totalPrice;
 
-//    @NotNull
-//    @Column(name = "reservation_status")
-//    private ReservationStatusEnum reservationStatus;
-
     @NotNull
     @Column(name = "is_checked_in")
     private boolean isCheckedIn;

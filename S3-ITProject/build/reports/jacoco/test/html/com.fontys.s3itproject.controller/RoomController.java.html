@@ -3,7 +3,6 @@
 import com.fontys.s3itproject.business.RoomService;
 import com.fontys.s3itproject.configuration.security.isauthenticated.IsAuthenticated;
 import com.fontys.s3itproject.dto.*;
-import com.fontys.s3itproject.repository.entity.Room;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,22 +21,22 @@ public class RoomController {
 
     @GetMapping
     public ResponseEntity&lt;GetRoomsResponseDTO&gt; getRooms(){
-<span class="fc" id="L25">        return ResponseEntity.ok(roomService.getRooms());</span>
+<span class="fc" id="L24">        return ResponseEntity.ok(roomService.getRooms());</span>
     }
 
     @GetMapping(path = &quot;/featured&quot;)
-<span class="fc" id="L29">    public ResponseEntity&lt;GetRoomsResponseDTO&gt; getFeaturedRooms(){return ResponseEntity.ok(roomService.getFeaturedRooms());}</span>
+<span class="fc" id="L28">    public ResponseEntity&lt;GetRoomsResponseDTO&gt; getFeaturedRooms(){return ResponseEntity.ok(roomService.getFeaturedRooms());}</span>
 
     @IsAuthenticated
     @RolesAllowed({&quot;ROLE_EMPLOYEE&quot;})
     @GetMapping(path = &quot;{id}&quot;)
     public ResponseEntity&lt;RoomDTO&gt; getRoom(@PathVariable(value = &quot;id&quot;) final long id){
-<span class="fc" id="L35">        final Optional&lt;RoomDTO&gt; roomOptional = roomService.getRoom(id);</span>
+<span class="fc" id="L34">        final Optional&lt;RoomDTO&gt; roomOptional = roomService.getRoom(id);</span>
 
-<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (roomOptional.isEmpty()){</span>
-<span class="fc" id="L38">            return ResponseEntity.notFound().build();</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (roomOptional.isEmpty()){</span>
+<span class="fc" id="L37">            return ResponseEntity.notFound().build();</span>
         }
-<span class="fc" id="L40">        return ResponseEntity.ok().body(roomOptional.get());</span>
+<span class="fc" id="L39">        return ResponseEntity.ok().body(roomOptional.get());</span>
     }
 
     @IsAuthenticated
@@ -45,8 +44,8 @@ public class RoomController {
     @PostMapping
     public ResponseEntity&lt;CreateRoomResponseDTO&gt; createRoom(
             @RequestBody @Valid CreateRoomRequestDTO createRoomRequest){
-<span class="fc" id="L48">        CreateRoomResponseDTO response = roomService.createRoom(createRoomRequest);</span>
-<span class="fc" id="L49">        return ResponseEntity.status(HttpStatus.CREATED).body(response);</span>
+<span class="fc" id="L47">        CreateRoomResponseDTO response = roomService.createRoom(createRoomRequest);</span>
+<span class="fc" id="L48">        return ResponseEntity.status(HttpStatus.CREATED).body(response);</span>
     }
 
     @IsAuthenticated
@@ -54,9 +53,9 @@ public class RoomController {
     @PutMapping(&quot;{id}&quot;)
     public ResponseEntity&lt;RoomDTO&gt; updateRoom(@PathVariable(&quot;id&quot;) long id,
             @RequestBody @Valid UpdateRoomRequestDTO request) {
-<span class="fc" id="L57">        request.setId(id);</span>
-<span class="fc" id="L58">        roomService.updateRoom(request);</span>
-<span class="fc" id="L59">        return ResponseEntity.noContent().build();</span>
+<span class="fc" id="L56">        request.setId(id);</span>
+<span class="fc" id="L57">        roomService.updateRoom(request);</span>
+<span class="fc" id="L58">        return ResponseEntity.noContent().build();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

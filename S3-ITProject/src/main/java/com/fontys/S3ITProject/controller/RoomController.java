@@ -3,7 +3,6 @@ package com.fontys.s3itproject.controller;
 import com.fontys.s3itproject.business.RoomService;
 import com.fontys.s3itproject.configuration.security.isauthenticated.IsAuthenticated;
 import com.fontys.s3itproject.dto.*;
-import com.fontys.s3itproject.repository.entity.Room;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

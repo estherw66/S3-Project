@@ -162,13 +162,11 @@ public class ReservationServiceImpl implements ReservationService {
 <span class="fc" id="L162">        return reservationRepository.findAll();</span>
     }
 <span class="fc" id="L164">    private List&lt;Reservation&gt; findAllByGuest(Guest guest) { return reservationRepository.findAllByGuest(guest); }</span>
-    private List&lt;ReservationRoom&gt; findAllRoomsByReservationID(Reservation reservation){
-<span class="nc" id="L166">        return reservationRoomRepository.findAllByReservation(reservation.getId());</span>
-    }
-    private void updateFields(Reservation reservation){
-<span class="fc bfc" id="L169" title="All 2 branches covered.">        reservation.setCheckedIn(!reservation.isCheckedIn());</span>
 
-<span class="fc" id="L171">        reservationRepository.save(reservation);</span>
-<span class="fc" id="L172">    }</span>
+    private void updateFields(Reservation reservation){
+<span class="fc bfc" id="L167" title="All 2 branches covered.">        reservation.setCheckedIn(!reservation.isCheckedIn());</span>
+
+<span class="fc" id="L169">        reservationRepository.save(reservation);</span>
+<span class="fc" id="L170">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

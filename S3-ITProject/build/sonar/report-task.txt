@@ -2,5 +2,5 @@ projectKey=S3-IndividualProject
 serverUrl=http://localhost:9000
 serverVersion=9.3.0.51899
 dashboardUrl=http://localhost:9000/dashboard?id=S3-IndividualProject
-ceTaskId=AYFxFhs9FjvCntYlsHkk
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYFxFhs9FjvCntYlsHkk
+ceTaskId=AYFx6vJ7FjvCntYlsHkw
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYFx6vJ7FjvCntYlsHkw

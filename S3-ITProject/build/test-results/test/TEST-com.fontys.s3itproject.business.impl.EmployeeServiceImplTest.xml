@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2022-06-17T09:25:00" hostname="XPS" time="0.234">
+<testsuite name="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2022-06-17T13:01:14" hostname="XPS" time="0.393">
   <properties/>
-  <testcase name="updateEmployee_shouldThrowUnauthorisedDataException_whenEmployeeIDNotFromLoggedInUser()" classname="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" time="0.202"/>
-  <testcase name="updateEmployee_shouldUpdateEmployeePhoneNumber()" classname="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" time="0.009"/>
-  <testcase name="updateEmployee_shouldThrowInvalidEmployeeException_whenEmployeeNotFound()" classname="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" time="0.001"/>
+  <testcase name="createEmployee_shouldThrowInvalidEmployeeException_whenEmployeeIsNot16YearsOld()" classname="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" time="0.341"/>
+  <testcase name="updateEmployee_shouldThrowUnauthorisedDataException_whenEmployeeIDNotFromLoggedInUser()" classname="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" time="0.018"/>
+  <testcase name="updateEmployee_shouldUpdateEmployeePhoneNumber()" classname="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" time="0.008"/>
+  <testcase name="updateEmployee_shouldThrowInvalidEmployeeException_whenEmployeeNotFound()" classname="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" time="0.002"/>
   <testcase name="getEmployees_shouldReturnAllEmployeesConvertedToDTO()" classname="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" time="0.006"/>
   <testcase name="getEmployee_shouldReturnUnauthorisedDataAccessException_whenEmployeeIDNotFromLoggedInUser()" classname="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" time="0.002"/>
   <testcase name="getEmployee_shouldReturnOptionalEmployeeByIDConvertedToDTO()" classname="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" time="0.002"/>
-  <testcase name="createEmployee_shouldThrowInvalidEmployeeException_whenSavingNewEmployeeDuplicatedPhoneNumber()" classname="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" time="0.003"/>
+  <testcase name="createEmployee_shouldThrowInvalidEmployeeException_whenSavingNewEmployeeDuplicatedPhoneNumber()" classname="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" time="0.002"/>
   <testcase name="createEmployee_shouldSaveNewEmployee()" classname="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" time="0.005"/>
   <testcase name="deleteEmployee_shouldDeleteEmployee()" classname="com.fontys.s3itproject.business.impl.EmployeeServiceImplTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>

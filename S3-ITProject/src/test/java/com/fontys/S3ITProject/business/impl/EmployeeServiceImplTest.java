@@ -112,6 +112,15 @@ class EmployeeServiceImplTest {
     }
 
     @Test
+    void createEmployee_shouldThrowInvalidEmployeeException_whenEmployeeIsNot16YearsOld() {
+        CreateEmployeeRequestDTO request = CreateEmployeeRequestDTO.builder()
+                .dateOfBirth(LocalDate.now().minusYears(15))
+                .build();
+
+        assertThrows(InvalidEmployeeException.class, () -> employeeService.createEmployee(request));
+    }
+
+    @Test
     void getEmployees_shouldReturnAllEmployeesConvertedToDTO() {
         // create employee entities
         Employee esther = Employee.builder()

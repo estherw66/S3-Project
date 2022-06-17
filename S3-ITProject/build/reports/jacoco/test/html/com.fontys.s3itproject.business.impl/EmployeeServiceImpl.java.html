@@ -35,8 +35,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 <span class="fc" id="L35">            throw new InvalidEmployeeException(&quot;PHONE_NUMBER_DUPLICATED&quot;);</span>
         }
 
-<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        if (request.getDateOfBirth().isAfter(LocalDate.now().minusYears(16))){</span>
-<span class="nc" id="L39">            throw new InvalidEmployeeException(&quot;EMPLOYEE_SHOULD_BE_AT_LEAST_16_YEARS_OLD&quot;);</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (request.getDateOfBirth().isAfter(LocalDate.now().minusYears(16))){</span>
+<span class="fc" id="L39">            throw new InvalidEmployeeException(&quot;EMPLOYEE_SHOULD_BE_AT_LEAST_16_YEARS_OLD&quot;);</span>
         }
 
 <span class="fc" id="L42">        Employee savedEmployee = saveNewEmployee(request);</span>

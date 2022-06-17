@@ -162,9 +162,7 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.findAll();
     }
     private List<Reservation> findAllByGuest(Guest guest) { return reservationRepository.findAllByGuest(guest); }
-    private List<ReservationRoom> findAllRoomsByReservationID(Reservation reservation){
-        return reservationRoomRepository.findAllByReservation(reservation.getId());
-    }
+
     private void updateFields(Reservation reservation){
         reservation.setCheckedIn(!reservation.isCheckedIn());
 
