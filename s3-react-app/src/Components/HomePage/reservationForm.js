@@ -118,19 +118,19 @@ const ReservationForm = () => {
         <form onSubmit={handleSubmit} className='reservation-form'>
             <div className='input inlined'>
                 <label>Check In Date:</label>
-                <input type={'date'} value={checkInDate} min={defaultCheckIn} onChange={(e) => setCheckInDate(e.target.value)} required />
+                <input id='check-in' type={'date'} value={checkInDate} min={defaultCheckIn} onChange={(e) => setCheckInDate(e.target.value)} required />
             </div>
             <div className='input inlined'>
                 <label>Check Out Date:</label>
-                <input type={'date'} value={checkOutDate} min={defaultCheckOut} onChange={(e) => setCheckOutDate(e.target.value)} required />
+                <input id='check-out' type={'date'} value={checkOutDate} min={defaultCheckOut} onChange={(e) => setCheckOutDate(e.target.value)} required />
             </div>
             <div className='input inlined'>
                 <label>Guests:</label>
-                <input type={'number'} value={amountOfGuests} min={1} max={6} onChange={(e) => setAmountOfGuests(e.target.value)} required />
+                <input id='guests' type={'number'} value={amountOfGuests} min={1} max={6} onChange={(e) => setAmountOfGuests(e.target.value)} required />
             </div>
             <div className='input inlined'>
                 <label>Room:</label>
-                <select onChange={changeSelectRoom}>
+                <select id='room' onChange={changeSelectRoom}>
                     <option>--------</option>
                     {rooms?.map(
                         roomType =>
@@ -151,7 +151,7 @@ const ReservationForm = () => {
                     )} */}
                 </select>
             </div>
-            <div className='input'>
+            <div id='make-reservation' className='input'>
                 <button>Make Reservation</button>
             </div>
         </form>

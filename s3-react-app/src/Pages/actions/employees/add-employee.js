@@ -95,38 +95,38 @@ const AddEmployeePage = () => {
               <h4>Employee Information</h4>
               <div className='row'>
                 <div className='form-input'>
-                  <input type={'text'} value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+                  <input id='first-name' type={'text'} value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
                   <label>First Name:</label>
                 </div>
                 <div className='form-input'>
-                  <input type={'text'} value={lastName} onChange={(e) => setLastName(e.target.value)} required />
+                  <input id='last-name' type={'text'} value={lastName} onChange={(e) => setLastName(e.target.value)} required />
                   <label>Last Name:</label>
                 </div>
                 <div className='form-input'>
-                  <input type={'text'} value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
+                  <input id='phone-number' type={'text'} value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
                   <label>Phone Number:</label>
                 </div>
               </div>
               <div className='row'>
                 <label>Date of Birth: </label>
-                <input type={'date'} value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} required />
+                <input id='date-of-birth' type={'date'} value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} required />
               </div><br/>
               <h4>Address Information</h4>
               <div className='row'>
                 <div className='form-input'>
-                  <input type={'text'} value={streetName} onChange={(e) => setStreetName(e.target.value)} required />
+                  <input id='street-name' type={'text'} value={streetName} onChange={(e) => setStreetName(e.target.value)} required />
                   <label>Street Name:</label>
                 </div>
                 <div className='form-input'>
-                  <input type={'text'} value={zipCode} onChange={(e) => setZipCode(e.target.value)} required />
+                  <input id='zip-code' type={'text'} value={zipCode} onChange={(e) => setZipCode(e.target.value)} required />
                   <label>Zip Code:</label>
                 </div>
                 <div className='form-input'>
-                  <input type={'text'} value={city} onChange={(e) => setCity(e.target.value)} required />
+                  <input id='city' type={'text'} value={city} onChange={(e) => setCity(e.target.value)} required />
                   <label>City:</label>
                 </div>
               </div>
-              <button>Save Changes</button>
+              <button id='save-changes'>Save Changes</button>
             </form>
           </div> 
         </div>

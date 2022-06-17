@@ -84,6 +84,7 @@ function App() {
             {/* error */}
             <Route path="/*" element={<Error />} />
         </Routes>
+        
         <Footer />
        </> 
     );
