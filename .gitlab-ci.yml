@@ -19,6 +19,14 @@ test:
     - ./gradlew.bat --stop
 
 sonarqube:
+  image: gradle:jre11-slim
+  variables:
+    SONAR_USER_HOME: "${S3-ITProject}/.sonar"
+    GIT_DEPTH: "0"
+  cache:
+    key: "${sonarqube}"
+    paths:
+      - .sonar/cache
   stage: sonarqube
   script:    
     - cd S3-ITProject    
@@ -27,6 +35,10 @@ sonarqube:
   allow_failure: true  
   only:
     - main
+
+  # variables:
+  #   SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+
 
 docker:
     stage: docker
