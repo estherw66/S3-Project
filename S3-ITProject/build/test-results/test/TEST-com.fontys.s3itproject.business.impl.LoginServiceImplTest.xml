@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.fontys.s3itproject.business.impl.LoginServiceImplTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-06-17T09:25:00" hostname="XPS" time="0.015">
+  <properties/>
+  <testcase name="login_shouldReturnAccessToken_whenLoginIsSuccessful()" classname="com.fontys.s3itproject.business.impl.LoginServiceImplTest" time="0.012"/>
+  <testcase name="login_shouldThrowInvalidCredentialsException_whenUsernameDoesntExist()" classname="com.fontys.s3itproject.business.impl.LoginServiceImplTest" time="0.001"/>
+  <testcase name="login_shouldThrowInvalidCredentialsException_whenCredentialsAreInvalid()" classname="com.fontys.s3itproject.business.impl.LoginServiceImplTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

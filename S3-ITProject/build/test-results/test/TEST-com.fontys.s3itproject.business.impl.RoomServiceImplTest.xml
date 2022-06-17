@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.fontys.s3itproject.business.impl.RoomServiceImplTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2022-06-17T09:25:00" hostname="XPS" time="0.031">
+  <properties/>
+  <testcase name="createRoom_shouldSaveRoom_imageUrlNotNull()" classname="com.fontys.s3itproject.business.impl.RoomServiceImplTest" time="0.019"/>
+  <testcase name="updateRoom_shouldThrowUnauthorisedDataAccessException_whenUpdateRoomEmployeeNotLoggedIn()" classname="com.fontys.s3itproject.business.impl.RoomServiceImplTest" time="0.003"/>
+  <testcase name="getRooms_shouldReturnAllRoomsConvertedToDTO()" classname="com.fontys.s3itproject.business.impl.RoomServiceImplTest" time="0.001"/>
+  <testcase name="updateRoom_shouldThrowInvalidRoomException_whenRoomNotFound()" classname="com.fontys.s3itproject.business.impl.RoomServiceImplTest" time="0.0"/>
+  <testcase name="updateRoom_shouldSaveNewPrice()" classname="com.fontys.s3itproject.business.impl.RoomServiceImplTest" time="0.001"/>
+  <testcase name="createRoom_shouldSaveRoom_imageUrlNull()" classname="com.fontys.s3itproject.business.impl.RoomServiceImplTest" time="0.001"/>
+  <testcase name="getRoom_shouldThrowUnauthorisedDataException_whenLoggedInUserIsNotEmployee()" classname="com.fontys.s3itproject.business.impl.RoomServiceImplTest" time="0.0"/>
+  <testcase name="getRoom_shouldReturnOptionalRoomByIDConvertedToDTO()" classname="com.fontys.s3itproject.business.impl.RoomServiceImplTest" time="0.001"/>
+  <testcase name="getRooms_shouldReturnAllFeaturedRoomsConvertedToDTO()" classname="com.fontys.s3itproject.business.impl.RoomServiceImplTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

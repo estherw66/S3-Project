@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.fontys.s3itproject.business.impl.GuestServiceImplTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2022-06-17T09:25:00" hostname="XPS" time="0.043">
+  <properties/>
+  <testcase name="getGuest_shouldReturnOptionalGuestConvertedToDTO_whenEmployeeLoggedIn()" classname="com.fontys.s3itproject.business.impl.GuestServiceImplTest" time="0.025"/>
+  <testcase name="getGuest_shouldThrowUnauthorisedDataAccessException_whenGuestIDIsNotFromLoggedInUser()" classname="com.fontys.s3itproject.business.impl.GuestServiceImplTest" time="0.001"/>
+  <testcase name="getGuest_shouldReturnOptionalGuestConvertedToDTO_whenFoundByID()" classname="com.fontys.s3itproject.business.impl.GuestServiceImplTest" time="0.002"/>
+  <testcase name="updateGuest_shouldThrowInvalidGuestException_whenGuestNotFound()" classname="com.fontys.s3itproject.business.impl.GuestServiceImplTest" time="0.002"/>
+  <testcase name="updateGuest_shouldThrowUnauthorisedDataAccessException_whenGuestIDIsNotFromLoggedInUser()" classname="com.fontys.s3itproject.business.impl.GuestServiceImplTest" time="0.002"/>
+  <testcase name="createGuest_shouldSaveNewGuest()" classname="com.fontys.s3itproject.business.impl.GuestServiceImplTest" time="0.003"/>
+  <testcase name="createGuest_shouldThrowUsernameAlreadyExistsException_whenUsernameAlreadyExists()" classname="com.fontys.s3itproject.business.impl.GuestServiceImplTest" time="0.003"/>
+  <testcase name="createGuest_shouldThrowEmailAlreadyExistsException_whenEmailAlreadyExists()" classname="com.fontys.s3itproject.business.impl.GuestServiceImplTest" time="0.002"/>
+  <testcase name="getGuests_shouldReturnAllGuestsConvertedToDTO()" classname="com.fontys.s3itproject.business.impl.GuestServiceImplTest" time="0.002"/>
+  <testcase name="updateGuest_shouldUpdateGuestEmail_whenGuestIDMatchesLoggedInUser()" classname="com.fontys.s3itproject.business.impl.GuestServiceImplTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

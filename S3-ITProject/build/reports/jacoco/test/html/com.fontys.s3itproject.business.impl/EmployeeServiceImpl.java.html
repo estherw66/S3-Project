@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EmployeeServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">s3-ITProject</a> &gt; <a href="index.source.html" class="el_package">com.fontys.s3itproject.business.impl</a> &gt; <span class="el_source">EmployeeServiceImpl.java</span></div><h1>EmployeeServiceImpl.java</h1><pre class="source lang-java linenums">package com.fontys.s3itproject.business.impl;
+
+import com.fontys.s3itproject.business.EmployeeService;
+import com.fontys.s3itproject.business.exception.InvalidEmployeeException;
+import com.fontys.s3itproject.business.exception.UnauthorisedDataAccessException;
+import com.fontys.s3itproject.dto.*;
+import com.fontys.s3itproject.repository.AddressRepository;
+import com.fontys.s3itproject.repository.EmployeeRepository;
+import com.fontys.s3itproject.repository.UserRepository;
+import com.fontys.s3itproject.repository.entity.*;
+import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+@Service
+@AllArgsConstructor
+public class EmployeeServiceImpl implements EmployeeService {
+    private static final String EMAIL_SUFFIX = &quot;@goldskye.com&quot;;
+
+    private final PasswordEncoder passwordEncoder;
+    private final AccessTokenDTO requestAccessToken;
+
+    private final EmployeeRepository employeeRepository;
+    private final UserRepository userRepository;
+    private final AddressRepository addressRepository;
+
+    @Override
+    public CreateEmployeeResponseDTO createEmployee(CreateEmployeeRequestDTO request) {
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (existsByPhoneNumber(request.getPhoneNumber())){</span>
+<span class="fc" id="L35">            throw new InvalidEmployeeException(&quot;PHONE_NUMBER_DUPLICATED&quot;);</span>
+        }
+
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        if (request.getDateOfBirth().isAfter(LocalDate.now().minusYears(16))){</span>
+<span class="nc" id="L39">            throw new InvalidEmployeeException(&quot;EMPLOYEE_SHOULD_BE_AT_LEAST_16_YEARS_OLD&quot;);</span>
+        }
+
+<span class="fc" id="L42">        Employee savedEmployee = saveNewEmployee(request);</span>
+
+<span class="fc" id="L44">        saveNewUser(savedEmployee, &quot;password123&quot;);</span>
+<span class="fc" id="L45">        saveNewAddress(savedEmployee, request.getStreetName(), request.getZipCode(), request.getCity());</span>
+
+<span class="fc" id="L47">        return CreateEmployeeResponseDTO.builder()</span>
+<span class="fc" id="L48">                .employeeID(savedEmployee.getId())</span>
+<span class="fc" id="L49">                .build();</span>
+    }
+
+    @Override
+    public GetEmployeesResponseDTO getEmployees() {
+<span class="fc" id="L54">        List&lt;EmployeeDTO&gt; employees = findAll()</span>
+<span class="fc" id="L55">                .stream()</span>
+<span class="fc" id="L56">                .map(EmployeeDTOConverter::convertToDTO)</span>
+<span class="fc" id="L57">                .toList();</span>
+
+<span class="fc" id="L59">        return GetEmployeesResponseDTO.builder()</span>
+<span class="fc" id="L60">                .employees(employees)</span>
+<span class="fc" id="L61">                .build();</span>
+    }
+
+    @Override
+    public Optional&lt;EmployeeDTO&gt; getEmployee(long employeeID) {
+<span class="pc bpc" id="L66" title="1 of 4 branches missed.">        if (!requestAccessToken.hasRole(RoleEnum.ADMIN.name()) &amp;&amp; requestAccessToken.getEmployeeId() != employeeID){</span>
+<span class="fc" id="L67">            throw new UnauthorisedDataAccessException(&quot;EMPLOYEE_ID_NOT_FROM_LOGGED_IN_USER&quot;);</span>
+        }
+
+<span class="fc" id="L70">        return employeeRepository.findById(employeeID).map(EmployeeDTOConverter::convertToDTO);</span>
+    }
+
+    @Override
+    public void updateEmployee(UpdateEmployeeRequestDTO request) {
+<span class="fc" id="L75">        Optional&lt;Employee&gt; employeeOptional = employeeRepository.findById(request.getId());</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">        if (employeeOptional.isEmpty()){</span>
+<span class="fc" id="L77">            throw new InvalidEmployeeException(&quot;EMPLOYEE_NOT_FOUND&quot;);</span>
+        }
+
+<span class="pc bpc" id="L80" title="1 of 4 branches missed.">        if (!requestAccessToken.hasRole(RoleEnum.ADMIN.name()) &amp;&amp; !requestAccessToken.getEmployeeId().equals(request.getId())){</span>
+<span class="fc" id="L81">            throw new UnauthorisedDataAccessException(&quot;EMPLOYEE_ID_NOT_FROM_LOGGED_IN_USER&quot;);</span>
+        }
+
+<span class="fc" id="L84">        Employee employee = employeeOptional.get();</span>
+<span class="fc" id="L85">        updateFields(request, employee);</span>
+<span class="fc" id="L86">    }</span>
+
+    @Override
+    public void deleteEmployee(Long employeeID) {
+<span class="fc" id="L90">        this.employeeRepository.deleteById(employeeID);</span>
+<span class="fc" id="L91">    }</span>
+
+    private void updateFields(UpdateEmployeeRequestDTO request, Employee employee) {
+<span class="fc" id="L94">        employee.setFirstName(request.getFirstName());</span>
+<span class="fc" id="L95">        employee.setLastName(request.getLastName());</span>
+<span class="fc" id="L96">        employee.setPhoneNumber(request.getPhoneNumber());</span>
+
+<span class="fc" id="L98">        employeeRepository.save(employee);</span>
+<span class="fc" id="L99">    }</span>
+
+    private void saveNewUser(Employee employee, String password){
+<span class="fc" id="L102">        String encodedPassword = passwordEncoder.encode(password);</span>
+
+<span class="fc" id="L104">        User newUser = User.builder()</span>
+<span class="fc" id="L105">                .username(employee.getFirstName().toLowerCase() + employee.getLastName().toLowerCase())</span>
+<span class="fc" id="L106">                .password(encodedPassword)</span>
+<span class="fc" id="L107">                .employee(employee)</span>
+<span class="fc" id="L108">                .guest(null)</span>
+<span class="fc" id="L109">                .build();</span>
+
+<span class="fc" id="L111">        newUser.setUserRoles(Set.of(</span>
+<span class="fc" id="L112">                UserRole.builder()</span>
+<span class="fc" id="L113">                        .user(newUser)</span>
+<span class="fc" id="L114">                        .role(RoleEnum.EMPLOYEE)</span>
+<span class="fc" id="L115">                        .build()));</span>
+
+<span class="fc" id="L117">        userRepository.save(newUser);</span>
+<span class="fc" id="L118">    }</span>
+
+    private void saveNewAddress(Employee employee, String streetName, String zipCode, String city){
+<span class="fc" id="L121">        Address newAddress = Address.builder()</span>
+<span class="fc" id="L122">                .streetName(streetName)</span>
+<span class="fc" id="L123">                .zipCode(zipCode)</span>
+<span class="fc" id="L124">                .city(city)</span>
+<span class="fc" id="L125">                .employee(employee)</span>
+<span class="fc" id="L126">                .build();</span>
+
+<span class="fc" id="L128">        addressRepository.save(newAddress);</span>
+<span class="fc" id="L129">    }</span>
+
+    private Employee saveNewEmployee(CreateEmployeeRequestDTO request){
+<span class="fc" id="L132">        Employee newEmployee = Employee.builder()</span>
+<span class="fc" id="L133">                .firstName(request.getFirstName())</span>
+<span class="fc" id="L134">                .lastName(request.getLastName())</span>
+<span class="fc" id="L135">                .email(request.getFirstName().toLowerCase() + request.getLastName().toLowerCase() + EMAIL_SUFFIX)</span>
+<span class="fc" id="L136">                .phoneNumber(request.getPhoneNumber())</span>
+<span class="fc" id="L137">                .dateOfBirth(request.getDateOfBirth())</span>
+<span class="fc" id="L138">                .build();</span>
+
+<span class="fc" id="L140">        return employeeRepository.save(newEmployee);</span>
+    }
+
+<span class="fc" id="L143">    private boolean existsByPhoneNumber(String phoneNumber) { return employeeRepository.existsByPhoneNumber(phoneNumber); }</span>
+
+    private List&lt;Employee&gt; findAll(){
+<span class="fc" id="L146">        return employeeRepository.findAll();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

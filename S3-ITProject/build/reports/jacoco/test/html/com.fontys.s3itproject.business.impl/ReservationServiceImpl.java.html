@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReservationServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">s3-ITProject</a> &gt; <a href="index.source.html" class="el_package">com.fontys.s3itproject.business.impl</a> &gt; <span class="el_source">ReservationServiceImpl.java</span></div><h1>ReservationServiceImpl.java</h1><pre class="source lang-java linenums">package com.fontys.s3itproject.business.impl;
+
+import com.fontys.s3itproject.business.ReservationService;
+import com.fontys.s3itproject.business.exception.InvalidGuestException;
+import com.fontys.s3itproject.business.exception.InvalidReservationException;
+import com.fontys.s3itproject.business.exception.UnauthorisedDataAccessException;
+import com.fontys.s3itproject.dto.*;
+import com.fontys.s3itproject.repository.GuestRepository;
+import com.fontys.s3itproject.repository.ReservationRepository;
+import com.fontys.s3itproject.repository.ReservationRoomRepository;
+import com.fontys.s3itproject.repository.entity.*;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static java.time.temporal.ChronoUnit.DAYS;
+
+@Service
+@AllArgsConstructor
+public class ReservationServiceImpl implements ReservationService {
+
+    private final AccessTokenDTO requestAccessToken;
+
+    private final ReservationRepository reservationRepository;
+    private final ReservationRoomRepository reservationRoomRepository;
+    private final GuestRepository guestRepository;
+
+    @Override
+    public CreateReservationResponseDTO createReservation(CreateReservationRequestDTO request) {
+<span class="fc" id="L34">        Optional&lt;Guest&gt; guestOptional = findGuestByID(request.getGuestID());</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (guestOptional.isEmpty()){</span>
+<span class="fc" id="L36">            throw new InvalidGuestException(&quot;GUEST_NOT_FOUND&quot;);</span>
+        }
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (request.getCheckInDate().isBefore(LocalDate.now())){</span>
+<span class="fc" id="L39">            throw new InvalidReservationException(&quot;CHECK_IN_DATE_CANNOT_BE_BEFORE_TODAY&quot;);</span>
+        }
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (request.getCheckOutDate().isBefore(request.getCheckInDate())){</span>
+<span class="fc" id="L42">            throw new InvalidReservationException(&quot;CHECK_OUT_DATE_MUST_BE_AFTER_CHECK_IN_DATE&quot;);</span>
+        }
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (request.getAmountOfGuests() &gt; calculateTotalRoomCapacity(request)){</span>
+<span class="fc" id="L45">            throw new InvalidReservationException(&quot;AMOUNT_OF_GUESTS_IS_HIGHER_THAN_TOTAL_CAPACITY&quot;);</span>
+        }
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (request.getCheckOutDate().equals(request.getCheckInDate())){</span>
+<span class="fc" id="L48">            throw new InvalidReservationException(&quot;CHECK_OUT_DATE_CANNOT_BE_THE_SAME_AS_CHECK_IN_DATE&quot;);</span>
+        }
+
+<span class="fc" id="L51">        Reservation savedReservation = saveNewReservation(request, guestOptional.get());</span>
+
+<span class="fc" id="L53">        List&lt;Room&gt; rooms = request.getReservationRooms()</span>
+<span class="fc" id="L54">                .stream()</span>
+<span class="fc" id="L55">                .map(RoomDTOConverter::convertToEntity)</span>
+<span class="fc" id="L56">                .toList();</span>
+
+<span class="fc" id="L58">        List&lt;ReservationRoom&gt; reservationRooms = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        for (Room room : rooms) {</span>
+<span class="fc" id="L60">            ReservationRoom reservationRoom = ReservationRoom.builder()</span>
+<span class="fc" id="L61">                    .reservation(savedReservation)</span>
+<span class="fc" id="L62">                    .room(room)</span>
+<span class="fc" id="L63">                    .build();</span>
+<span class="fc" id="L64">            reservationRooms.add(reservationRoom);</span>
+<span class="fc" id="L65">            reservationRoomRepository.save(reservationRoom);</span>
+<span class="fc" id="L66">        }</span>
+
+<span class="fc" id="L68">        savedReservation.setReservationRooms(reservationRooms);</span>
+
+<span class="fc" id="L70">        return CreateReservationResponseDTO.builder()</span>
+<span class="fc" id="L71">                .reservationID(savedReservation.getId())</span>
+<span class="fc" id="L72">                .build();</span>
+    }
+
+    @Override
+    public GetReservationsResponseDTO getReservations() {
+<span class="fc" id="L77">        List&lt;ReservationDTO&gt; reservations = findAll()</span>
+<span class="fc" id="L78">                .stream()</span>
+<span class="fc" id="L79">                .map(ReservationDTOConverter::convertToDTO)</span>
+<span class="fc" id="L80">                .toList();</span>
+
+<span class="fc" id="L82">        return GetReservationsResponseDTO.builder()</span>
+<span class="fc" id="L83">                .reservations(reservations)</span>
+<span class="fc" id="L84">                .build();</span>
+    }
+
+    @Override
+    public GetReservationsResponseDTO getReservationsByGuest(Long id) {
+<span class="fc" id="L89">        Optional&lt;Guest&gt; guestOptional = guestRepository.findById(id);</span>
+
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        if (guestOptional.isEmpty()){</span>
+<span class="fc" id="L92">            throw new InvalidGuestException(&quot;GUEST_NOT_FOUND&quot;);</span>
+        }
+
+<span class="fc" id="L95">        List&lt;ReservationDTO&gt; reservations = findAllByGuest(guestOptional.get())</span>
+<span class="fc" id="L96">                .stream()</span>
+<span class="fc" id="L97">                .map(ReservationDTOConverter::convertToDTO)</span>
+<span class="fc" id="L98">                .toList();</span>
+
+<span class="fc" id="L100">        return GetReservationsResponseDTO.builder()</span>
+<span class="fc" id="L101">                .reservations(reservations)</span>
+<span class="fc" id="L102">                .build();</span>
+    }
+
+    @Override
+    public void reservationCheckIn(ReservationCheckInRequestDTO request) {
+<span class="fc" id="L107">        Optional&lt;Reservation&gt; reservationOptional = reservationRepository.findById(request.getId());</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">        if (reservationOptional.isEmpty()){</span>
+<span class="fc" id="L109">            throw new InvalidReservationException(&quot;RESERVATION_NOT_FOUND&quot;);</span>
+        }
+
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        if (!requestAccessToken.hasRole(RoleEnum.EMPLOYEE.name())){</span>
+<span class="fc" id="L113">            throw new UnauthorisedDataAccessException(&quot;UNAUTHORISED_TO_PERFORM_ACTION&quot;);</span>
+        }
+
+<span class="fc" id="L116">        Reservation reservation = reservationOptional.get();</span>
+
+<span class="fc" id="L118">        updateFields(reservation);</span>
+<span class="fc" id="L119">    }</span>
+
+    private Reservation saveNewReservation(CreateReservationRequestDTO request, Guest guest){
+
+
+<span class="fc" id="L124">        Reservation reservation = Reservation.builder()</span>
+<span class="fc" id="L125">                .reservationDate(LocalDate.now())</span>
+<span class="fc" id="L126">                .checkInDate(request.getCheckInDate())</span>
+<span class="fc" id="L127">                .checkOutDate(request.getCheckOutDate())</span>
+<span class="fc" id="L128">                .amountOfGuests(request.getAmountOfGuests())</span>
+<span class="fc" id="L129">                .isCheckedIn(false)</span>
+<span class="fc" id="L130">                .totalPrice(calculateTotalPrice(request))</span>
+<span class="fc" id="L131">                .guest(guest)</span>
+<span class="fc" id="L132">                .build();</span>
+
+<span class="fc" id="L134">        return reservationRepository.save(reservation);</span>
+    }
+    private Optional&lt;Guest&gt; findGuestByID(Long id){
+<span class="fc" id="L137">        return guestRepository.findById(id);</span>
+    }
+    private double calculateTotalPrice(CreateReservationRequestDTO request){
+<span class="fc" id="L140">        double totalPrice = 0;</span>
+
+        // calculate nights for reservation
+<span class="fc" id="L143">        long totalDays = DAYS.between(request.getCheckInDate(), request.getCheckOutDate());</span>
+
+        // calculate total price for every room
+<span class="fc bfc" id="L146" title="All 2 branches covered.">        for (RoomDTO room : request.getReservationRooms()){</span>
+<span class="fc" id="L147">            totalPrice += room.getPricePerNight() * totalDays;</span>
+<span class="fc" id="L148">        }</span>
+
+<span class="fc" id="L150">        return totalPrice;</span>
+    }
+    private int calculateTotalRoomCapacity(CreateReservationRequestDTO request){
+<span class="fc" id="L153">        int totalCapacity = 0;</span>
+
+<span class="fc bfc" id="L155" title="All 2 branches covered.">        for (RoomDTO room : request.getReservationRooms()){</span>
+<span class="fc" id="L156">            totalCapacity += room.getCapacity();</span>
+<span class="fc" id="L157">        }</span>
+
+<span class="fc" id="L159">        return totalCapacity;</span>
+    }
+    private List&lt;Reservation&gt; findAll(){
+<span class="fc" id="L162">        return reservationRepository.findAll();</span>
+    }
+<span class="fc" id="L164">    private List&lt;Reservation&gt; findAllByGuest(Guest guest) { return reservationRepository.findAllByGuest(guest); }</span>
+    private List&lt;ReservationRoom&gt; findAllRoomsByReservationID(Reservation reservation){
+<span class="nc" id="L166">        return reservationRoomRepository.findAllByReservation(reservation.getId());</span>
+    }
+    private void updateFields(Reservation reservation){
+<span class="fc bfc" id="L169" title="All 2 branches covered.">        reservation.setCheckedIn(!reservation.isCheckedIn());</span>
+
+<span class="fc" id="L171">        reservationRepository.save(reservation);</span>
+<span class="fc" id="L172">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

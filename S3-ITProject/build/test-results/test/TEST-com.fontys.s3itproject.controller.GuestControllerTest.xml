@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.fontys.s3itproject.controller.GuestControllerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-06-17T09:25:04" hostname="XPS" time="0.073">
+  <properties/>
+  <testcase name="createGuest_shouldReturn201ResponseAndCreateGuest_whenRequestValid()" classname="com.fontys.s3itproject.controller.GuestControllerTest" time="0.022"/>
+  <testcase name="getGuest_shouldReturn200ResponseWithGuest_whenGuestFound()" classname="com.fontys.s3itproject.controller.GuestControllerTest" time="0.01"/>
+  <testcase name="updateGuest_shouldReturn204ResponseAndUpdateGuest()" classname="com.fontys.s3itproject.controller.GuestControllerTest" time="0.01"/>
+  <testcase name="createGuest_shouldReturn400ResponseAndNotCreateGuest_whenMissingFields()" classname="com.fontys.s3itproject.controller.GuestControllerTest" time="0.013"/>
+  <testcase name="getGuest_shouldReturn404_whenGuestNotFound()" classname="com.fontys.s3itproject.controller.GuestControllerTest" time="0.007"/>
+  <testcase name="getAllGuests_shouldReturn200ResponseWithGuestsArray()" classname="com.fontys.s3itproject.controller.GuestControllerTest" time="0.007"/>
+  <system-out><![CDATA[2022-06-17 11:25:03.041  INFO 6748 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.fontys.s3itproject.controller.GuestControllerTest], using SpringBootContextLoader
+2022-06-17 11:25:03.042  INFO 6748 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.fontys.s3itproject.controller.GuestControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-06-17 11:25:03.042  INFO 6748 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.fontys.s3itproject.controller.GuestControllerTest]: GuestControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-06-17 11:25:03.043  INFO 6748 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.fontys.s3itproject.S3ItProjectApplication for test class com.fontys.s3itproject.controller.GuestControllerTest
+2022-06-17 11:25:03.044  INFO 6748 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-06-17 11:25:03.045  INFO 6748 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@131c055a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@23d9f2, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@53193a1a, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@1f23d44f, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@6c662424, org.springframework.test.context.support.DirtiesContextTestExecutionListener@72949c13, org.springframework.test.context.transaction.TransactionalTestExecutionListener@6847a1b1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6947915a, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@34dddf52, org.springframework.test.context.event.EventPublishingTestExecutionListener@62ffb9de, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@3760c619, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@62f84cee, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@388528ac, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@27ab572b, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@16ca0dc9, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@36f5acc2, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@272432f8]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.6.4)
+
+2022-06-17 11:25:03.059  INFO 6748 --- [    Test worker] c.f.s.controller.GuestControllerTest     : Starting GuestControllerTest using Java 17.0.2 on XPS with PID 6748 (started by esthe in C:\Users\esthe\Desktop\s3-estherwolfs-it\s3-ITProject)
+2022-06-17 11:25:03.060  INFO 6748 --- [    Test worker] c.f.s.controller.GuestControllerTest     : No active profile set, falling back to 1 default profile: "default"
+2022-06-17 11:25:03.269  INFO 6748 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-06-17 11:25:03.297  INFO 6748 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27 ms. Found 7 JPA repository interfaces.
+2022-06-17 11:25:03.394  INFO 6748 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityConfig' of type [com.fontys.s3itproject.configuration.security.MethodSecurityConfig$$EnhancerBySpringCGLIB$$1ac5cad6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-06-17 11:25:03.447  INFO 6748 --- [    Test worker] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 8.5.5 by Redgate
+2022-06-17 11:25:03.447  INFO 6748 --- [    Test worker] o.f.c.internal.license.VersionPrinter    : See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.5
+2022-06-17 11:25:03.447  INFO 6748 --- [    Test worker] o.f.c.internal.license.VersionPrinter    : 
+2022-06-17 11:25:03.448  INFO 6748 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2022-06-17 11:25:03.466  INFO 6748 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2022-06-17 11:25:03.466  INFO 6748 --- [    Test worker] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:mysql://localhost:3306/goldskye_hotel (MySQL 8.0)
+2022-06-17 11:25:03.480  INFO 6748 --- [    Test worker] o.f.core.internal.command.DbValidate     : Successfully validated 3 migrations (execution time 00:00.006s)
+2022-06-17 11:25:03.487  INFO 6748 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Current version of schema `goldskye_hotel`: 3
+2022-06-17 11:25:03.487  INFO 6748 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Schema `goldskye_hotel` is up to date. No migration necessary.
+2022-06-17 11:25:03.528  INFO 6748 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-06-17 11:25:03.535  INFO 6748 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-06-17 11:25:03.647  INFO 6748 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-06-17 11:25:03.647  INFO 6748 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-06-17 11:25:04.012  INFO 6748 --- [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 0aadcc62-4a8a-4b35-89f3-00173b93aa67
+
+2022-06-17 11:25:04.071  INFO 6748 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will not secure any request
+2022-06-17 11:25:04.718  INFO 6748 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-06-17 11:25:04.719  INFO 6748 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-06-17 11:25:04.719  INFO 6748 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2022-06-17 11:25:04.727  INFO 6748 --- [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2022-06-17 11:25:04.727  INFO 6748 --- [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4093fbef]]
+2022-06-17 11:25:04.727  INFO 6748 --- [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2022-06-17 11:25:04.730  INFO 6748 --- [    Test worker] c.f.s.controller.GuestControllerTest     : Started GuestControllerTest in 1.682 seconds (JVM running for 14.053)
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/guests
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"183"]
+             Body =     {
+        "firstName": "Esther",
+        "lastName": "Wolfs",
+        "email": "estherwolfs@hotmail.com",
+        "username": "esther403",
+        "password": "password123"
+    }
+
+    Session Attrs = {}
+
+Handler:
+             Type = com.fontys.s3itproject.controller.GuestController
+           Method = com.fontys.s3itproject.controller.GuestController#createGuest(CreateGuestRequestDTO)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"1; mode=block", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"guestID":1}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /api/guests/1
+       Parameters = {}
+          Headers = []
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.fontys.s3itproject.controller.GuestController
+           Method = com.fontys.s3itproject.controller.GuestController#getGuest(long)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"1; mode=block", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"id":1,"firstName":"Esther","lastName":null,"email":null,"reservations":null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = PUT
+      Request URI = /api/guests/1
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"115"]
+             Body =     {
+        "firstName": "Esther",
+        "lastName": "Wolfs",
+        "email": "estherwolfs@hotmail.com"
+    }
+
+    Session Attrs = {}
+
+Handler:
+             Type = com.fontys.s3itproject.controller.GuestController
+           Method = com.fontys.s3itproject.controller.GuestController#updateGuest(long, UpdateGuestRequestDTO)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 204
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", X-Content-Type-Options:"nosniff", X-XSS-Protection:"1; mode=block", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-06-17 11:25:04.786 ERROR 6748 --- [    Test worker] c.f.s.c.e.RestCustomExceptionHandler     : MethodArgumentNotValidException with status status=400 BAD_REQUEST occurred error=org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.fontys.s3itproject.dto.CreateGuestResponseDTO> com.fontys.s3itproject.controller.GuestController.createGuest(com.fontys.s3itproject.dto.CreateGuestRequestDTO) with 9 errors: [Field error in object 'createGuestRequestDTO' on field 'email': rejected value []; codes [Length.createGuestRequestDTO.email,Length.email,Length.java.lang.String,Length]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createGuestRequestDTO.email,email]; arguments []; default message [email],50,2]; default message [length must be between 2 and 50]] [Field error in object 'createGuestRequestDTO' on field 'lastName': rejected value []; codes [NotBlank.createGuestRequestDTO.lastName,NotBlank.lastName,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createGuestRequestDTO.lastName,lastName]; arguments []; default message [lastName]]; default message [must not be blank]] [Field error in object 'createGuestRequestDTO' on field 'firstName': rejected value []; codes [Length.createGuestRequestDTO.firstName,Length.firstName,Length.java.lang.String,Length]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createGuestRequestDTO.firstName,firstName]; arguments []; default message [firstName],25,2]; default message [length must be between 2 and 25]] [Field error in object 'createGuestRequestDTO' on field 'password': rejected value []; codes [NotBlank.createGuestRequestDTO.password,NotBlank.password,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createGuestRequestDTO.password,password]; arguments []; default message [password]]; default message [must not be blank]] [Field error in object 'createGuestRequestDTO' on field 'username': rejected value []; codes [NotBlank.createGuestRequestDTO.username,NotBlank.username,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createGuestRequestDTO.username,username]; arguments []; default message [username]]; default message [must not be blank]] [Field error in object 'createGuestRequestDTO' on field 'lastName': rejected value []; codes [Length.createGuestRequestDTO.lastName,Length.lastName,Length.java.lang.String,Length]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createGuestRequestDTO.lastName,lastName]; arguments []; default message [lastName],50,2]; default message [length must be between 2 and 50]] [Field error in object 'createGuestRequestDTO' on field 'email': rejected value []; codes [NotBlank.createGuestRequestDTO.email,NotBlank.email,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createGuestRequestDTO.email,email]; arguments []; default message [email]]; default message [must not be blank]] [Field error in object 'createGuestRequestDTO' on field 'firstName': rejected value []; codes [NotBlank.createGuestRequestDTO.firstName,NotBlank.firstName,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createGuestRequestDTO.firstName,firstName]; arguments []; default message [firstName]]; default message [must not be blank]] [Field error in object 'createGuestRequestDTO' on field 'username': rejected value []; codes [Length.createGuestRequestDTO.username,Length.username,Length.java.lang.String,Length]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createGuestRequestDTO.username,username]; arguments []; default message [username],20,2]; default message [length must be between 2 and 20]] 
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/guests
+       Parameters = {}
+          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"129"]
+             Body =     {
+        "firstName": "",
+        "lastName": "",
+        "email": "",
+        "username": "",
+        "password": ""
+    }
+
+    Session Attrs = {}
+
+Handler:
+             Type = com.fontys.s3itproject.controller.GuestController
+           Method = com.fontys.s3itproject.controller.GuestController#createGuest(CreateGuestRequestDTO)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.web.bind.MethodArgumentNotValidException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"1; mode=block", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = [{"field":"email","error":"length must be between 2 and 50"},{"field":"lastName","error":"must not be blank"},{"field":"firstName","error":"length must be between 2 and 25"},{"field":"password","error":"must not be blank"},{"field":"username","error":"must not be blank"},{"field":"lastName","error":"length must be between 2 and 50"},{"field":"email","error":"must not be blank"},{"field":"firstName","error":"must not be blank"},{"field":"username","error":"length must be between 2 and 20"}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /api/guests/1
+       Parameters = {}
+          Headers = []
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.fontys.s3itproject.controller.GuestController
+           Method = com.fontys.s3itproject.controller.GuestController#getGuest(long)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 404
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", X-Content-Type-Options:"nosniff", X-XSS-Protection:"1; mode=block", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /api/guests
+       Parameters = {}
+          Headers = []
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.fontys.s3itproject.controller.GuestController
+           Method = com.fontys.s3itproject.controller.GuestController#getAllGuests()
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"1; mode=block", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = application/json
+             Body = {"guests":[{"id":1,"firstName":null,"lastName":null,"email":null,"reservations":null},{"id":2,"firstName":null,"lastName":null,"email":null,"reservations":null}]}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EmployeeController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">s3-ITProject</a> &gt; <a href="index.source.html" class="el_package">com.fontys.s3itproject.controller</a> &gt; <span class="el_source">EmployeeController.java</span></div><h1>EmployeeController.java</h1><pre class="source lang-java linenums">package com.fontys.s3itproject.controller;
+
+import com.fontys.s3itproject.business.EmployeeService;
+import com.fontys.s3itproject.configuration.security.isauthenticated.IsAuthenticated;
+import com.fontys.s3itproject.dto.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
+import javax.validation.Valid;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(&quot;/api/employees&quot;)
+@RequiredArgsConstructor
+@CrossOrigin(origins = &quot;http://localhost:3000&quot;)
+public class EmployeeController {
+    private final EmployeeService employeeService;
+
+    @IsAuthenticated
+    @RolesAllowed({&quot;ROLE_ADMIN&quot;})
+    @GetMapping
+    public ResponseEntity&lt;GetEmployeesResponseDTO&gt; getEmployees(){
+<span class="fc" id="L26">        return ResponseEntity.ok(employeeService.getEmployees());</span>
+    }
+
+    @IsAuthenticated
+    @RolesAllowed({&quot;ROLE_EMPLOYEE&quot;, &quot;ROLE_ADMIN&quot;})
+    @GetMapping(path = &quot;{id}&quot;)
+    public ResponseEntity&lt;EmployeeDTO&gt; getEmployee(@PathVariable(value = &quot;id&quot;) final long id){
+<span class="fc" id="L33">        final Optional&lt;EmployeeDTO&gt; employeeOptional = employeeService.getEmployee(id);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (employeeOptional.isEmpty()) {</span>
+<span class="fc" id="L35">            return ResponseEntity.notFound().build();</span>
+        }
+<span class="fc" id="L37">        return ResponseEntity.ok().body(employeeOptional.get());</span>
+    }
+
+    @IsAuthenticated
+    @RolesAllowed({&quot;ROLE_ADMIN&quot;})
+    @PostMapping
+    public ResponseEntity&lt;CreateEmployeeResponseDTO&gt; createEmployee(
+            @RequestBody @Valid CreateEmployeeRequestDTO createEmployeeRequest){
+<span class="fc" id="L45">        CreateEmployeeResponseDTO response = employeeService.createEmployee(createEmployeeRequest);</span>
+<span class="fc" id="L46">        return ResponseEntity.status(HttpStatus.CREATED).body(response);</span>
+    }
+
+    @IsAuthenticated
+    @RolesAllowed({&quot;ROLE_ADMIN&quot;, &quot;ROLE_EMPLOYEE&quot;})
+    @PutMapping(&quot;{id}&quot;)
+    public ResponseEntity&lt;EmployeeDTO&gt; updateEmployee(@PathVariable(value = &quot;id&quot;) long id,
+                                                      @RequestBody @Valid UpdateEmployeeRequestDTO requestDTO){
+<span class="fc" id="L54">        requestDTO.setId(id);</span>
+<span class="fc" id="L55">        employeeService.updateEmployee(requestDTO);</span>
+<span class="fc" id="L56">        return ResponseEntity.noContent().build();</span>
+    }
+
+    @IsAuthenticated
+    @RolesAllowed({&quot;ROLE_ADMIN&quot;})
+    @DeleteMapping(&quot;{id}&quot;)
+    public ResponseEntity&lt;Void&gt; deleteEmployee(@PathVariable long id){
+<span class="fc" id="L63">        employeeService.deleteEmployee(id);</span>
+<span class="fc" id="L64">        return ResponseEntity.noContent().build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - EmployeeControllerTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>EmployeeControllerTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.fontys.s3itproject.controller.html">com.fontys.s3itproject.controller</a> &gt; EmployeeControllerTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">7</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.266s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">createEmployee_shouldCreateEmployeeAndReturn201_whenRequestValid()</td>
+<td class="success">0.011s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">createEmployee_shouldNotCreateEmployeeAndReturn400_WhenMissingFields()</td>
+<td class="success">0.099s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">deleteEmployee_shouldReturn204_whenDeleteEmployee()</td>
+<td class="success">0.013s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">getEmployee_shouldReturn200ResponseWithEmployee_whenEmployeeFound()</td>
+<td class="success">0.008s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">getEmployee_shouldReturn404NotFoundError_whenEmployeeNotFound()</td>
+<td class="success">0.008s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">getEmployees_shouldReturn200ResponseWithEmployeesArray()</td>
+<td class="success">0.113s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">updateEmployee_shouldReturn204_whenUpdatingEmployee()</td>
+<td class="success">0.014s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2022-06-17 11:25:00.607  INFO 6748 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.fontys.s3itproject.controller.EmployeeControllerTest], using SpringBootContextLoader
+2022-06-17 11:25:00.608  INFO 6748 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.fontys.s3itproject.controller.EmployeeControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-06-17 11:25:00.608  INFO 6748 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.fontys.s3itproject.controller.EmployeeControllerTest]: EmployeeControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-06-17 11:25:00.624  INFO 6748 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.fontys.s3itproject.S3ItProjectApplication for test class com.fontys.s3itproject.controller.EmployeeControllerTest
+2022-06-17 11:25:00.625  INFO 6748 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-06-17 11:25:00.626  INFO 6748 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@62e9c551, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@5aa87486, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@2d517e29, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@58f0825e, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@749f075c, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6d8a510d, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4b8cdaa3, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@17b243fe, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@1b1b13b3, org.springframework.test.context.event.EventPublishingTestExecutionListener@24a63be4, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@9d2a411, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@c7abb66, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@4fbfb7d1, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@5ad3dcd9, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@46bd09be, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@1fc53b84, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@2d760692]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.6.4)
+
+2022-06-17 11:25:00.648  INFO 6748 --- [    Test worker] c.f.s.controller.EmployeeControllerTest  : Starting EmployeeControllerTest using Java 17.0.2 on XPS with PID 6748 (started by esthe in C:\Users\esthe\Desktop\s3-estherwolfs-it\s3-ITProject)
+2022-06-17 11:25:00.649  INFO 6748 --- [    Test worker] c.f.s.controller.EmployeeControllerTest  : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2022-06-17 11:25:00.878  INFO 6748 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-06-17 11:25:00.909  INFO 6748 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 7 JPA repository interfaces.
+2022-06-17 11:25:01.041  INFO 6748 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityConfig' of type [com.fontys.s3itproject.configuration.security.MethodSecurityConfig$$EnhancerBySpringCGLIB$$1ac5cad6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-06-17 11:25:01.105  INFO 6748 --- [    Test worker] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 8.5.5 by Redgate
+2022-06-17 11:25:01.106  INFO 6748 --- [    Test worker] o.f.c.internal.license.VersionPrinter    : See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#8.5.5
+2022-06-17 11:25:01.106  INFO 6748 --- [    Test worker] o.f.c.internal.license.VersionPrinter    : 
+2022-06-17 11:25:01.107  INFO 6748 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2022-06-17 11:25:01.129  INFO 6748 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2022-06-17 11:25:01.130  INFO 6748 --- [    Test worker] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:mysql://localhost:3306/goldskye_hotel (MySQL 8.0)
+2022-06-17 11:25:01.147  INFO 6748 --- [    Test worker] o.f.core.internal.command.DbValidate     : Successfully validated 3 migrations (execution time 00:00.007s)
+2022-06-17 11:25:01.158  INFO 6748 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Current version of schema `goldskye_hotel`: 3
+2022-06-17 11:25:01.159  INFO 6748 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Schema `goldskye_hotel` is up to date. No migration necessary.
+2022-06-17 11:25:01.218  INFO 6748 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-06-17 11:25:01.223  INFO 6748 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-06-17 11:25:01.323  INFO 6748 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-06-17 11:25:01.324  INFO 6748 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-06-17 11:25:01.829  INFO 6748 --- [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: b4f1cda3-f794-4753-933a-ea940e4f359d
+
+2022-06-17 11:25:01.880  INFO 6748 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will not secure any request
+2022-06-17 11:25:02.755  INFO 6748 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-06-17 11:25:02.755  INFO 6748 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-06-17 11:25:02.756  INFO 6748 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2022-06-17 11:25:02.765  INFO 6748 --- [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2022-06-17 11:25:02.765  INFO 6748 --- [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@1220eb72]]
+2022-06-17 11:25:02.766  INFO 6748 --- [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2022-06-17 11:25:02.767  INFO 6748 --- [    Test worker] c.f.s.controller.EmployeeControllerTest  : Started EmployeeControllerTest in 2.138 seconds (JVM running for 12.09)
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /api/employees
+       Parameters = {}
+          Headers = []
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.fontys.s3itproject.controller.EmployeeController
+           Method = com.fontys.s3itproject.controller.EmployeeController#getEmployees()
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Vary:&quot;Origin&quot;, &quot;Access-Control-Request-Method&quot;, &quot;Access-Control-Request-Headers&quot;, Content-Type:&quot;application/json&quot;, X-Content-Type-Options:&quot;nosniff&quot;, X-XSS-Protection:&quot;1; mode=block&quot;, Cache-Control:&quot;no-cache, no-store, max-age=0, must-revalidate&quot;, Pragma:&quot;no-cache&quot;, Expires:&quot;0&quot;, X-Frame-Options:&quot;DENY&quot;]
+     Content type = application/json
+             Body = {&quot;employees&quot;:[{&quot;id&quot;:1,&quot;firstName&quot;:&quot;Esther&quot;,&quot;lastName&quot;:&quot;Wolfs&quot;,&quot;email&quot;:&quot;estherwolfs@goldskye.com&quot;,&quot;phoneNumber&quot;:&quot;+31612901749&quot;,&quot;dateOfBirth&quot;:&quot;1998-01-01&quot;,&quot;address&quot;:null},{&quot;id&quot;:2,&quot;firstName&quot;:&quot;John&quot;,&quot;lastName&quot;:&quot;Floreani&quot;,&quot;email&quot;:&quot;johnfloreani@goldskye.com&quot;,&quot;phoneNumber&quot;:&quot;+31648265971&quot;,&quot;dateOfBirth&quot;:&quot;1993-12-31&quot;,&quot;address&quot;:null}]}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = DELETE
+      Request URI = /api/employees/1
+       Parameters = {}
+          Headers = []
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.fontys.s3itproject.controller.EmployeeController
+           Method = com.fontys.s3itproject.controller.EmployeeController#deleteEmployee(long)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 204
+    Error message = null
+          Headers = [Vary:&quot;Origin&quot;, &quot;Access-Control-Request-Method&quot;, &quot;Access-Control-Request-Headers&quot;, X-Content-Type-Options:&quot;nosniff&quot;, X-XSS-Protection:&quot;1; mode=block&quot;, Cache-Control:&quot;no-cache, no-store, max-age=0, must-revalidate&quot;, Pragma:&quot;no-cache&quot;, Expires:&quot;0&quot;, X-Frame-Options:&quot;DENY&quot;]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /api/employees/1
+       Parameters = {}
+          Headers = []
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.fontys.s3itproject.controller.EmployeeController
+           Method = com.fontys.s3itproject.controller.EmployeeController#getEmployee(long)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 404
+    Error message = null
+          Headers = [Vary:&quot;Origin&quot;, &quot;Access-Control-Request-Method&quot;, &quot;Access-Control-Request-Headers&quot;, X-Content-Type-Options:&quot;nosniff&quot;, X-XSS-Protection:&quot;1; mode=block&quot;, Cache-Control:&quot;no-cache, no-store, max-age=0, must-revalidate&quot;, Pragma:&quot;no-cache&quot;, Expires:&quot;0&quot;, X-Frame-Options:&quot;DENY&quot;]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+2022-06-17 11:25:02.997 ERROR 6748 --- [    Test worker] c.f.s.c.e.RestCustomExceptionHandler     : MethodArgumentNotValidException with status status=400 BAD_REQUEST occurred error=org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity&lt;com.fontys.s3itproject.dto.CreateEmployeeResponseDTO&gt; com.fontys.s3itproject.controller.EmployeeController.createEmployee(com.fontys.s3itproject.dto.CreateEmployeeRequestDTO) with 12 errors: [Field error in object 'createEmployeeRequestDTO' on field 'streetName': rejected value []; codes [NotBlank.createEmployeeRequestDTO.streetName,NotBlank.streetName,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createEmployeeRequestDTO.streetName,streetName]; arguments []; default message [streetName]]; default message [must not be blank]] [Field error in object 'createEmployeeRequestDTO' on field 'zipCode': rejected value []; codes [NotBlank.createEmployeeRequestDTO.zipCode,NotBlank.zipCode,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createEmployeeRequestDTO.zipCode,zipCode]; arguments []; default message [zipCode]]; default message [must not be blank]] [Field error in object 'createEmployeeRequestDTO' on field 'city': rejected value []; codes [NotBlank.createEmployeeRequestDTO.city,NotBlank.city,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createEmployeeRequestDTO.city,city]; arguments []; default message [city]]; default message [must not be blank]] [Field error in object 'createEmployeeRequestDTO' on field 'dateOfBirth': rejected value [null]; codes [NotNull.createEmployeeRequestDTO.dateOfBirth,NotNull.dateOfBirth,NotNull.java.time.LocalDate,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createEmployeeRequestDTO.dateOfBirth,dateOfBirth]; arguments []; default message [dateOfBirth]]; default message [must not be null]] [Field error in object 'createEmployeeRequestDTO' on field 'streetName': rejected value []; codes [Length.createEmployeeRequestDTO.streetName,Length.streetName,Length.java.lang.String,Length]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createEmployeeRequestDTO.streetName,streetName]; arguments []; default message [streetName],50,2]; default message [length must be between 2 and 50]] [Field error in object 'createEmployeeRequestDTO' on field 'lastName': rejected value []; codes [NotBlank.createEmployeeRequestDTO.lastName,NotBlank.lastName,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createEmployeeRequestDTO.lastName,lastName]; arguments []; default message [lastName]]; default message [must not be blank]] [Field error in object 'createEmployeeRequestDTO' on field 'firstName': rejected value []; codes [NotBlank.createEmployeeRequestDTO.firstName,NotBlank.firstName,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createEmployeeRequestDTO.firstName,firstName]; arguments []; default message [firstName]]; default message [must not be blank]] [Field error in object 'createEmployeeRequestDTO' on field 'lastName': rejected value []; codes [Length.createEmployeeRequestDTO.lastName,Length.lastName,Length.java.lang.String,Length]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createEmployeeRequestDTO.lastName,lastName]; arguments []; default message [lastName],50,2]; default message [length must be between 2 and 50]] [Field error in object 'createEmployeeRequestDTO' on field 'firstName': rejected value []; codes [Length.createEmployeeRequestDTO.firstName,Length.firstName,Length.java.lang.String,Length]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createEmployeeRequestDTO.firstName,firstName]; arguments []; default message [firstName],25,2]; default message [length must be between 2 and 25]] [Field error in object 'createEmployeeRequestDTO' on field 'city': rejected value []; codes [Length.createEmployeeRequestDTO.city,Length.city,Length.java.lang.String,Length]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createEmployeeRequestDTO.city,city]; arguments []; default message [city],50,2]; default message [length must be between 2 and 50]] [Field error in object 'createEmployeeRequestDTO' on field 'zipCode': rejected value []; codes [Length.createEmployeeRequestDTO.zipCode,Length.zipCode,Length.java.lang.String,Length]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createEmployeeRequestDTO.zipCode,zipCode]; arguments []; default message [zipCode],6,6]; default message [length must be between 6 and 6]] [Field error in object 'createEmployeeRequestDTO' on field 'phoneNumber': rejected value []; codes [NotBlank.createEmployeeRequestDTO.phoneNumber,NotBlank.phoneNumber,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [createEmployeeRequestDTO.phoneNumber,phoneNumber]; arguments []; default message [phoneNumber]]; default message [must not be blank]] 
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/employees
+       Parameters = {}
+          Headers = [Content-Type:&quot;application/json;charset=UTF-8&quot;, Content-Length:&quot;228&quot;]
+             Body =     {
+        &quot;firstName&quot;: &quot;&quot;,
+        &quot;lastName&quot;: &quot;&quot;,
+        &quot;email&quot;: &quot;&quot;,
+        &quot;phoneNumber&quot;: &quot;&quot;,
+        &quot;dateOfBirth&quot;: &quot;&quot;,
+        &quot;password&quot;: &quot;&quot;,
+        &quot;streetName&quot;: &quot;&quot;,
+        &quot;zipCode&quot;: &quot;&quot;,
+        &quot;city&quot;: &quot;&quot;
+    }
+
+    Session Attrs = {}
+
+Handler:
+             Type = com.fontys.s3itproject.controller.EmployeeController
+           Method = com.fontys.s3itproject.controller.EmployeeController#createEmployee(CreateEmployeeRequestDTO)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.web.bind.MethodArgumentNotValidException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = [Vary:&quot;Origin&quot;, &quot;Access-Control-Request-Method&quot;, &quot;Access-Control-Request-Headers&quot;, Content-Type:&quot;application/json&quot;, X-Content-Type-Options:&quot;nosniff&quot;, X-XSS-Protection:&quot;1; mode=block&quot;, Cache-Control:&quot;no-cache, no-store, max-age=0, must-revalidate&quot;, Pragma:&quot;no-cache&quot;, Expires:&quot;0&quot;, X-Frame-Options:&quot;DENY&quot;]
+     Content type = application/json
+             Body = [{&quot;field&quot;:&quot;streetName&quot;,&quot;error&quot;:&quot;must not be blank&quot;},{&quot;field&quot;:&quot;zipCode&quot;,&quot;error&quot;:&quot;must not be blank&quot;},{&quot;field&quot;:&quot;city&quot;,&quot;error&quot;:&quot;must not be blank&quot;},{&quot;field&quot;:&quot;dateOfBirth&quot;,&quot;error&quot;:&quot;must not be null&quot;},{&quot;field&quot;:&quot;streetName&quot;,&quot;error&quot;:&quot;length must be between 2 and 50&quot;},{&quot;field&quot;:&quot;lastName&quot;,&quot;error&quot;:&quot;must not be blank&quot;},{&quot;field&quot;:&quot;firstName&quot;,&quot;error&quot;:&quot;must not be blank&quot;},{&quot;field&quot;:&quot;lastName&quot;,&quot;error&quot;:&quot;length must be between 2 and 50&quot;},{&quot;field&quot;:&quot;firstName&quot;,&quot;error&quot;:&quot;length must be between 2 and 25&quot;},{&quot;field&quot;:&quot;city&quot;,&quot;error&quot;:&quot;length must be between 2 and 50&quot;},{&quot;field&quot;:&quot;zipCode&quot;,&quot;error&quot;:&quot;length must be between 6 and 6&quot;},{&quot;field&quot;:&quot;phoneNumber&quot;,&quot;error&quot;:&quot;must not be blank&quot;}]
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = PUT
+      Request URI = /api/employees/1
+       Parameters = {}
+          Headers = [Content-Type:&quot;application/json;charset=UTF-8&quot;, Content-Length:&quot;110&quot;]
+             Body =     {
+        &quot;firstName&quot;: &quot;Esther&quot;,
+        &quot;lastName&quot;: &quot;Wolfs&quot;,
+        &quot;phoneNumber&quot;: &quot;+31612901749&quot;
+    }
+
+    Session Attrs = {}
+
+Handler:
+             Type = com.fontys.s3itproject.controller.EmployeeController
+           Method = com.fontys.s3itproject.controller.EmployeeController#updateEmployee(long, UpdateEmployeeRequestDTO)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 204
+    Error message = null
+          Headers = [Vary:&quot;Origin&quot;, &quot;Access-Control-Request-Method&quot;, &quot;Access-Control-Request-Headers&quot;, X-Content-Type-Options:&quot;nosniff&quot;, X-XSS-Protection:&quot;1; mode=block&quot;, Cache-Control:&quot;no-cache, no-store, max-age=0, must-revalidate&quot;, Pragma:&quot;no-cache&quot;, Expires:&quot;0&quot;, X-Frame-Options:&quot;DENY&quot;]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /api/employees/1
+       Parameters = {}
+          Headers = []
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.fontys.s3itproject.controller.EmployeeController
+           Method = com.fontys.s3itproject.controller.EmployeeController#getEmployee(long)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = [Vary:&quot;Origin&quot;, &quot;Access-Control-Request-Method&quot;, &quot;Access-Control-Request-Headers&quot;, Content-Type:&quot;application/json&quot;, X-Content-Type-Options:&quot;nosniff&quot;, X-XSS-Protection:&quot;1; mode=block&quot;, Cache-Control:&quot;no-cache, no-store, max-age=0, must-revalidate&quot;, Pragma:&quot;no-cache&quot;, Expires:&quot;0&quot;, X-Frame-Options:&quot;DENY&quot;]
+     Content type = application/json
+             Body = {&quot;id&quot;:1,&quot;firstName&quot;:&quot;Esther&quot;,&quot;lastName&quot;:&quot;Wolfs&quot;,&quot;email&quot;:&quot;EstherWolfs@goldskye.com&quot;,&quot;phoneNumber&quot;:&quot;+31612901749&quot;,&quot;dateOfBirth&quot;:&quot;1998-01-01&quot;,&quot;address&quot;:{&quot;id&quot;:null,&quot;streetName&quot;:&quot;Mozartlaan 41&quot;,&quot;zipCode&quot;:&quot;5151KA&quot;,&quot;city&quot;:&quot;Drunen&quot;}}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/employees
+       Parameters = {}
+          Headers = [Content-Type:&quot;application/json;charset=UTF-8&quot;, Content-Length:&quot;275&quot;]
+             Body = {
+    &quot;firstName&quot;: &quot;Esther&quot;,
+    &quot;lastName&quot;: &quot;Wolfs&quot;,
+    &quot;email&quot;: &quot;estherwolfs@goldskye.com&quot;,
+    &quot;phoneNumber&quot;: &quot;+31612901749&quot;,
+    &quot;dateOfBirth&quot;: &quot;1998-01-01&quot;,
+    &quot;password&quot;: &quot;password1&quot;,
+    &quot;streetName&quot;: &quot;Mozartlaan 41&quot;,
+    &quot;zipCode&quot;: &quot;5151KA&quot;,
+    &quot;city&quot;: &quot;Drunen&quot;
+}
+
+    Session Attrs = {}
+
+Handler:
+             Type = com.fontys.s3itproject.controller.EmployeeController
+           Method = com.fontys.s3itproject.controller.EmployeeController#createEmployee(CreateEmployeeRequestDTO)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 201
+    Error message = null
+          Headers = [Vary:&quot;Origin&quot;, &quot;Access-Control-Request-Method&quot;, &quot;Access-Control-Request-Headers&quot;, Content-Type:&quot;application/json&quot;, X-Content-Type-Options:&quot;nosniff&quot;, X-XSS-Protection:&quot;1; mode=block&quot;, Cache-Control:&quot;no-cache, no-store, max-age=0, must-revalidate&quot;, Pragma:&quot;no-cache&quot;, Expires:&quot;0&quot;, X-Frame-Options:&quot;DENY&quot;]
+     Content type = application/json
+             Body = {&quot;employeeID&quot;:1}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.4</a> at 17 Jun 2022, 11:25:09</p>
+</div>
+</div>
+</body>
+</html>

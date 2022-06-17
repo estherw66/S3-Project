@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoginServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">s3-ITProject</a> &gt; <a href="index.source.html" class="el_package">com.fontys.s3itproject.business.impl</a> &gt; <span class="el_source">LoginServiceImpl.java</span></div><h1>LoginServiceImpl.java</h1><pre class="source lang-java linenums">package com.fontys.s3itproject.business.impl;
+
+import com.fontys.s3itproject.business.AccessTokenEncoder;
+import com.fontys.s3itproject.business.LoginService;
+import com.fontys.s3itproject.business.exception.InvalidCredentialsException;
+import com.fontys.s3itproject.dto.AccessTokenDTO;
+import com.fontys.s3itproject.dto.LoginRequestDTO;
+import com.fontys.s3itproject.dto.LoginResponseDTO;
+import com.fontys.s3itproject.repository.UserRepository;
+import com.fontys.s3itproject.repository.entity.User;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class LoginServiceImpl implements LoginService {
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final AccessTokenEncoder accessTokenEncoder;
+
+    @Override
+    public LoginResponseDTO login(LoginRequestDTO loginRequest) {
+<span class="fc" id="L26">        User user = userRepository.findByUsername(loginRequest.getUsername());</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        if (user == null){</span>
+<span class="fc" id="L28">            throw new InvalidCredentialsException(&quot;USERNAME_DOESNT_EXIST&quot;);</span>
+        }
+
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        if (!matchesPassword(loginRequest.getPassword(), user.getPassword())){</span>
+<span class="fc" id="L32">            throw new InvalidCredentialsException();</span>
+        }
+
+<span class="fc" id="L35">        String accessToken = generateAccessToken(user);</span>
+<span class="fc" id="L36">        return LoginResponseDTO.builder()</span>
+<span class="fc" id="L37">                .accessToken(accessToken)</span>
+
+<span class="fc" id="L39">                .build();</span>
+    }
+
+    private boolean matchesPassword(String rawPassword, String encodedPassword){
+<span class="fc" id="L43">        return passwordEncoder.matches(rawPassword, encodedPassword);</span>
+    }
+
+    public String generateAccessToken(User user){
+<span class="pc bpc" id="L47" title="2 of 4 branches missed.">        Long employeeID = user.getEmployee() != null ? user.getEmployee().getId() : user.getGuest() != null ? user.getGuest().getId() : null;</span>
+
+<span class="fc" id="L49">        List&lt;String&gt; roles = user.getUserRoles().stream()</span>
+<span class="fc" id="L50">                .map(userRole -&gt; userRole.getRole().toString())</span>
+<span class="fc" id="L51">                .toList();</span>
+
+<span class="fc" id="L53">        return accessTokenEncoder.encode(</span>
+<span class="fc" id="L54">                AccessTokenDTO.builder()</span>
+<span class="fc" id="L55">                        .subject(user.getUsername())</span>
+<span class="fc" id="L56">                        .roles(roles)</span>
+<span class="fc" id="L57">                        .employeeId(employeeID)</span>
+<span class="fc" id="L58">                        .build());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

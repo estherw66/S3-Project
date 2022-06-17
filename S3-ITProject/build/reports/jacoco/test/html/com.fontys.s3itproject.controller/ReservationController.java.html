@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReservationController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">s3-ITProject</a> &gt; <a href="index.source.html" class="el_package">com.fontys.s3itproject.controller</a> &gt; <span class="el_source">ReservationController.java</span></div><h1>ReservationController.java</h1><pre class="source lang-java linenums">package com.fontys.s3itproject.controller;
+
+import com.fontys.s3itproject.business.ReservationService;
+import com.fontys.s3itproject.configuration.security.isauthenticated.IsAuthenticated;
+import com.fontys.s3itproject.dto.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
+import javax.validation.Valid;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(&quot;/api/reservations&quot;)
+@CrossOrigin(origins = &quot;http://localhost:3000&quot;)
+public class ReservationController {
+
+    private final ReservationService reservationService;
+
+    @PostMapping
+    public ResponseEntity&lt;CreateReservationResponseDTO&gt; createReservation(
+            @RequestBody @Valid CreateReservationRequestDTO createReservationRequest){
+<span class="fc" id="L25">        CreateReservationResponseDTO response = reservationService.createReservation(createReservationRequest);</span>
+<span class="fc" id="L26">        return ResponseEntity.status(HttpStatus.CREATED).body(response);</span>
+    }
+
+    @IsAuthenticated
+    @RolesAllowed({&quot;ROLE_EMPLOYEE&quot;})
+    @GetMapping
+    public ResponseEntity&lt;GetReservationsResponseDTO&gt; getReservations(){
+<span class="fc" id="L33">       return ResponseEntity.ok(reservationService.getReservations());</span>
+    }
+
+    @IsAuthenticated
+    @RolesAllowed({&quot;ROLE_GUEST&quot;})
+    @GetMapping(path = &quot;{id}&quot;)
+    public ResponseEntity&lt;GetReservationsResponseDTO&gt; getReservationsByGuest(@PathVariable(value = &quot;id&quot;) long id){
+<span class="fc" id="L40">        return ResponseEntity.ok(reservationService.getReservationsByGuest(id));</span>
+    }
+
+    @IsAuthenticated
+    @RolesAllowed({&quot;ROLE_EMPLOYEE&quot;})
+    @PutMapping(&quot;{id}&quot;)
+    public ResponseEntity&lt;ReservationDTO&gt; reservationCheckIn(@PathVariable(value = &quot;id&quot;) long id){
+<span class="fc" id="L47">        ReservationCheckInRequestDTO request = ReservationCheckInRequestDTO.builder()</span>
+<span class="fc" id="L48">                        .id(id).build();</span>
+        
+<span class="fc" id="L50">        reservationService.reservationCheckIn(request);</span>
+<span class="fc" id="L51">        return ResponseEntity.noContent().build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
