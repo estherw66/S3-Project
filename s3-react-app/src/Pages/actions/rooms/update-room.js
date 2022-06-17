@@ -111,7 +111,7 @@ const UpdateRoomPage = () => {
                                 <label>Total Amount In Hotel:</label>
                             </div>
                         </div>
-                        <button>Save Changes</button>
+                        <button className='btn'>Save Changes</button>
                     </form>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import useAuth from '../hooks/useAuth'
 import jwt_decode from "jwt-decode"
 
@@ -18,7 +18,6 @@ const LoginPage = () => {
   const { setAuth } = useAuth();
 
   const navigate = useNavigate();
-  const location = useLocation();
 
   const usernameRef = useRef();
   const errRef = useRef();
@@ -92,18 +91,18 @@ const LoginPage = () => {
   }
   return (
     <div className='main'>
-      <div>
-        <div>
+      <div className='login-container'>
+        <div className='login-box'>
           <form onSubmit={handleSubmit}>
             <h1>Login to your account</h1>
             <p ref={errRef} className={errorMsg ? "errormsg" : "offscreen"}>{errorMsg}</p>
             <label>Username:</label>
-            <input type={'text'} ref={usernameRef} autoComplete='off' value={username} onChange={(e) => setUsername(e.target.value)} required />
+            <input className='login-input' type={'text'} ref={usernameRef} autoComplete='off' value={username} onChange={(e) => setUsername(e.target.value)} required />
             <label>Password:</label>
-            <input type={'password'} value={password} onChange={(e) => setPassword(e.target.value)} required />
-            <button>Login</button>
+            <input className='login-input' type={'password'} value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <button className='btn'>Login</button>
           </form>
-          <Link to={'/signup'}>Create Account</Link>
+          <Link to={'/signup'} className='update-link'>Create Account</Link>
         </div>
       </div>
     </div>

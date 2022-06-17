@@ -34,53 +34,55 @@ const Sidebar = () => {
     {isEmployee ? (
       <div className='sidebar'>
         <ul className='sidebar-list'>
-          <li className='sidebar-row'>
-            <Link to={'/profile'} className='side-link'>
-              <div className='link'><FaUserAlt /> Account</div>
-            </Link>
-          </li>
-          <li className='sidebar-row'>
-            <Link to={'/employee/reservations'} className='side-link'>
-              <div className='link'><HiOutlineTicket /> Reservations</div>
-            </Link>
-          </li>
-          <li className='sidebar-row'>
-            <Link to={'/employee/rooms'} className='side-link'>
-              <div className='link'><FaHotel /> Rooms</div>
-            </Link>
-          </li>
-          {isAdmin ? (
+          <Link to={'/profile'} className='side-link'>
             <li className='sidebar-row'>
-              <Link to={'/employees'} className='side-link'>
-                <div className='link'><FaUsers /> Employees</div>
-              </Link>
+              <div className='link'><FaUserAlt /> Account</div>
             </li>
+          </Link>
+          <Link to={'/employee/reservations'} className='side-link'>
+           <li className='sidebar-row'>
+              <div className='link'><HiOutlineTicket /> Reservations</div>
+            </li>
+          </Link>
+          <Link to={'/employee/rooms'} className='side-link'>
+            <li className='sidebar-row'>
+              <div className='link'><FaHotel /> Rooms</div>
+            </li>
+          </Link>
+          {isAdmin ? (
+            <Link to={'/employees'} className='side-link'>
+              <li className='sidebar-row'>
+                <div className='link'><FaUsers /> Employees</div>
+              </li>
+            </Link>
           ) : (
             null
           )}
-          <li className='sidebar-row'>
-            <Link to={'/logout'} className='side-link'>
+          <Link to={'/logout'} className='side-link'>
+            <li className='sidebar-row'>
               <div className='link'><MdLogout /> Logout</div>
-            </Link>
-          </li>
+            </li>
+          </Link>
         </ul>
       </div>
     ) : (
       <div className='sidebar'>
         <ul className='sidebar-list'>
-          <li className='sidebar-row'>
-            <Link to={'/profile'} className='side-link'><FaUserAlt /> Account</Link>
-          </li>
-          <li className='sidebar-row'>
-            <Link to={`/guest/reservations/${auth?.decoded?.employeeID}`} className='side-link'>
+          <Link to={'/profile'} className='side-link'>
+            <li className='sidebar-row'>
+              <div className='link'><FaUserAlt /> Account</div>
+            </li>
+          </Link>
+          <Link to={`/guest/reservations/${auth?.decoded?.employeeID}`} className='side-link'>
+            <li className='sidebar-row'>
               <div className='link'><HiOutlineTicket /> Reservations</div>
-            </Link>
-          </li>
-          <li className='sidebar-row'>
-            <Link to={'/logout'} className='side-link'>
+            </li>
+          </Link>
+          <Link to={'/logout'} className='side-link'>
+            <li className='sidebar-row'>
               <div className='link'><MdLogout /> Logout</div>
-            </Link>
-          </li>
+            </li>
+          </Link>
         </ul>
       </div>
     )}

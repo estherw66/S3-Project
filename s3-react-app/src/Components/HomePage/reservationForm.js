@@ -152,7 +152,7 @@ const ReservationForm = () => {
                 </select>
             </div>
             <div id='make-reservation' className='input'>
-                <button>Make Reservation</button>
+                <button className='btn'>Make Reservation</button>
             </div>
         </form>
     </div>

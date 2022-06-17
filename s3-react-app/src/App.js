@@ -28,7 +28,6 @@ import RequireAuth from "./Components/RequireAuth";
 import Navbar from "./Components/navbar";
 import Footer from "./Components/footer";
 
-import ViewEmployeeDetails from "./Components/Employees/ViewEmployeeDetails";
 import SingupPage from "./pages/signup";
 import GuestReservationsPage from "./pages/guest/guest-reservation";
 

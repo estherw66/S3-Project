@@ -114,7 +114,7 @@ const AddRoomPage = () => {
                                 <label>Total Amount In Hotel*:</label>
                             </div>
                         </div>
-                        <button>Save Room</button>
+                        <button className='btn'>Save Room</button>
                     </form>
                 </div>
             </div>

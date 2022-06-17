@@ -32,12 +32,11 @@ const RoomsPage = () => {
         <div className='right'>
           <div className='header'>
             <h3>All Rooms:</h3>
-            <input type={'text'} className='search-bar' placeholder='Search...'/>
-            <Link to={`/employee/rooms/add`}>Add New Room</Link>
+            <Link to={`/employee/rooms/add`} className='btn'>Add New Room</Link>
           </div>
           <div className='body'>
             <div className='row'>
-              <table>
+              <table className='table'>
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -47,6 +46,7 @@ const RoomsPage = () => {
                     <th>Total Amount</th>
                     <th>Featured</th>
                     <th>Image</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -60,7 +60,7 @@ const RoomsPage = () => {
                       <td>{room.totalAmountInHotel}</td>
                       <td>{room.featured ? 'Yes' : 'No'}</td>
                       <td>{room.imageUrl === '' ? 'No' : 'Yes'}</td>
-                      <td><Link to={`/employee/rooms/update/${room.id}`}>Update</Link></td>
+                      <td><Link to={`/employee/rooms/update/${room.id}`} className='update-link'>Update</Link></td>
                     </tr>
                   )}
                 </tbody>

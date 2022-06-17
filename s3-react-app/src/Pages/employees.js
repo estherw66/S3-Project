@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import EmployeesList from '../Components/Employees/EmployeesList'
-
 import {AiOutlineUserAdd} from 'react-icons/ai'
 
 import axios from '../api/axios'
@@ -38,12 +36,11 @@ const EmployeesPage = () => {
         <div className='right'>
           <div className='header'>
             <h3>All Employees:</h3>
-            <input type={'text'} placeholder={'Search...'} className='search-bar' />
-            <Link to={'/employees/add'}>Add New<AiOutlineUserAdd /></Link>
+            <Link to={'/employees/add'} className='btn'>Add New <AiOutlineUserAdd /></Link>
           </div>
           <div className='body'>
             <div className='row'>
-              <table>
+              <table className='table'>
                 <thead>
                   <tr>
                     <th>ID</th>

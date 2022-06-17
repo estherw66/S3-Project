@@ -126,7 +126,7 @@ const AddEmployeePage = () => {
                   <label>City:</label>
                 </div>
               </div>
-              <button id='save-changes'>Save Changes</button>
+              <button className='btn' id='save-changes'>Save Changes</button>
             </form>
           </div> 
         </div>

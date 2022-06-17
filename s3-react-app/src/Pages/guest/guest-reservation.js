@@ -41,7 +41,7 @@ const GuestReservationsPage = () => {
                   </div>
                   <div className='body'>
                       <div className='row'>
-                        <table>
+                        <table className='table'>
                             <thead>
                                 <tr>
                                     <th>ID</th>

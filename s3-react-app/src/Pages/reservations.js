@@ -27,6 +27,10 @@ const ReservationsPage = () => {
         getAllReservations()
     }, [])
 
+    useEffect(() => {
+        getAllReservations()
+    }, [reservations])
+
   return (
       <div className='main'>
           <div className='row'>
@@ -39,7 +43,7 @@ const ReservationsPage = () => {
                   </div>
                   <div className='body'>
                       <div className='row'>
-                        <table>
+                        <table className='table'>
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -50,6 +54,7 @@ const ReservationsPage = () => {
                                     <th>Amount of Guests</th>
                                     <th>Total Price</th>
                                     <th>Check In Status</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
