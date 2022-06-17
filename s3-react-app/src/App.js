@@ -37,7 +37,6 @@ const ENDPOINT = "http://localhost:8080/ws"
 
 function App() {
 
-    
 
     return (
        <>
@@ -85,7 +84,6 @@ function App() {
             {/* error */}
             <Route path="/*" element={<Error />} />
         </Routes>
-
         <Footer />
        </> 
     );
