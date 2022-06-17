@@ -26,6 +26,8 @@ public class ReservationController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_EMPLOYEE"})
     @GetMapping
     public ResponseEntity<GetReservationsResponseDTO> getReservations(){
        return ResponseEntity.ok(reservationService.getReservations());
