@@ -43,5 +43,5 @@ sonarqube:
 docker:
     stage: docker
     script: 
-      - docker-compose up --build
+      - docker-compose up
       - docker-compose down
