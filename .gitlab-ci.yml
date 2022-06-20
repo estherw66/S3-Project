@@ -1,6 +1,7 @@
 stages:
 - build
 - test 
+- cypress
 - sonarqube
 - docker
 
@@ -17,6 +18,16 @@ test:
     - cd S3-ITProject
     - ./gradlew test
     - ./gradlew.bat --stop
+
+cypress:
+  image: cypress/browsers:node12.14.1-chrome85-ff81
+  stage: test
+  script:
+    - cd s3-react-app
+    # start the server in the background
+    - npm run start:ci &
+    # run Cypress tests
+    - npx cypress run --browser chrome
 
 sonarqube:
   image: gradle:jre11-slim
