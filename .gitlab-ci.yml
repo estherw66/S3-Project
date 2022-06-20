@@ -21,13 +21,13 @@ test:
 
 cypress:
   image: cypress/browsers:node12.14.1-chrome85-ff81
-  stage: test
+  stage: cypress
   script:
     - cd s3-react-app
     # start the server in the background
-    - npm run start:ci &
+    - npm start
     # run Cypress tests
-    - npx cypress run --browser chrome
+    - npm test
 
 sonarqube:
   image: gradle:jre11-slim
