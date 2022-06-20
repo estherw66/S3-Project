@@ -25,6 +25,7 @@ cypress:
   script:
     - cd s3-react-app
     # start the server in the background
+    - npm install
     - npm start
     # run Cypress tests
     - npm test
